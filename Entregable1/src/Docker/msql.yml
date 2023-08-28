@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_DATABASE=arquitectura"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "/mnt/host/asl/docker-desktop-data/data/mysql:/var/lib/mysql"
