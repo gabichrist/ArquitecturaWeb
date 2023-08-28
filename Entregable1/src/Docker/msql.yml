@@ -6,8 +6,7 @@ services:
     restart: always
     environment:
       - "MYSQL_ROOT_PASSWORD=password"
-      - "MYSQL_DATABASE=arquitectura"
     ports:
       - "3306:3306"
     volumes:
-      - "/mnt/host/asl/docker-desktop-data/data/mysql:/var/lib/mysql"
+      - "/Users/adiazpace/Documents/eclipse-workspace/mysql:/var/lib/mysql"
