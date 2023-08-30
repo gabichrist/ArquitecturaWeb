@@ -14,7 +14,7 @@ public interface DAOFactory {
 	public static DAOFactory getDAOFactory(int whichFactory) {
 		switch (whichFactory) {
 		case MYSQL_JDBC:
-			return new MySqlDAOFactory();
+			return MySqlDAOFactory.getInstance();
 		case DERBY_JDBC:
 			return null;
 		case JPA_HIBERNATE:
