@@ -6,9 +6,7 @@ public interface DAOFactory {
 	public static final int JPA_HIBERNATE = 3;
 
 	public abstract ClienteDAO getClienteDAO();
-
 	public abstract FacturaDAO getFacturaDAO();
-
 	public abstract ProductoDAO getProductoDAO();
 
 	public static DAOFactory getDAOFactory(int whichFactory) {

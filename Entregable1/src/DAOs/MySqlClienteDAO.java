@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import entity.Cliente;
 
 public class MySqlClienteDAO implements ClienteDAO {
+	// TODO: este private se puede mandar como protected a la interfaz/clase padre
 	private Connection connection;
-
-	public MySqlClienteDAO(Connection c) {
-		this.connection = c;
-	}
 
 	@Override
 	public ArrayList<Cliente> getClientes() throws SQLException {
+		this.connection = MySqlDAOFactory.getConnection();
+
 		connection.beginRequest();
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		String select = "SELECT * FROM Cliente";
@@ -32,7 +31,8 @@ public class MySqlClienteDAO implements ClienteDAO {
 		}
 		rs.close();
 		ps.close();
-
+		this.connection.close();
+		
 		// TODO: Ver cómo reabrir una conexión que fue cerrada
 		// connection.close();
 		return clientes;
@@ -40,6 +40,7 @@ public class MySqlClienteDAO implements ClienteDAO {
 
 	@Override
 	public void addCliente(Cliente c) throws SQLException {
+		this.openConnection();
 		String insert = "INSERT INTO Cliente (idCliente, nombre, email) VALUES(?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(insert);
 		ps.setInt(1, c.getIdCliente());
@@ -48,6 +49,17 @@ public class MySqlClienteDAO implements ClienteDAO {
 		ps.executeUpdate();
 		ps.close();
 		connection.commit();
+		connection.close();
 	}
-
+	
+	
+	// TODO: esto puede ir una única vez en la interfaz padre dao<T> que falta hacer
+	private void openConnection() {
+		try {
+			if (connection == null || connection.isClosed())
+				connection = MySqlDAOFactory.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
 }

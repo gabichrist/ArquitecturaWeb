@@ -10,11 +10,11 @@ public class MySqlDAOFactory implements DAOFactory {
 	private ClienteDAO clienteDAO;
 	private FacturaDAO facturaDAO;
 	private ProductoDAO productoDAO;
-	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String uri = "jdbc:mysql://localhost:3306/";
-	private String dbName = "entregable1";
-	private String dbUser = "root";
-	private String dbPassword = "password";
+	// private final String driver = "com.mysql.cj.jdbc.Driver";
+	private final static String uri = "jdbc:mysql://localhost:3306/";
+	private final static String dbName = "entregable1";
+	private final static String dbUser = "root";
+	private final static String dbPassword = "password";
 	private Connection conn;
 	static MySqlDAOFactory instance = null;
 
@@ -24,7 +24,8 @@ public class MySqlDAOFactory implements DAOFactory {
 
 	private void connect() {
 		try {
-			// TODO: Eliminaría esta línea, dado que parece no ser necesaria para el DriverManager
+			// TODO: Eliminaría esta línea, dado que parece no ser necesaria para el
+			// DriverManager
 			// Class.forName(driver).getDeclaredConstructor().newInstance();
 
 			// Crear base de datos si no existe:
@@ -34,14 +35,12 @@ public class MySqlDAOFactory implements DAOFactory {
 
 			this.conn = DriverManager.getConnection(uri + dbName, dbUser, dbPassword);
 			this.conn.setAutoCommit(false);
+
+			// TODO: es responsabilidad de cada DAO crear sus tablas
 			createTables();
 
 			// TODO: Ver cómo reabrir una conexión que fue cerrada
-			// MySqlDAOFactory.conn.close();
-
-			this.clienteDAO = new MySqlClienteDAO(this.conn);
-			this.facturaDAO = new MySqlFacturaDAO(this.conn);
-			this.productoDAO = new MySqlProductoDAO(this.conn);
+			// this.conn.close();
 		} catch (IllegalArgumentException | SecurityException | SQLException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -71,18 +70,42 @@ public class MySqlDAOFactory implements DAOFactory {
 			MySqlDAOFactory.instance = new MySqlDAOFactory();
 			MySqlDAOFactory.instance.connect();
 		}
+
 		return MySqlDAOFactory.instance;
 	}
-	
+
 	public ClienteDAO getClienteDAO() {
+		if (this.clienteDAO == null)
+			this.clienteDAO = new MySqlClienteDAO();
+
 		return clienteDAO;
 	}
 
 	public FacturaDAO getFacturaDAO() {
+		if (this.facturaDAO == null)
+			this.facturaDAO = new MySqlFacturaDAO();
+
 		return facturaDAO;
 	}
 
 	public ProductoDAO getProductoDAO() {
+		if (this.productoDAO == null)
+			this.productoDAO = new MySqlProductoDAO();
+
 		return productoDAO;
+	}
+
+	public static Connection getConnection() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(MySqlDAOFactory.uri + MySqlDAOFactory.dbName, MySqlDAOFactory.dbUser,
+					MySqlDAOFactory.dbPassword);
+			conn.setAutoCommit(false);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conn;
 	}
 }
