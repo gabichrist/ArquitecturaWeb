@@ -1,4 +1,4 @@
-package DTOs;
+package entity;
 
 public class Cliente {
 	int idCliente;
@@ -35,5 +35,9 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	@Override
+	public String toString() {
+		return idCliente + ", " + nombre + ", " + email;
+	}
 }

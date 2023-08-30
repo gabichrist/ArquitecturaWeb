@@ -2,8 +2,8 @@ package DAOs;
 
 import java.util.ArrayList;
 
-import DTOs.Cliente;
-import DTOs.Factura;
+import entity.Cliente;
+import entity.Factura;
 
 public class MySqlFacturaDAO implements FacturaDAO{
 

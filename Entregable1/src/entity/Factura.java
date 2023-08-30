@@ -1,4 +1,4 @@
-package DTOs;
+package entity;
 
 public class Factura {
 	int idFactura;

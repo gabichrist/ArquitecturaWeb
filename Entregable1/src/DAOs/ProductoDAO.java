@@ -2,8 +2,8 @@ package DAOs;
 
 import java.util.ArrayList;
 
-import DTOs.FacturaProducto;
-import DTOs.Producto;
+import entity.FacturaProducto;
+import entity.Producto;
 
 public interface ProductoDAO {
 	public abstract ArrayList<Producto> getProductos();
