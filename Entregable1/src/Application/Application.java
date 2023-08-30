@@ -1,35 +1,30 @@
-package Application;
+package application;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import DAOs.ClienteDAO;
-import DAOs.DAOFactory;
 import entity.Cliente;
+import entity.Producto;
+import service.ServicioCSVParser;
+import service.ServicioCliente;
+import service.ServicioProducto;
 
 public class Application {
 
-	public static void main(String[] args) {
-		DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL_JDBC);
-		ClienteDAO daoClient = daoFactory.getClienteDAO();
-		
-		// c√≥digo de prueba
-		try {
-			daoClient.addCliente(new Cliente(4, "segundo sombra", "segundo.gmx.net"));
-		} catch (SQLException e) {
-			// cliente test ya creado
-		}
+	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
+		ServicioCSVParser csvParser = new ServicioCSVParser();
+		ServicioCliente svcCliente = new ServicioCliente();
+		ServicioProducto svcProducto = new ServicioProducto();
 
-		List<Cliente> clientes;
-		try {
-			clientes = daoClient.getClientes();
-			clientes.forEach(cliente -> System.out.println(cliente));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-
+		csvParser.loadData();
+		Producto p = svcProducto.getProductoMasRecaudado();
+		System.out.println("Producto m·s recaudado: " + p);
+		List<Cliente> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
+		clientes.forEach(cliente -> {
+			System.out.println("Cliente " + cliente);	
+		});
 	}
 
 }

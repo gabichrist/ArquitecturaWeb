@@ -1,31 +1,29 @@
 package entity;
 
 public class FacturaProducto {
-	Factura f;
-	Producto p;
-	int cantidad;
-
-	public FacturaProducto(Factura f, Producto p, int cantidad) {
-		super();
-		this.f = f;
-		this.p = p;
+	int idFactura;
+	int idProducto;
+	
+	public FacturaProducto(int idFactura, int idProducto, int cantidad) {
+		this.idFactura = idFactura;
+		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 	}
-
-	public Factura getFactura() {
-		return f;
+	
+	public int getIdFactura() {
+		return idFactura;
 	}
 
-	public void setFactura(Factura f) {
-		this.f = f;
+	public void setIdFactura(int idFactura) {
+		this.idFactura = idFactura;
 	}
 
-	public Producto getProducto() {
-		return p;
+	public int getIdProducto() {
+		return idProducto;
 	}
 
-	public void setProducto(Producto p) {
-		this.p = p;
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
 	}
 
 	public int getCantidad() {
@@ -35,5 +33,10 @@ public class FacturaProducto {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
+	int cantidad;
+
+
+	
 
 }
