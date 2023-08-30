@@ -12,11 +12,15 @@ public interface DAOFactory {
 	public abstract ProductoDAO getProductoDAO();
 
 	public static DAOFactory getDAOFactory(int whichFactory) {
-		 switch (whichFactory) {
-		 case MYSQL_JDBC : return new MySqlDAOFactory();
-		 case DERBY_JDBC: return null;
-		 case JPA_HIBERNATE: return null;
-		 default: return null;
-		 }
+		switch (whichFactory) {
+		case MYSQL_JDBC:
+			return new MySqlDAOFactory();
+		case DERBY_JDBC:
+			return null;
+		case JPA_HIBERNATE:
+			return null;
+		default:
+			return null;
+		}
 	}
 }
