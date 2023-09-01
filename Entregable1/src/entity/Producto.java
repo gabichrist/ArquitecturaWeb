@@ -36,4 +36,11 @@ public class Producto {
 		this.valor = valor;
 	}
 
+	@Override
+	public String toString() {
+		return	this.getIdProducto() + " - " + 
+				this.getNombre() + " - $" +
+				this.getValor();
+	}
+
 }
