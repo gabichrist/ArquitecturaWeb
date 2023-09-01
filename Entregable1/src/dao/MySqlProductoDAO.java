@@ -10,11 +10,10 @@ import java.util.Optional;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import entity.Cliente;
 import entity.Producto;
 import factory.MySqlDAOFactory;
 
-public class MySqlProductoDAO implements Dao<Producto> {
+public class MySqlProductoDAO implements DaoProducto {
 
 	private Connection connection;
 
@@ -90,6 +89,7 @@ public class MySqlProductoDAO implements Dao<Producto> {
 		}
 	}
 	
+	@Override
 	public Producto getProductoMasRecaudado() throws SQLException {
 		connection = MySqlDAOFactory.getConnection();
 		Producto productoMasRecaudado = null;
@@ -116,12 +116,4 @@ public class MySqlProductoDAO implements Dao<Producto> {
 		
 		return productoMasRecaudado;
 	}
-
-	@Override
-	public List<Cliente> getClientesPorFacturacion() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
 }

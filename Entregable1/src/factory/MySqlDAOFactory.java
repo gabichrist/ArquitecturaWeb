@@ -5,20 +5,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import dao.Dao;
+import dao.DaoCliente;
+import dao.DaoProducto;
 import dao.MySqlClienteDAO;
 import dao.MySqlFacturaDAO;
 import dao.MySqlFacturaProductoDAO;
 import dao.MySqlProductoDAO;
-import entity.Cliente;
 import entity.Factura;
 import entity.FacturaProducto;
-import entity.Producto;
 
 public class MySqlDAOFactory implements DAOFactory {
 
-	private Dao<Cliente> clienteDAO;
+	private DaoCliente clienteDAO;
 	private Dao<Factura> facturaDAO;
-	private Dao<Producto> productoDAO;
+	private DaoProducto productoDAO;
 	private Dao<FacturaProducto> facturaProductoDAO;
 
 	private final static String uri = "jdbc:mysql://localhost:3306/";
@@ -55,7 +55,7 @@ public class MySqlDAOFactory implements DAOFactory {
 		return MySqlDAOFactory.instance;
 	}
 
-	public Dao<Cliente> getClienteDAO() throws SQLException {
+	public DaoCliente getClienteDAO() throws SQLException {
 		if (this.clienteDAO == null)
 			this.clienteDAO = new MySqlClienteDAO();
 
@@ -77,7 +77,8 @@ public class MySqlDAOFactory implements DAOFactory {
 		return facturaProductoDAO;
 	}
 
-	public Dao<Producto> getProductoDAO() throws SQLException {
+	@Override
+	public DaoProducto getProductoDAO() throws SQLException {
 		if (this.productoDAO == null)
 			this.productoDAO = new MySqlProductoDAO();
 
@@ -96,6 +97,4 @@ public class MySqlDAOFactory implements DAOFactory {
 		}
 		return conn;
 	}
-
-	
 }

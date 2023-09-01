@@ -3,16 +3,16 @@ package service;
 import java.sql.SQLException;
 
 import dao.Dao;
-import entity.Cliente;
+import dao.DaoCliente;
+import dao.DaoProducto;
 import entity.Factura;
 import entity.FacturaProducto;
-import entity.Producto;
 import factory.DAOFactory;
 
 public abstract class Servicio {
-	protected Dao<Cliente> daoClient;
+	protected DaoCliente daoClient;
 	protected Dao<Factura> daoFactura;
-	protected Dao<Producto> daoProducto;
+	protected DaoProducto daoProducto;
 	protected Dao<FacturaProducto> daoFacturaProducto;
 	
 	public Servicio() throws SQLException {

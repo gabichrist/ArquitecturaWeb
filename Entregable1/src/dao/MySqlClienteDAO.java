@@ -12,10 +12,9 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import entity.Cliente;
-import entity.Producto;
 import factory.MySqlDAOFactory;
 
-public class MySqlClienteDAO implements Dao<Cliente> {
+public class MySqlClienteDAO implements DaoCliente {
 	private Connection connection;
 
 	public MySqlClienteDAO() throws SQLException {
@@ -104,12 +103,8 @@ public class MySqlClienteDAO implements Dao<Cliente> {
 		}
 
 	}
-
-	@Override
-	public Producto getProductoMasRecaudado() {
-		return null;
-	}
 	
+	@Override
 	public ArrayList<Cliente> getClientesPorFacturacion() throws SQLException{
 		connection = MySqlDAOFactory.getConnection();
 		ArrayList<Cliente> clientes = new ArrayList<>();
