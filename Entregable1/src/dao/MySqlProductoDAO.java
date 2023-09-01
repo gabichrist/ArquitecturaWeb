@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -20,12 +19,6 @@ public class MySqlProductoDAO implements DaoProducto {
 	public MySqlProductoDAO() throws SQLException {
 		this.openConnection();
 		this.createTable();
-	}
-
-	@Override
-	public Optional<Producto> get(long id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -44,18 +37,6 @@ public class MySqlProductoDAO implements DaoProducto {
 		ps.executeUpdate();
 		ps.close();
 		connection.commit();
-	}
-
-	@Override
-	public void update(Producto t, String[] params) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(Producto t) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -88,32 +69,30 @@ public class MySqlProductoDAO implements DaoProducto {
 			this.save(p);
 		}
 	}
-	
+
 	@Override
 	public Producto getProductoMasRecaudado() throws SQLException {
 		connection = MySqlDAOFactory.getConnection();
 		Producto productoMasRecaudado = null;
-		
+
 		// Recaudacion: cantidad de productos vendidos multiplicado por su valor.
-		String producto = "SELECT p.*, SUM(p.valor * fp.cantidad) as totalRecaudacion " +
-				"FROM producto p NATURAL JOIN facturaproducto fp " +
-				"GROUP BY idProducto " + 
-				"ORDER BY `totalRecaudacion` DESC " + 
-				"LIMIT 1";
-		
+		String producto = "SELECT p.*, SUM(p.valor * fp.cantidad) as totalRecaudacion "
+				+ "FROM producto p NATURAL JOIN facturaproducto fp " + "GROUP BY idProducto "
+				+ "ORDER BY `totalRecaudacion` DESC " + "LIMIT 1";
+
 		PreparedStatement ps = connection.prepareStatement(producto);
 		ResultSet rs = ps.executeQuery();
-		while(rs.next()) {
+		while (rs.next()) {
 			int idProducto = rs.getInt(1);
 			String nombre = rs.getString(2);
 			Float valor = rs.getFloat(3);
 			productoMasRecaudado = new Producto(idProducto, nombre, valor);
 		}
-		
+
 		ps.close();
 		rs.close();
 		connection.close();
-		
+
 		return productoMasRecaudado;
 	}
 }

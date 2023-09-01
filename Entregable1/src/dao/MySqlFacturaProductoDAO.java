@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -18,12 +17,6 @@ public class MySqlFacturaProductoDAO implements Dao<FacturaProducto> {
 	public MySqlFacturaProductoDAO() throws SQLException {
 		this.openConnection();
 		this.createTable();
-	}
-
-	@Override
-	public Optional<FacturaProducto> get(long id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -42,18 +35,6 @@ public class MySqlFacturaProductoDAO implements Dao<FacturaProducto> {
 		ps.executeUpdate();
 		ps.close();
 		connection.commit();
-	}
-
-	@Override
-	public void update(FacturaProducto t, String[] params) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(FacturaProducto t) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

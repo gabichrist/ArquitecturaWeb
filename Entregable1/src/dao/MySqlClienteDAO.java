@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -76,23 +75,6 @@ public class MySqlClienteDAO implements DaoCliente {
 	}
 
 	@Override
-	public Optional<Cliente> get(long id) throws SQLException {
-		return null;
-	}
-
-	@Override
-	public void update(Cliente t, String[] params) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(Cliente t) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void loadData(CSVParser csvContent) throws SQLException {
 		for (CSVRecord row : csvContent) {
 			int idCliente = Integer.parseInt(row.get("idCliente"));
@@ -103,32 +85,30 @@ public class MySqlClienteDAO implements DaoCliente {
 		}
 
 	}
-	
+
 	@Override
-	public ArrayList<Cliente> getClientesPorFacturacion() throws SQLException{
+	public ArrayList<Cliente> getClientesPorFacturacion() throws SQLException {
 		connection = MySqlDAOFactory.getConnection();
 		ArrayList<Cliente> clientes = new ArrayList<>();
-		
+
 		// Selecciona todos los clientes en orden descendente por su facturacion
-		String select = "SELECT c.*, SUM(p.valor * fp.cantidad) as facturacion " + 
-					"FROM cliente c JOIN factura f ON (c.idCliente = f.idCliente) " +
-					"JOIN facturaproducto fp ON (f.idFactura = fp.idFactura) " +
-					"JOIN producto p ON (p.idProducto = fp.idProducto) " +
-					"WHERE c.idCliente = f.idCliente " +
-					"GROUP BY c.idCliente " +
-					"ORDER BY `facturacion` DESC";
-	
+		String select = "SELECT c.*, SUM(p.valor * fp.cantidad) as facturacion "
+				+ "FROM cliente c JOIN factura f ON (c.idCliente = f.idCliente) "
+				+ "JOIN facturaproducto fp ON (f.idFactura = fp.idFactura) "
+				+ "JOIN producto p ON (p.idProducto = fp.idProducto) " + "WHERE c.idCliente = f.idCliente "
+				+ "GROUP BY c.idCliente " + "ORDER BY `facturacion` DESC";
+
 		PreparedStatement ps = connection.prepareStatement(select);
-		
+
 		ResultSet rs = ps.executeQuery();
-		while(rs.next()) {			
+		while (rs.next()) {
 			int idCliente = rs.getInt(1);
 			String nombre = rs.getString(2);
 			String email = rs.getString(3);
 			Cliente cliente = new Cliente(idCliente, nombre, email);
 			clientes.add(cliente);
 		}
-		
+
 		connection.commit();
 		connection.close();
 		ps.close();

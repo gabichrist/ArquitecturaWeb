@@ -10,7 +10,6 @@ public class ServicioProducto extends Servicio {
 		super();
 	}
 
-	// TODO: Ejercicio 3 entregable
 	public Producto getProductoMasRecaudado() throws SQLException {
 		return this.daoProducto.getProductoMasRecaudado();
 	}

@@ -8,10 +8,8 @@ import java.sql.SQLException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 
-import factory.DAOFactory;
 
 public class ServicioCSVParser extends Servicio {
-	DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL_JDBC);
 
 	public ServicioCSVParser() throws SQLException {
 		super();

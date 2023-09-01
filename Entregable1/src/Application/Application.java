@@ -20,11 +20,10 @@ public class Application {
 
 		csvParser.loadData();
 		Producto productoMayorRecaudacion = svcProducto.getProductoMasRecaudado();
-		System.out.println("Producto que mas recaudo:\n" + productoMayorRecaudacion + "\n"
-		);
+		System.out.println("Producto que mas recaudo:\n" + productoMayorRecaudacion + "\n");
 		List<Cliente> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
 		System.out.println("Listado de clientes ordenada por facturacion:");
-		clientes.forEach(cliente ->  System.out.println(cliente));
+		clientes.forEach(cliente -> System.out.println(cliente));
 	}
 
 }

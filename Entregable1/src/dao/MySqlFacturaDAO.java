@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -21,11 +20,6 @@ public class MySqlFacturaDAO implements Dao<Factura> {
 	}
 
 	@Override
-	public Optional<Factura> get(long id) {
-		return null;
-	}
-
-	@Override
 	public List<Factura> getAll() {
 		return null;
 	}
@@ -39,16 +33,6 @@ public class MySqlFacturaDAO implements Dao<Factura> {
 		ps.executeUpdate();
 		ps.close();
 		connection.commit();
-	}
-
-	@Override
-	public void update(Factura t, String[] params) {
-
-	}
-
-	@Override
-	public void delete(Factura t) {
-
 	}
 
 	@Override
