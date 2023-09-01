@@ -19,19 +19,12 @@ public class Application {
 		ServicioProducto svcProducto = new ServicioProducto();
 
 		csvParser.loadData();
-		Producto p = svcProducto.getProductoMasRecaudado();
-		System.out.println("Producto que mas recaudo: " + 
-							p.getIdProducto() + " - " + 
-							p.getNombre() + " - $" +
-							p.getValor() + "\n"
+		Producto productoMayorRecaudacion = svcProducto.getProductoMasRecaudado();
+		System.out.println("Producto que mas recaudo:\n" + productoMayorRecaudacion + "\n"
 		);
 		List<Cliente> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
-		System.out.println("Listado de clientes ordenada por facturacion: \n");
-		clientes.forEach(cliente -> {
-			System.out.println("Cliente " + cliente.getIdCliente() + " " +
-					 			cliente.getNombre() + " -- " + cliente.getEmail()
-			);	
-		});
+		System.out.println("Listado de clientes ordenada por facturacion:");
+		clientes.forEach(cliente ->  System.out.println(cliente));
 	}
 
 }
