@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import entity.Cliente;
 import entity.Producto;
 import factory.MySqlDAOFactory;
 
@@ -87,5 +89,39 @@ public class MySqlProductoDAO implements Dao<Producto> {
 			this.save(p);
 		}
 	}
+	
+	public Producto getProductoMasRecaudado() throws SQLException {
+		connection = MySqlDAOFactory.getConnection();
+		Producto productoMasRecaudado = null;
+		
+		// Recaudacion: cantidad de productos vendidos multiplicado por su valor.
+		String producto = "SELECT p.*, SUM(p.valor * fp.cantidad) as totalRecaudacion " +
+				"FROM producto p NATURAL JOIN facturaproducto fp " +
+				"GROUP BY idProducto " + 
+				"ORDER BY `totalRecaudacion` DESC " + 
+				"LIMIT 1";
+		
+		PreparedStatement ps = connection.prepareStatement(producto);
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			int idProducto = rs.getInt(1);
+			String nombre = rs.getString(2);
+			Float valor = rs.getFloat(3);
+			productoMasRecaudado = new Producto(idProducto, nombre, valor);
+		}
+		
+		ps.close();
+		rs.close();
+		connection.close();
+		
+		return productoMasRecaudado;
+	}
+
+	@Override
+	public List<Cliente> getClientesPorFacturacion() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

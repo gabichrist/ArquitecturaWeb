@@ -9,7 +9,9 @@ import java.util.Optional;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import entity.Cliente;
 import entity.FacturaProducto;
+import entity.Producto;
 import factory.MySqlDAOFactory;
 
 public class MySqlFacturaProductoDAO implements Dao<FacturaProducto> {
@@ -85,6 +87,18 @@ public class MySqlFacturaProductoDAO implements Dao<FacturaProducto> {
 			FacturaProducto fp = new FacturaProducto(idFactura, idProducto, cantidad);
 			this.save(fp);
 		}
+	}
+
+	@Override
+	public Producto getProductoMasRecaudado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cliente> getClientesPorFacturacion() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

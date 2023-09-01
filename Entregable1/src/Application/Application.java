@@ -1,4 +1,4 @@
-package application;
+package Application;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,10 +20,17 @@ public class Application {
 
 		csvParser.loadData();
 		Producto p = svcProducto.getProductoMasRecaudado();
-		System.out.println("Producto más recaudado: " + p);
+		System.out.println("Producto que mas recaudo: " + 
+							p.getIdProducto() + " - " + 
+							p.getNombre() + " - $" +
+							p.getValor() + "\n"
+		);
 		List<Cliente> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
+		System.out.println("Listado de clientes ordenada por facturacion: \n");
 		clientes.forEach(cliente -> {
-			System.out.println("Cliente " + cliente);	
+			System.out.println("Cliente " + cliente.getIdCliente() + " " +
+					 			cliente.getNombre() + " -- " + cliente.getEmail()
+			);	
 		});
 	}
 

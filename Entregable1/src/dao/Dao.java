@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import org.apache.commons.csv.CSVParser;
 
+import entity.Cliente;
+import entity.Producto;
+
 public interface Dao<T> {
     
     Optional<T> get(long id) throws SQLException;
@@ -23,4 +26,8 @@ public interface Dao<T> {
     void createTable() throws SQLException;
     
     void loadData(CSVParser csvContent) throws SQLException;
+
+	Producto getProductoMasRecaudado() throws SQLException;
+
+	List<Cliente> getClientesPorFacturacion() throws SQLException;
 }

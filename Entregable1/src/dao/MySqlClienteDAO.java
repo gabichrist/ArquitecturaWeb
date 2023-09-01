@@ -12,6 +12,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import entity.Cliente;
+import entity.Producto;
 import factory.MySqlDAOFactory;
 
 public class MySqlClienteDAO implements Dao<Cliente> {
@@ -102,6 +103,43 @@ public class MySqlClienteDAO implements Dao<Cliente> {
 			this.save(c);
 		}
 
+	}
+
+	@Override
+	public Producto getProductoMasRecaudado() {
+		return null;
+	}
+	
+	public ArrayList<Cliente> getClientesPorFacturacion() throws SQLException{
+		connection = MySqlDAOFactory.getConnection();
+		ArrayList<Cliente> clientes = new ArrayList<>();
+		
+		// Selecciona todos los clientes en orden descendente por su facturacion
+		String select = "SELECT c.*, SUM(p.valor * fp.cantidad) as facturacion " + 
+					"FROM cliente c JOIN factura f ON (c.idCliente = f.idCliente) " +
+					"JOIN facturaproducto fp ON (f.idFactura = fp.idFactura) " +
+					"JOIN producto p ON (p.idProducto = fp.idProducto) " +
+					"WHERE c.idCliente = f.idCliente " +
+					"GROUP BY c.idCliente " +
+					"ORDER BY `facturacion` DESC";
+	
+		PreparedStatement ps = connection.prepareStatement(select);
+		
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {			
+			int idCliente = rs.getInt(1);
+			String nombre = rs.getString(2);
+			String email = rs.getString(3);
+			Cliente cliente = new Cliente(idCliente, nombre, email);
+			clientes.add(cliente);
+		}
+		
+		connection.commit();
+		connection.close();
+		ps.close();
+		rs.close();
+
+		return clientes;
 	}
 
 }
