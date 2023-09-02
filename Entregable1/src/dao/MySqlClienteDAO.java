@@ -11,7 +11,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import entity.Cliente;
-import entity.ClienteConFacturado;
+import entity.ClienteFacturado;
 import factory.MySqlDAOFactory;
 
 public class MySqlClienteDAO implements DaoCliente {
@@ -88,9 +88,9 @@ public class MySqlClienteDAO implements DaoCliente {
 	}
 
 	@Override
-	public ArrayList<ClienteConFacturado> getClientesPorFacturacion() throws SQLException {
+	public ArrayList<ClienteFacturado> getClientesPorFacturacion() throws SQLException {
 		connection = MySqlDAOFactory.getConnection();
-		ArrayList<ClienteConFacturado> clientes = new ArrayList<>();
+		ArrayList<ClienteFacturado> clientes = new ArrayList<>();
 
 		// Selecciona todos los clientes en orden descendente por su facturacion
 		String select = "SELECT c.*, SUM(p.valor * fp.cantidad) as facturacion "
@@ -107,7 +107,7 @@ public class MySqlClienteDAO implements DaoCliente {
 			String nombre = rs.getString(2);
 			String email = rs.getString(3);
 			float facturado = rs.getFloat(4);
-			ClienteConFacturado cliente = new ClienteConFacturado(idCliente, nombre, email, facturado);
+			ClienteFacturado cliente = new ClienteFacturado(idCliente, nombre, email, facturado);
 			clientes.add(cliente);
 		}
 

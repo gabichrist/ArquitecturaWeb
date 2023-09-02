@@ -1,9 +1,9 @@
 package entity;
 
-public class ClienteConFacturado extends Cliente {
+public class ClienteFacturado extends Cliente {
 	float facturado;
 	
-	public ClienteConFacturado(int idCliente, String nombre, String email,  float facturado) {
+	public ClienteFacturado(int idCliente, String nombre, String email,  float facturado) {
 		super(idCliente, nombre, email);
 		this.facturado = facturado;
 	}
