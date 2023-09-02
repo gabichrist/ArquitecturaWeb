@@ -38,8 +38,8 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return	this.getIdProducto() + " - " + 
-				this.getNombre() + " - $" +
+		return	this.getIdProducto() + ", " + 
+				this.getNombre() + ", $" +
 				this.getValor();
 	}
 

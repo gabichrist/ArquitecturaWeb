@@ -3,7 +3,8 @@ package dao;
 import java.sql.SQLException;
 
 import entity.Producto;
+import entity.ProductoConRecaudacion;
 
 public interface DaoProducto extends Dao<Producto> {
-	Producto getProductoMasRecaudado() throws SQLException;
+	ProductoConRecaudacion getProductoMasRecaudado() throws SQLException;
 }

@@ -10,6 +10,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import entity.Producto;
+import entity.ProductoConRecaudacion;
 import factory.MySqlDAOFactory;
 
 public class MySqlProductoDAO implements DaoProducto {
@@ -71,9 +72,9 @@ public class MySqlProductoDAO implements DaoProducto {
 	}
 
 	@Override
-	public Producto getProductoMasRecaudado() throws SQLException {
+	public ProductoConRecaudacion getProductoMasRecaudado() throws SQLException {
 		connection = MySqlDAOFactory.getConnection();
-		Producto productoMasRecaudado = null;
+		ProductoConRecaudacion productoMasRecaudado = null;
 
 		// Recaudacion: cantidad de productos vendidos multiplicado por su valor.
 		String producto = "SELECT p.*, SUM(p.valor * fp.cantidad) as totalRecaudacion "
@@ -86,7 +87,8 @@ public class MySqlProductoDAO implements DaoProducto {
 			int idProducto = rs.getInt(1);
 			String nombre = rs.getString(2);
 			Float valor = rs.getFloat(3);
-			productoMasRecaudado = new Producto(idProducto, nombre, valor);
+			Float recaudado = rs.getFloat(4);
+			productoMasRecaudado = new ProductoConRecaudacion(idProducto, nombre, valor, recaudado);
 		}
 
 		ps.close();
