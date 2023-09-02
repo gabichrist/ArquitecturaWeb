@@ -7,6 +7,7 @@ import java.util.List;
 
 import entity.Cliente;
 import entity.Producto;
+import factory.DAOFactory;
 import service.ServicioCSVParser;
 import service.ServicioCliente;
 import service.ServicioProducto;
@@ -24,6 +25,8 @@ public class Application {
 		List<Cliente> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
 		System.out.println("Listado de clientes ordenada por facturacion:");
 		clientes.forEach(cliente -> System.out.println(cliente));
+		
+		DAOFactory.getDAOFactory(DAOFactory.MYSQL_JDBC).closeConnection();
 	}
 
 }

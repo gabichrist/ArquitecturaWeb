@@ -30,4 +30,6 @@ public interface DAOFactory {
 			return null;
 		}
 	}
+	
+	public abstract void closeConnection() throws SQLException;
 }

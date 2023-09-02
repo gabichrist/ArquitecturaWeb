@@ -97,4 +97,11 @@ public class MySqlDAOFactory implements DAOFactory {
 		}
 		return conn;
 	}
+
+	@Override
+	public void closeConnection() throws SQLException {
+		if (!this.conn.isClosed())
+			this.conn.close();
+		
+	}
 }
