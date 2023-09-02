@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import entity.Cliente;
+import entity.ClienteConFacturado;
 import entity.Producto;
 import factory.DAOFactory;
 import service.ServicioCSVParser;
@@ -22,7 +23,7 @@ public class Application {
 		csvParser.loadData();
 		Producto productoMayorRecaudacion = svcProducto.getProductoMasRecaudado();
 		System.out.println("Producto que mas recaudo:\n" + productoMayorRecaudacion + "\n");
-		List<Cliente> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
+		List<ClienteConFacturado> clientes = svcCliente.getClientesOrdenadosPorFacturacion();
 		System.out.println("Listado de clientes ordenada por facturacion:");
 		clientes.forEach(cliente -> System.out.println(cliente));
 		

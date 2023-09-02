@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import entity.Cliente;
+import entity.ClienteConFacturado;
 
 public class ServicioCliente extends Servicio {
 
@@ -12,8 +13,8 @@ public class ServicioCliente extends Servicio {
 	}
 
 	// Retorna una lista de clientes en orden descendente segun la facturacion
-	public List<Cliente> getClientesOrdenadosPorFacturacion() throws SQLException {
-		List<Cliente> clientes = new ArrayList<Cliente>();
+	public List<ClienteConFacturado> getClientesOrdenadosPorFacturacion() throws SQLException {
+		List<ClienteConFacturado> clientes = new ArrayList<>();
 		clientes = daoClient.getClientesPorFacturacion();	
 		
 		return clientes;
