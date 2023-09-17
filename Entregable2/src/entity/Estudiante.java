@@ -27,7 +27,7 @@ public class Estudiante {
 	private String genero;
 	
 	@Column(nullable = false)
-	private int dni;
+	private String dni;
 	
 	@Column(nullable = false)
 	private String ciudad;
@@ -39,7 +39,7 @@ public class Estudiante {
 		super();
 	}
 
-	public Estudiante(int lU, String nombres, String apellido, int edad, String genero, int dni, String ciudad) {
+	public Estudiante(int lU, String nombres, String apellido, int edad, String genero, String dni, String ciudad) {
 		super();
 		LU = lU;
 		this.nombres = nombres;
@@ -87,11 +87,11 @@ public class Estudiante {
 		this.genero = genero;
 	}
 
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
@@ -102,6 +102,7 @@ public class Estudiante {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+
 
 	public List<Inscripcion> getCarreras() {
 		return carreras;
