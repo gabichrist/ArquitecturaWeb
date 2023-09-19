@@ -1,8 +1,8 @@
 package repository;
 
-import dto.CarreraDTO;
+import entity.Carrera;
 
 public interface CarreraRepository {
 
-	public abstract CarreraDTO obtenerCarrerasOrdenadasporInscriptos();
+	public abstract Carrera obtenerCarrerasOrdenadasporInscriptos();
 }

@@ -9,7 +9,9 @@ public class EstudianteDTO implements Serializable {
 
 	private int LU;
 
-	private String nombreCompleto;
+	private String nombres;
+	
+	private String apellido;
 
 	private int edad;
 
@@ -20,12 +22,18 @@ public class EstudianteDTO implements Serializable {
 	private String ciudad;
 
 	private ArrayList<Inscripcion> carreras;
+	
 
-	public EstudianteDTO(int lU, String nombreCompleto, int edad, String genero, String dni, String ciudad,
+	public EstudianteDTO() {
+		super();
+	}
+
+	public EstudianteDTO(int lU, String nombres, String apellido, int edad, String genero, String dni, String ciudad,
 			ArrayList<Inscripcion> carreras) {
 		super();
 		LU = lU;
-		this.nombreCompleto = nombreCompleto;
+		this.nombres = nombres;
+		this.apellido = apellido;
 		this.edad = edad;
 		this.genero = genero;
 		this.dni = dni;
@@ -41,12 +49,21 @@ public class EstudianteDTO implements Serializable {
 		LU = lU;
 	}
 
-	public String getNombreCompleto() {
-		return nombreCompleto;
+	public String getNombres() {
+		return nombres;
 	}
 
-	public void setNombreCompleto(String nombreCompleto) {
-		this.nombreCompleto = nombreCompleto;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+	
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public int getEdad() {
