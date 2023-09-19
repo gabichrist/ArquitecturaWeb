@@ -6,11 +6,27 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@NamedQueries(value = {
+		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad"),
+		@NamedQuery(name = Estudiante.OBTENER_POR_LIBRETA, query = "SELECT e FROM Estudiante e WHERE e.lu = :libreta"),
+		@NamedQuery(name = Estudiante.OBTENER_POR_GENERO, query = "SELECT e FROM Estudiante e WHERE e.genero = :genero"),
+		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT i.estudiante FROM Inscripcion i, Estudiante e, Carrera c " + 
+		"WHERE c.idCarrera = i.carrera.idCarrera AND e.LU = i.estudiante.LU AND c.idCarrera = :carrera AND i.estudiante.ciudad = :ciudad")
+	})
+
 public class Estudiante {
 	
+	public static final String OBTENER_POR_EDAD = "Estudiante.obtenerPorEdad";
+	public static final String OBTENER_POR_LIBRETA = "Estudiante.obtenerPorLibreta";
+	public static final String OBTENER_POR_GENERO = "Estudiante.obtenerPorGenero";
+	public static final String OBTENER_POR_CARRERA_Y_CIUDAD = "Estudiante.obtenerPorCarrerayCiudad";
+
 	@Id
 	private int LU;
 	
