@@ -35,6 +35,10 @@ public class Inscripcion {
 	@Column(nullable = false)
 	private boolean esGraduado;
 
+	public Inscripcion() {
+	    // Constructor requerido por Hibernate, para pueder generar la entidad desde una búsqueda.
+	}
+	
 	public Inscripcion(Estudiante estudiante, Carrera carrera, Timestamp fecha_ingreso, Timestamp fecha_egreso, Boolean esGraduado) {
 		super();
 		this.id = new InscripcionId(estudiante, carrera);
