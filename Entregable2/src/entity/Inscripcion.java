@@ -1,34 +1,30 @@
 package entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@SuppressWarnings("serial")
+//TODO: revisar, no sé por qué el eclipse me marca advertencia en esta línea, pero corre ok parece.
 @Entity
-public class Inscripcion implements Serializable{
-
-	@Id
-	@GeneratedValue(strategy=
-	GenerationType.AUTO)
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Estudiante estudiante;
+public class Inscripcion {
 	
 	@Id
-	@GeneratedValue(strategy=
-	GenerationType.AUTO)
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Carrera carrera;
+    @EmbeddedId
+    private InscripcionId id;
+    
+    @ManyToOne
+    @JoinColumn(name = "LU", referencedColumnName = "LU", insertable = false, updatable = false)
+    private Estudiante estudiante;
+
+    @ManyToOne
+    @JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera", insertable = false, updatable = false)
+    private Carrera carrera;
 	
 	@Column
 	private Timestamp fecha_ingreso;
@@ -39,33 +35,29 @@ public class Inscripcion implements Serializable{
 	@Column(nullable = false)
 	private boolean esGraduado;
 
-	public Inscripcion() {
-		super();
-	}
-
 	public Inscripcion(Estudiante estudiante, Carrera carrera, Timestamp fecha_ingreso, Timestamp fecha_egreso, Boolean esGraduado) {
 		super();
-		this.estudiante = estudiante;
-		this.carrera = carrera;
+		this.id = new InscripcionId(estudiante, carrera);
 		this.fecha_ingreso = fecha_ingreso;
 		this.fecha_egreso = fecha_egreso;
 		this.esGraduado = esGraduado;
 	}
 
-	public Estudiante getEstudiante() {
-		return estudiante;
+	public Inscripcion(Estudiante estudiante, Carrera carrera) {
+		super();
+		this.id = new InscripcionId(estudiante, carrera);
+		Date now = new Date();
+		this.fecha_ingreso = new Timestamp(now.getTime());
+		this.fecha_egreso = null;
+		this.esGraduado = false;
 	}
 
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
+	public Estudiante getEstudiante() {
+		return this.id.getEstudiante();
 	}
 
 	public Carrera getCarrera() {
-		return carrera;
-	}
-
-	public void setCarrera(Carrera carrera) {
-		this.carrera = carrera;
+		return this.id.getCarrera();
 	}
 
 	public Timestamp getFecha_ingreso() {
@@ -95,8 +87,7 @@ public class Inscripcion implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Inscripcion [estudiante=" + estudiante + ", carrera=" + carrera + ", fecha_ingreso=" + fecha_ingreso
+		return "Inscripcion [estudiante=" + id.getEstudiante() + ", carrera=" + id.getCarrera() + ", fecha_ingreso=" + fecha_ingreso
 				+ ", fecha_egreso=" + fecha_egreso + "]";
 	}
-	
 }

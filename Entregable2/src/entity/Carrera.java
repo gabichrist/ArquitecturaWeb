@@ -1,7 +1,8 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +18,8 @@ public class Carrera {
 	@Column(nullable = false)
 	private String nombre;
 	
-	@OneToMany(mappedBy = "carrera")
-	private List<Inscripcion> estudiantes;
+	@OneToMany(mappedBy = "id.carrera")
+	private Set<Inscripcion> inscripcionSet;
 	
 	public Carrera() {
 		super();
@@ -28,7 +29,7 @@ public class Carrera {
 		super();
 		this.idCarrera = idCarrera;
 		this.nombre = nombre;
-		this.estudiantes = new ArrayList<Inscripcion>();
+		this.inscripcionSet = new HashSet<>();
 	}
 
 	public String getNombre() {
@@ -39,8 +40,9 @@ public class Carrera {
 		this.nombre = nombre;
 	}
 
-	public List<Inscripcion> getEstudiantes() {
-		return estudiantes;
+	public Collection<Estudiante> getEstudiantes() {
+		// TODO: Iterar inscripciones y devolver colección de estudiantes.
+		return new HashSet<>();
 	}
 
 	public int getIdCarrera() {

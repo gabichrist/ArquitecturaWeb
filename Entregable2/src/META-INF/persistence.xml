@@ -9,6 +9,7 @@
 		<class>entity.Estudiante</class>
 		<class>entity.Carrera</class>	
 		<class>entity.Inscripcion</class>	
+		<class>entity.InscripcionId</class>	
 		
 		<properties>
 			<!-- Propiedades de configuracion de JDBC para MySQL -->
