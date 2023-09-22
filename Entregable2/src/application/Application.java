@@ -12,6 +12,7 @@ import entity.Inscripcion;
 import entity.InscripcionId;
 //import service.ServicioCarrera;
 //import service.ServicioEstudiante;
+import factory.ConnectionFactory;
 
 public class Application {
 
@@ -31,6 +32,40 @@ public class Application {
 
 		// Se crean y cargan estudiantes en la base de datos si no existen
 		//servicioEstudiante.altaEstudiante(null);
+
+		// a- Dar de alta estudiante		
+		//Estudiante e1 = new Estudiante(245852, "Juan", "Perez" , 25, "M", "39526555", "Tandil");
+		//Estudiante e2 = new Estudiante(268584, "Maria", "Gonzalez" , 22, "F", "42526555", "Mar del Plata");
+		
+		//servicioEstudiante.altaEstudiante(e1);
+		//servicioEstudiante.altaEstudiante(e2);
+		
+		// b- Matricular un estudiante a una carrera
+		//servicioestudiante.matricularEstudiante()
+	
+		// c- Recuperar un estudiante, y especificar algun criterio de ordenamiento simple
+		//List<Estudiante> listaEstudiantesPorEdad = servicioEstudiante.listarEstudiantesOrdenadosporEdad();
+		//List<Estudiante> listaEstudiantesOrdenado = servicioEstudiante.listarEstudiantesOrdenados("DESC");
+		
+		// d- Recuperar un estudiante, en base a su numero de libreta universitaria
+		//Estudiante estudiantePorLibreta = servicioEstudiante.obtenerEstudianteporLibreta(268584);
+		//System.out.println(estudiantePorLibreta.toString());
+		
+		// e- Recuperar todos los estudiantes, en base a su genero
+		//List<Estudiante> listaEstudiantesMasculinos = servicioEstudiante.listarEstudiantesporGenero("M");
+		//	List<Estudiante> listaEstudiantesFemeninos = servicioEstudiante.listarEstudiantesporGenero("F");
+
+		// f- Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos
+		//List<Carrera> listaCarrerasOrdenadasPorinscriptos = servicioCarrera.listarCarrerasOrdenadasporInscriptos();
+		
+		// g- Recuperar los estudiantes de una determinada carrera, filtrando por ciudad de residencia.		
+		
+		//List<Estudiante> estudiantesPorCarreraYCiudad = servicioEstudiante.listarEstudiantesporCarrerayCiudad(carrera, "Tandil");
+		
+		
+
+		// CÓDIGO DE PRUEBA PARA VERIFICAR QUE FUNCIONA LA BD
+		em.getTransaction().begin();
 		Estudiante e1 = em.find(Estudiante.class, 245852);
 		if (e1 == null) {
 			e1 = new Estudiante(245852, "Juan", "Perez" , 25, "M", "39526555", "Tandil");
