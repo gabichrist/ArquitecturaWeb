@@ -9,10 +9,11 @@ public class ConnectionFactory {
 	private EntityManagerFactory emf;
 	
 	public EntityManager connection() {
-		this.emf = Persistence.createEntityManagerFactory("Entregable2");
-		EntityManager em = emf.createEntityManager();
+	this.emf = Persistence.createEntityManagerFactory("Entregable2");
+		//EntityManager em = emf.createEntityManager();
 		System.out.println(emf);
-		return em;
+		//return em;
+		return null;
 	}
 	
 	public void close(EntityManager em) {

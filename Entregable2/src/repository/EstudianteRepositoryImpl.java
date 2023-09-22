@@ -23,11 +23,13 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 
 	@Override
 	public Estudiante insertarEstudiante(Estudiante estudiante) {
+		entityManager.getTransaction().begin();	
 		if (estudiante.getDni() == null) {
 			entityManager.persist(estudiante);
 		} else {
 			estudiante = entityManager.merge(estudiante);
 		}
+		entityManager.getTransaction().commit();	
 		return estudiante;
 	}
 
@@ -36,6 +38,14 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_EDAD, Estudiante.class);
 		List<Estudiante> estudiantes = q.getResultList();
 		return estudiantes;
+	}
+	
+	@Override
+	public List<Estudiante> obtenerEstudiantesOrdenados(String criterioOrdenamiento) {
+		//TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_ORDENADOS, Estudiante.class);
+		//List<Estudiante> estudiantes = q.getResultList();
+		//return estudiantes;
+		return null;
 	}
 
 	@Override
@@ -62,5 +72,6 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		List<Estudiante> estudiantes = q.getResultList();
 		return estudiantes;
 	}
+
 
 }
