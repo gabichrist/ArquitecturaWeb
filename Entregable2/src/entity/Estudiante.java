@@ -1,7 +1,8 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +12,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@NamedQueries(value = {
-		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad"),
-		@NamedQuery(name = Estudiante.OBTENER_POR_LIBRETA, query = "SELECT e FROM Estudiante e WHERE e.lu = :libreta"),
-		@NamedQuery(name = Estudiante.OBTENER_POR_GENERO, query = "SELECT e FROM Estudiante e WHERE e.genero = :genero"),
-		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = " "),
-		//@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT e FROM Estudiante JOIN e.carreras i " + 
-		//		"WHERE i.idCarrera = :carrera AND e.ciudad = :ciudad")
-	})
+//@NamedQueries(value = {		
+//		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad"),
+//		@NamedQuery(name = Estudiante.OBTENER_POR_LIBRETA, query = "SELECT e FROM Estudiante e WHERE e.lu = :libreta"),
+//		@NamedQuery(name = Estudiante.OBTENER_POR_GENERO, query = "SELECT e FROM Estudiante e WHERE e.genero = :genero"),
+//		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT e FROM Estudiante JOIN e.carreras i " + 
+//		"WHERE i.idCarrera = :carrera AND e.ciudad = :ciudad")
+//	})
 
 public class Estudiante {
 	
@@ -48,8 +48,8 @@ public class Estudiante {
 	@Column(nullable = false)
 	private String ciudad;
 	
-	@OneToMany(mappedBy = "estudiante")
-	private List<Inscripcion> carreras;
+	@OneToMany(mappedBy = "id.estudiante")
+	private Set<Inscripcion> inscripcionSet;
 	
 	public Estudiante() {
 		super();
@@ -64,7 +64,7 @@ public class Estudiante {
 		this.genero = genero;
 		this.dni = dni;
 		this.ciudad = ciudad;
-		this.carreras = new ArrayList<Inscripcion>();
+		// this.carreraSet = new Set<Inscripcion>();
 	}
 	
 	public int getLU() {
@@ -120,8 +120,9 @@ public class Estudiante {
 	}
 
 
-	public List<Inscripcion> getCarreras() {
-		return carreras;
+	public Collection<Inscripcion> getCarreras() {
+		//TODO: iterar inscripciones y devolver carreras
+		return new HashSet<>();
 	}
 
 	@Override
