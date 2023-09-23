@@ -62,6 +62,6 @@ public class ReporteCarreraDTO {
 
 	@Override
 	public String toString() {
-		return "Carrera: " + carrera + " - Año: " + anio + " - Cantidad de Inscriptos: " + cantidadInscriptos + " - Cantidad de egresados: " + cantidadEgresados;
+		return "Carrera: " + carrera + " - Anio: " + anio + " - Cantidad de Inscriptos: " + cantidadInscriptos + " - Cantidad de egresados: " + cantidadEgresados;
 	}		
 }

@@ -1,13 +1,10 @@
 package application;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import entity.Carrera;
 import entity.Estudiante;
-import entity.Inscripcion;
 import service.ServicioCarrera;
 import service.ServicioEstudiante;
 import service.ServicioInscripcion;
@@ -36,7 +33,7 @@ public class Application {
 			new Estudiante(256445, "Paz", "Almada" , 23, "F", "40652224", "Tandil"),
 			new Estudiante(256446, "Alberto", "Flores" , 25, "M", "40652225", "Balcarce"),
 			new Estudiante(256447, "Eduardo", "Martinez" , 27, "M", "40652226", "Tandil"),
-			new Estudiante(256448, "María José", "Rodriguez" , 29, "F", "40652227", "Tandil"),
+			new Estudiante(256448, "Maria Jose", "Rodriguez" , 29, "F", "40652227", "Tandil"),
 			new Estudiante(256449, "Laura", "Miranda" , 31, "F", "40652228", "Tandil"),
 			new Estudiante(256450, "Perdro", "Beltrame" , 33, "M", "40652229", "Tandil"),
 			new Estudiante(256451, "Juan", "De Las Casas" , 35, "M", "40652210", "Mar del Plata"),
