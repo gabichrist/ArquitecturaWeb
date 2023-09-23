@@ -3,14 +3,10 @@ package repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-
 import dto.EstudiantesPorCarreraDTO;
 import dto.ReporteCarreraDTO;
 import entity.Carrera;
-import entity.Estudiante;
 import factory.ConnectionFactory;
 
 public class CarreraRepositoryImpl implements CarreraRepository{
@@ -52,7 +48,6 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		return carreras;
 	}
 	
-	// esta no estoy segura
 	@Override
 	public List<EstudiantesPorCarreraDTO> obtenerCarrerasOrdenadasporInscriptosDTO() {
 		entityManager.getTransaction().begin();		
@@ -63,9 +58,12 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 	}
 
 	@Override
-	public ReporteCarreraDTO generarReporteCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReporteCarreraDTO> generarReporteCarrera() {
+		entityManager.getTransaction().begin();		
+		TypedQuery<ReporteCarreraDTO> q = entityManager.createNamedQuery(Carrera.GENERAR_REPORTE_CARRERA, ReporteCarreraDTO.class);
+		List<ReporteCarreraDTO> carreras = q.getResultList();		
+		entityManager.getTransaction().commit();
+		return carreras;
 	}
 
 

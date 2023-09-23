@@ -1,25 +1,16 @@
 package application;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import entity.Carrera;
 import entity.Estudiante;
-import entity.Inscripcion;
-import entity.InscripcionId;
 import service.ServicioCarrera;
 import service.ServicioEstudiante;
 import service.ServicioInscripcion;
-import factory.ConnectionFactory;
 
 public class Application {
 
 	public static void main(String[] args) {
 		
-		EntityManager em = ConnectionFactory.connection();
 		
 		ServicioEstudiante servicioEstudiante = new ServicioEstudiante();
 		ServicioCarrera servicioCarrera = new ServicioCarrera();
@@ -29,41 +20,48 @@ public class Application {
 		Carrera c1 = servicioCarrera.altaCarrera("TUDAI");
 		Carrera c2 = servicioCarrera.altaCarrera("TUARI");
 		Carrera c3 = servicioCarrera.altaCarrera("SISTEMAS");		
-				
-		// a- Dar de alta estudiante		
+			
+//		// a- Dar de alta estudiante		
 		Estudiante e1 = new Estudiante(245852, "Juan", "Perez" , 25, "M", "39526555", "Tandil");
 		Estudiante e2 = new Estudiante(268584, "Maria", "Gonzalez" , 22, "F", "42526555", "Mar del Plata");
 		Estudiante e3 = new Estudiante(256852, "Esteban", "Lopez" , 21, "F", "43252221", "Tandil");
+		Estudiante e4 = new Estudiante(256343, "Martin", "Rodriguez" , 20, "M", "44652221", "Tandil");
+		Estudiante e5 = new Estudiante(256444, "Daiana", "Ramirez" , 21, "F", "40652221", "Balcarce");
+		
 		servicioEstudiante.altaEstudiante(e1);
 		servicioEstudiante.altaEstudiante(e2);
 		servicioEstudiante.altaEstudiante(e3);
-		
-		// b- Matricular un estudiante a una carrera
+		servicioEstudiante.altaEstudiante(e4);
+		servicioEstudiante.altaEstudiante(e5);
+//		// b- Matricular un estudiante a una carrera
 		servicioInscripcion.matricularEstudiante(e1, c1);
 		servicioInscripcion.matricularEstudiante(e1, c2);
 		servicioInscripcion.matricularEstudiante(e1, c3);
 		servicioInscripcion.matricularEstudiante(e2, c1);
+		servicioInscripcion.matricularEstudiante(e4, c1);
+		servicioInscripcion.matricularEstudiante(e5, c1);
 	
 		// c- Recuperar un estudiante, y especificar algun criterio de ordenamiento simple
-		List<Estudiante> listaEstudiantesPorEdad = servicioEstudiante.listarEstudiantesOrdenadosporEdad();
+		servicioEstudiante.listarEstudiantesOrdenadosporEdad();
 		//List<Estudiante> listaEstudiantesOrdenado = servicioEstudiante.listarEstudiantesOrdenados("DESC");
 		
 		// d- Recuperar un estudiante, en base a su numero de libreta universitaria
 		int libreta = 268584;
-		Estudiante estudiantePorLibreta = servicioEstudiante.obtenerEstudianteporLibreta(libreta);
+		servicioEstudiante.obtenerEstudianteporLibreta(libreta);
 		
 		
 		// e- Recuperar todos los estudiantes, en base a su genero
-		List<Estudiante> listaEstudiantesMasculinos = servicioEstudiante.listarEstudiantesporGenero("M");
-		List<Estudiante> listaEstudiantesFemeninos = servicioEstudiante.listarEstudiantesporGenero("F");
+		servicioEstudiante.listarEstudiantesporGenero("M");
+		servicioEstudiante.listarEstudiantesporGenero("F");
 
 		// f- Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos
-		//List<Carrera> listaCarrerasOrdenadasPorinscriptos = servicioCarrera.listarCarrerasOrdenadasporInscriptos();
+		servicioCarrera.listarCarrerasOrdenadasporInscriptosDTO();
 		
 		// g- Recuperar los estudiantes de una determinada carrera, filtrando por ciudad de residencia.		
+		servicioEstudiante.listarEstudiantesporCarrerayCiudad(c1, "Tandil");
 		
-		//List<Estudiante> estudiantesPorCarreraYCiudad = servicioEstudiante.listarEstudiantesporCarrerayCiudad(carrera, "Tandil");
-		
+		//ejercicio 3
+		servicioCarrera.generarReporteCarrera();
 		
 
 		// CÓDIGO DE PRUEBA PARA VERIFICAR QUE FUNCIONA LA BD

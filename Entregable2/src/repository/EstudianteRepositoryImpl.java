@@ -1,10 +1,7 @@
 package repository;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import entity.Carrera;
 import entity.Estudiante;
@@ -38,14 +35,6 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_EDAD, Estudiante.class);
 		List<Estudiante> estudiantes = q.getResultList();
 		return estudiantes;
-	}
-	
-	@Override
-	public List<Estudiante> obtenerEstudiantesOrdenados(String criterioOrdenamiento) {
-		//TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_ORDENADOS, Estudiante.class);
-		//List<Estudiante> estudiantes = q.getResultList();
-		//return estudiantes;
-		return null;
 	}
 
 	@Override

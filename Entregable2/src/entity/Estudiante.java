@@ -16,8 +16,8 @@ import javax.persistence.OneToMany;
 		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad ASC"),
 		@NamedQuery(name = Estudiante.OBTENER_POR_LIBRETA, query = "SELECT e FROM Estudiante e WHERE e.LU = :libreta"),
 		@NamedQuery(name = Estudiante.OBTENER_POR_GENERO, query = "SELECT e FROM Estudiante e WHERE e.genero = :genero"),
-//		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT e FROM Estudiante JOIN e.carreras i " + 
-//		"WHERE i.idCarrera = :carrera AND e.ciudad = :ciudad")
+		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT e FROM Estudiante e, Inscripcion i, Carrera c "
+				+ "WHERE c.idCarrera = i.carrera.idCarrera AND e.LU = i.estudiante.LU and i.carrera.idCarrera = :carrera AND e.ciudad = :ciudad")
 	})
 
 public class Estudiante {

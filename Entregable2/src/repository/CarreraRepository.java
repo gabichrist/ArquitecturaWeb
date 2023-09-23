@@ -16,5 +16,5 @@ public interface CarreraRepository {
 
 	public abstract List<EstudiantesPorCarreraDTO> obtenerCarrerasOrdenadasporInscriptosDTO();
 	
-	public abstract ReporteCarreraDTO generarReporteCarrera(Carrera carrera);
+	public abstract List<ReporteCarreraDTO> generarReporteCarrera();
 }

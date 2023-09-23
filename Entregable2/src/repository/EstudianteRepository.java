@@ -11,8 +11,6 @@ public interface EstudianteRepository {
 	
 	public abstract List<Estudiante> obtenerEstudiantesOrdenadosPorEdad();
 	
-	public abstract List<Estudiante> obtenerEstudiantesOrdenados(String criterioOrdenamiento);
-
 	public abstract Estudiante obtenerEstudiantePorLibreta(int LU);
 
 	public abstract List<Estudiante> obtenerEstudiantesPorGenero(String genero);

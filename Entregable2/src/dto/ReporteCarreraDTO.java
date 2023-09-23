@@ -1,6 +1,5 @@
 package dto;
 
-import java.time.LocalDate;
 
 /**
  * ReporteCarrerasDTO
@@ -15,18 +14,18 @@ public class ReporteCarreraDTO {
 	
 	private Long cantidadEgresados;
 	
-	private LocalDate fecha;
+	private int año;
 
 	public ReporteCarreraDTO() {
 		super();
 	}
 
-	public ReporteCarreraDTO(String carrera, Long cantidadInscriptos, Long cantidadEgresados, LocalDate fecha) {
+	public ReporteCarreraDTO(String carrera, Long cantidadInscriptos, Long cantidadEgresados, int año) {
 		super();
 		this.carrera = carrera;
 		this.cantidadInscriptos = cantidadInscriptos;
 		this.cantidadEgresados = cantidadEgresados;
-		this.fecha = fecha;
+		this.año = año;
 	}
 
 	public String getCarrera() {
@@ -53,17 +52,16 @@ public class ReporteCarreraDTO {
 		this.cantidadEgresados = cantidadEgresados;
 	}
 
-	public LocalDate getFecha() {
-		return fecha;
+	public int getFecha() {
+		return año;
 	}
 
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
+	public void setFecha(int año) {
+		this.año = año;
 	}
 
 	@Override
 	public String toString() {
-		return "ReporteCarrerasDTO [carrera=" + carrera + ", cantidadInscriptos=" + cantidadInscriptos
-				+ ", cantidadEgresados=" + cantidadEgresados + ", fecha=" + fecha + "]";
+		return "Carrera: " + carrera + " - Año: " + año + " - Cantidad de Inscriptos: " + cantidadInscriptos + " - Cantidad de egresados: " + cantidadEgresados;
 	}		
 }

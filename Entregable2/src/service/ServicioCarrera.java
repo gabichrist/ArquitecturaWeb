@@ -23,18 +23,22 @@ public class ServicioCarrera {
 		return carrera;
 	}
 	
-	public List<Carrera> listarCarrerasOrdenadasporInscriptos() {
-		List<Carrera> carreras = carreraRepository.obtenerCarrerasOrdenadasporInscriptos();
-		return carreras;		
-	}
 	
 	public List<EstudiantesPorCarreraDTO> listarCarrerasOrdenadasporInscriptosDTO() {
 		List<EstudiantesPorCarreraDTO> carreras = carreraRepository.obtenerCarrerasOrdenadasporInscriptosDTO();
+		System.out.println("\nLista de carreras ordenados por cantidad de inscriptos:");
+		for (EstudiantesPorCarreraDTO carrera : carreras) {
+			System.out.println(carrera.toString());
+		}
 		return carreras;
 	}
 	
-	public ReporteCarreraDTO generarReporteCarrera(Carrera carrera){
-		ReporteCarreraDTO reporte = carreraRepository.generarReporteCarrera(carrera);
+	public List<ReporteCarreraDTO> generarReporteCarrera(){
+		List<ReporteCarreraDTO> reporte = carreraRepository.generarReporteCarrera();
+		System.out.println("\n Reporte de carreras: ");
+		for (ReporteCarreraDTO c : reporte) {
+			System.out.println(c.toString());
+		}
 		return reporte;
 	} 
 	

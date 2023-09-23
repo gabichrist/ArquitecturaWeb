@@ -7,14 +7,14 @@ public class EstudiantesPorCarreraDTO implements Serializable{
 	
 	private String nombre;
 	
-	private Integer cantidadEstudiantes;
+	private Long cantidadEstudiantes;
 	
 
 	public EstudiantesPorCarreraDTO() {
 		super();
 	}
 
-	public EstudiantesPorCarreraDTO(String nombre, Integer cantidadEstudiantes) {
+	public EstudiantesPorCarreraDTO(String nombre, Long cantidadEstudiantes) {
 		super();	
 		this.nombre = nombre;
 		this.cantidadEstudiantes = cantidadEstudiantes;
@@ -28,17 +28,17 @@ public class EstudiantesPorCarreraDTO implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public Integer getCantidadEstudiantes() {
+	public Long getCantidadEstudiantes() {
 		return cantidadEstudiantes;
 	}
 
-	public void setCantidadEstudiantes(Integer cantidadEstudiantes) {
+	public void setCantidadEstudiantes(Long cantidadEstudiantes) {
 		this.cantidadEstudiantes = cantidadEstudiantes;
 	}
 
 	@Override
 	public String toString() {
-		return "EstudiantesPorCarreraDTO [nombre=" + nombre + ", cantidadEstudiantes=" + cantidadEstudiantes + "]";
+		return "Carrera: " + nombre + ", cantidadEstudiantes= " + cantidadEstudiantes;
 	}
 	
 }

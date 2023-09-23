@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-//TODO: revisar, no sé por qué el eclipse me marca advertencia en esta línea, pero corre ok parece.
 @Entity
 public class Inscripcion {
 	
