@@ -24,6 +24,11 @@ public class ServicioEstudiante {
 
 	public List<Estudiante> listarEstudiantesOrdenadosporEdad() {
 		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesOrdenadosPorEdad();
+		System.out.println("\nLista de estudiantes ordenados por edad:");
+		for (Estudiante estudiante : estudiantes) {
+			System.out.println(estudiante.toString());
+		}
+		
 		return estudiantes;
 	}
 

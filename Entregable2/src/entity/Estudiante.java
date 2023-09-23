@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries(value = {		
-		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad"),
+		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad ASC"),
 		@NamedQuery(name = Estudiante.OBTENER_POR_LIBRETA, query = "SELECT e FROM Estudiante e WHERE e.LU = :libreta"),
 		@NamedQuery(name = Estudiante.OBTENER_POR_GENERO, query = "SELECT e FROM Estudiante e WHERE e.genero = :genero"),
 //		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT e FROM Estudiante JOIN e.carreras i " + 
@@ -127,8 +127,8 @@ public class Estudiante {
 
 	@Override
 	public String toString() {
-		return "Estudiante [LU=" + LU + ", nombres=" + nombres + ", apellido=" + apellido + ", edad=" + edad
-				+ ", genero=" + genero + ", dni=" + dni + ", ciudad=" + ciudad + "]";
+		return LU + ", " + nombres + " " + apellido + ", edad: " + edad
+				+ ", " + genero + ", DNI: " + dni + ", " + ciudad;
 	}
 	
 }

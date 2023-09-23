@@ -1,6 +1,6 @@
 package application;
 
-//import java.util.List;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,8 +33,10 @@ public class Application {
 		// a- Dar de alta estudiante		
 		Estudiante e1 = new Estudiante(245852, "Juan", "Perez" , 25, "M", "39526555", "Tandil");
 		Estudiante e2 = new Estudiante(268584, "Maria", "Gonzalez" , 22, "F", "42526555", "Mar del Plata");
+		Estudiante e3 = new Estudiante(256852, "Esteban", "Lopez" , 21, "F", "43252221", "Tandil");
 		servicioEstudiante.altaEstudiante(e1);
 		servicioEstudiante.altaEstudiante(e2);
+		servicioEstudiante.altaEstudiante(e3);
 		
 		// b- Matricular un estudiante a una carrera
 		servicioInscripcion.matricularEstudiante(e1, c1);
@@ -43,7 +45,7 @@ public class Application {
 		servicioInscripcion.matricularEstudiante(e2, c1);
 	
 		// c- Recuperar un estudiante, y especificar algun criterio de ordenamiento simple
-		//List<Estudiante> listaEstudiantesPorEdad = servicioEstudiante.listarEstudiantesOrdenadosporEdad();
+		List<Estudiante> listaEstudiantesPorEdad = servicioEstudiante.listarEstudiantesOrdenadosporEdad();
 		//List<Estudiante> listaEstudiantesOrdenado = servicioEstudiante.listarEstudiantesOrdenados("DESC");
 		
 		// d- Recuperar un estudiante, en base a su numero de libreta universitaria
