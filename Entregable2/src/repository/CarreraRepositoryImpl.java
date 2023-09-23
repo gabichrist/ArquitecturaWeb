@@ -39,7 +39,11 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 	@Override
 	public Carrera obtenerCarreraPorNombre(String nombre) {	
 		TypedQuery<Carrera> q = entityManager.createNamedQuery(Carrera.OBTENER_POR_NOMBRE, Carrera.class).setParameter("nombre", nombre);
+		if (q.getResultList().isEmpty()) {
+			return null;
+		}
 		Carrera carrera = q.getSingleResult();
+		System.out.println("carrera " + carrera);
 		return carrera;
 	}
 	
