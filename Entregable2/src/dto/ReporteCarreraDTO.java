@@ -14,18 +14,18 @@ public class ReporteCarreraDTO {
 	
 	private Long cantidadEgresados;
 	
-	private int año;
+	private int anio;
 
 	public ReporteCarreraDTO() {
 		super();
 	}
 
-	public ReporteCarreraDTO(String carrera, Long cantidadInscriptos, Long cantidadEgresados, int año) {
+	public ReporteCarreraDTO(String carrera, Long cantidadInscriptos, Long cantidadEgresados, int anio) {
 		super();
 		this.carrera = carrera;
 		this.cantidadInscriptos = cantidadInscriptos;
 		this.cantidadEgresados = cantidadEgresados;
-		this.año = año;
+		this.anio = anio;
 	}
 
 	public String getCarrera() {
@@ -53,15 +53,15 @@ public class ReporteCarreraDTO {
 	}
 
 	public int getFecha() {
-		return año;
+		return anio;
 	}
 
-	public void setFecha(int año) {
-		this.año = año;
+	public void setFecha(int anio) {
+		this.anio = anio;
 	}
 
 	@Override
 	public String toString() {
-		return "Carrera: " + carrera + " - Año: " + año + " - Cantidad de Inscriptos: " + cantidadInscriptos + " - Cantidad de egresados: " + cantidadEgresados;
+		return "Carrera: " + carrera + " - AÃ±o: " + anio + " - Cantidad de Inscriptos: " + cantidadInscriptos + " - Cantidad de egresados: " + cantidadEgresados;
 	}		
 }
