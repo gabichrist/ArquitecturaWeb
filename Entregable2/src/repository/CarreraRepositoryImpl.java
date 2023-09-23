@@ -10,13 +10,13 @@ import javax.persistence.TypedQuery;
 import dto.EstudiantesPorCarreraDTO;
 import dto.ReporteCarreraDTO;
 import entity.Carrera;
+import factory.ConnectionFactory;
 
 public class CarreraRepositoryImpl implements CarreraRepository{
 	EntityManager entityManager;
 
 	public CarreraRepositoryImpl() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Entregable2");
-		this.entityManager = emf.createEntityManager();
+		this.entityManager = ConnectionFactory.connection();
 	}
 
 	public CarreraRepositoryImpl(EntityManager entityManager) {
@@ -26,11 +26,12 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 	@Override
 	public Carrera insertarCarrera(Carrera carrera) {	
 		entityManager.getTransaction().begin();	
-		if (carrera.getNombre() == null) {
+//		TODO! CORREGIR LÓGICA VERIFICACIÓN
+//		if (carrera.getNombre() == null) {
 			entityManager.persist(carrera);
-		} else {
-			carrera = entityManager.merge(carrera);
-		}
+//		} else {
+//			carrera = entityManager.merge(carrera);
+//		}
 		entityManager.getTransaction().commit();
 		return carrera;		
 	}	

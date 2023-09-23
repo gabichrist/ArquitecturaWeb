@@ -8,13 +8,13 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import entity.Carrera;
 import entity.Estudiante;
+import factory.ConnectionFactory;
 
 public class EstudianteRepositoryImpl implements EstudianteRepository {
 	EntityManager entityManager;
 
 	public EstudianteRepositoryImpl() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Entregable2");
-		this.entityManager = emf.createEntityManager();
+		this.entityManager = ConnectionFactory.connection();
 	}
 
 	public EstudianteRepositoryImpl(EntityManager entityManager) {
@@ -24,11 +24,12 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	@Override
 	public Estudiante insertarEstudiante(Estudiante estudiante) {
 		entityManager.getTransaction().begin();	
-		if (estudiante.getDni() == null) {
+//		TODO! CORREGIR LÓGICA VERIFICACIÓN
+//		if (estudiante.getDni() == null) {
 			entityManager.persist(estudiante);
-		} else {
-			estudiante = entityManager.merge(estudiante);
-		}
+//		} else {
+//			estudiante = entityManager.merge(estudiante);
+//		}
 		entityManager.getTransaction().commit();	
 		return estudiante;
 	}
