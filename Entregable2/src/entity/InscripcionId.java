@@ -19,6 +19,10 @@ public class InscripcionId implements Serializable {
     @JoinColumn(name = "idCarrera")
     private Carrera carrera;
 
+    public InscripcionId() {
+		super();
+    }
+    
 	public InscripcionId(Estudiante estudiante, Carrera carrera) {
 	    this.estudiante = estudiante;
 	    this.carrera = carrera;
@@ -48,6 +52,6 @@ public class InscripcionId implements Serializable {
 
 	@Override
 	public int hashCode() {
-	    return Objects.hash(estudiante, carrera);
+	    return Objects.hash(estudiante.getLU(), carrera.getIdCarrera());
 	}
 }

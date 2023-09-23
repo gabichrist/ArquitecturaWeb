@@ -5,5 +5,6 @@ import entity.Estudiante;
 import entity.Inscripcion;
 
 public interface InscripcionRepository {
-	public abstract Inscripcion matricular(Estudiante estudiante, Carrera carrera);
+	public abstract Inscripcion insertarInscripcion(Inscripcion inscripcion);
+	public abstract Inscripcion obtenerInscripcion(Estudiante estudiante, Carrera carrera);
 }

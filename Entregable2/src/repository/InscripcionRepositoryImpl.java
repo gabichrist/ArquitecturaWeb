@@ -19,19 +19,25 @@ public class InscripcionRepositoryImpl implements InscripcionRepository {
 		this.entityManager = entityManager;
 	}
 
+	private Inscripcion getById(InscripcionId id) {
+		return this.entityManager.find(Inscripcion.class, id);
+	}
+
 	@Override
-	public Inscripcion matricular(Estudiante estudiante, Carrera carrera) {
-		Inscripcion inscripcion = new Inscripcion(estudiante, carrera);
+	public Inscripcion insertarInscripcion(Inscripcion inscripcion) {
+		entityManager.getTransaction().begin();	
 		if (this.getById(inscripcion.getId()) == null) {
-			entityManager.getTransaction().begin();	
 			entityManager.persist(inscripcion);
-			entityManager.getTransaction().commit();	
+		} else {
+			entityManager.merge(inscripcion);
 		}
+		entityManager.getTransaction().commit();	
 		return getById(inscripcion.getId());
 	}
 
-	public Inscripcion getById(InscripcionId id) {
-		return this.entityManager.find(Inscripcion.class, id);
+	@Override
+	public Inscripcion obtenerInscripcion(Estudiante estudiante, Carrera carrera) {
+		return getById(new InscripcionId(estudiante, carrera));
 	}
 
 }
