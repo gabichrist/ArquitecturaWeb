@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import dto.EstudiantesPorCarreraDTO;
 import dto.ReporteCarreraDTO;
 import entity.Carrera;
+import entity.Estudiante;
 import factory.ConnectionFactory;
 
 public class CarreraRepositoryImpl implements CarreraRepository{
@@ -26,16 +27,22 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 	@Override
 	public Carrera insertarCarrera(Carrera carrera) {	
 		entityManager.getTransaction().begin();	
-//		TODO! CORREGIR LÓGICA VERIFICACIÓN
-//		if (carrera.getNombre() == null) {
+		if (this.obtenerCarreraPorNombre(carrera.getNombre()) == null) {
 			entityManager.persist(carrera);
-//		} else {
-//			carrera = entityManager.merge(carrera);
-//		}
+		} else {
+			carrera = entityManager.merge(carrera);
+		}
 		entityManager.getTransaction().commit();
-		return carrera;		
+		return this.obtenerCarreraPorNombre(carrera.getNombre());		
 	}	
-
+	
+	@Override
+	public Carrera obtenerCarreraPorNombre(String nombre) {	
+		TypedQuery<Carrera> q = entityManager.createNamedQuery(Carrera.OBTENER_POR_NOMBRE, Carrera.class).setParameter("nombre", nombre);
+		Carrera carrera = q.getSingleResult();
+		return carrera;
+	}
+	
 	// f- Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos
 	@Override
 	public List<Carrera> obtenerCarrerasOrdenadasporInscriptos() {
@@ -60,5 +67,5 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 		return null;
 	}
 
-	
+
 }

@@ -9,6 +9,8 @@ import entity.Carrera;
 public interface CarreraRepository {
 	
 	public abstract Carrera insertarCarrera(Carrera carrera);
+	
+	public abstract Carrera obtenerCarreraPorNombre(String nombre);
 
 	public abstract List<Carrera> obtenerCarrerasOrdenadasporInscriptos();
 

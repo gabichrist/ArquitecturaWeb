@@ -14,8 +14,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-//@NamedQueries(value = {
-//		// MAS TARDE REVISO SI ESTAN BIEN ESCRITOS TODOS LOS JPQL Y QUE FUNCIONEN
+@NamedQueries(value = {
+		@NamedQuery(name = Carrera.OBTENER_POR_NOMBRE, query = "SELECT c FROM Carrera c WHERE c.nombre = :nombre"),
+
 //		@NamedQuery(name = Carrera.OBTENER_POR_INSCRIPTOS, query = "SELECT DISTINCT i.carrera "
 //				+ "FROM Inscripcion i,  Estudiante e, Carrera c "
 //				+ "WHERE c.idCarrera = i.carrera.idCarrera AND e.LU = i.estudiante.LU "
@@ -32,10 +33,11 @@ import javax.persistence.OneToMany;
 //		@NamedQuery(name = Carrera.GENERAR_REPORTE_CARRERA, query = "")
 //			//	+ "SELECT NEW dto.ReporteCarreraDTO()
 //
-//})
+})
 		
 public class Carrera {
 	
+	public static final String OBTENER_POR_NOMBRE = "Carrera.obtenerPorNombre";
 	public static final String OBTENER_POR_INSCRIPTOS = "Carrera.obtenerPorInscriptos";
 	public static final String OBTENER_POR_INSCRIPTOS_DTO = "Carrera.obtenerPorInscriptosDTO";
 	public static final String GENERAR_REPORTE_CARRERA = "Carrera.generarReporteCarrera";

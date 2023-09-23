@@ -25,8 +25,9 @@ public class Application {
 		
 		// Se crean y cargan carreras
 		servicioCarrera.altaCarrera("TUDAI");
-		servicioCarrera.altaCarrera("TUARI");
-		servicioCarrera.altaCarrera("SISTEMAS");		
+		//servicioCarrera.altaCarrera("TUARI");
+		//servicioCarrera.altaCarrera("SISTEMAS");	
+		//servicioCarrera.altaCarrera("SISTEMAS");
 				
 
 		// Se crean y cargan estudiantes en la base de datos si no existen

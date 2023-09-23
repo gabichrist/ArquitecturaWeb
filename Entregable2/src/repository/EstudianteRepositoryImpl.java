@@ -30,7 +30,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 			estudiante = entityManager.merge(estudiante);
 		}
 		entityManager.getTransaction().commit();	
-		return estudiante;
+		return this.obtenerEstudiantePorLibreta(estudiante.getLU());
 	}
 
 	@Override
