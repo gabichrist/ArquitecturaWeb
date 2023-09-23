@@ -25,14 +25,12 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 	}
 	
 	@Override
-	public Carrera insertarCarrera(Carrera carrera) {	
-		entityManager.getTransaction().begin();	
+	public Carrera insertarCarrera(Carrera carrera) {		
 		if (this.obtenerCarreraPorNombre(carrera.getNombre()) == null) {
+			entityManager.getTransaction().begin();	
 			entityManager.persist(carrera);
-		} else {
-			carrera = entityManager.merge(carrera);
-		}
-		entityManager.getTransaction().commit();
+			entityManager.getTransaction().commit();
+		} 		
 		return this.obtenerCarreraPorNombre(carrera.getNombre());		
 	}	
 	
@@ -43,7 +41,6 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 			return null;
 		}
 		Carrera carrera = q.getSingleResult();
-		System.out.println("carrera " + carrera);
 		return carrera;
 	}
 	
