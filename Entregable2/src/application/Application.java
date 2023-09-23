@@ -10,7 +10,7 @@ import entity.Carrera;
 import entity.Estudiante;
 import entity.Inscripcion;
 import entity.InscripcionId;
-//import service.ServicioCarrera;
+import service.ServicioCarrera;
 import service.ServicioEstudiante;
 import factory.ConnectionFactory;
 
@@ -21,12 +21,12 @@ public class Application {
 		EntityManager em = ConnectionFactory.connection();
 		
 		ServicioEstudiante servicioEstudiante = new ServicioEstudiante();
-	//	ServicioCarrera servicioCarrera = new ServicioCarrera();
+		ServicioCarrera servicioCarrera = new ServicioCarrera();
 		
 		// Se crean y cargan carreras
-		//servicioCarrera.altaCarrera("TUDAI");
-		//servicioCarrera.altaCarrera("TUARI");
-		//servicioCarrera.altaCarrera("SISTEMAS");		
+		servicioCarrera.altaCarrera("TUDAI");
+		servicioCarrera.altaCarrera("TUARI");
+		servicioCarrera.altaCarrera("SISTEMAS");		
 				
 
 		// Se crean y cargan estudiantes en la base de datos si no existen
