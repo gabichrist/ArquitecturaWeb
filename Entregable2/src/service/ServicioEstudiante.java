@@ -28,7 +28,6 @@ public class ServicioEstudiante {
 		for (Estudiante estudiante : estudiantes) {
 			System.out.println(estudiante.toString());
 		}
-		
 		return estudiantes;
 	}
 
@@ -38,7 +37,12 @@ public class ServicioEstudiante {
 	}
 	
 	public Estudiante obtenerEstudianteporLibreta(int LU) {
-		Estudiante estudiante = this.estudianteRepository.obtenerEstudiantePorLibreta(LU);		
+		Estudiante estudiante = this.estudianteRepository.obtenerEstudiantePorLibreta(LU);	
+		if(estudiante != null) {
+			System.out.println("\nEstudiante con LU " + LU + "\n" + estudiante.toString());
+		} else {
+			System.out.println("\\nNo existe un estudiante con LU " + LU);
+		}
 		return estudiante;
 	}
 

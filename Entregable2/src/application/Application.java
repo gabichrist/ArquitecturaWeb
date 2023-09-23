@@ -49,8 +49,9 @@ public class Application {
 		//List<Estudiante> listaEstudiantesOrdenado = servicioEstudiante.listarEstudiantesOrdenados("DESC");
 		
 		// d- Recuperar un estudiante, en base a su numero de libreta universitaria
-		//Estudiante estudiantePorLibreta = servicioEstudiante.obtenerEstudianteporLibreta(268584);
-		//System.out.println(estudiantePorLibreta.toString());
+		int libreta = 268584;
+		Estudiante estudiantePorLibreta = servicioEstudiante.obtenerEstudianteporLibreta(libreta);
+		
 		
 		// e- Recuperar todos los estudiantes, en base a su genero
 		//List<Estudiante> listaEstudiantesMasculinos = servicioEstudiante.listarEstudiantesporGenero("M");
