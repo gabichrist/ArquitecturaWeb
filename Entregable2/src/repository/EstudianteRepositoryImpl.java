@@ -24,18 +24,17 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	@Override
 	public Estudiante insertarEstudiante(Estudiante estudiante) {
 		entityManager.getTransaction().begin();	
-//		TODO! CORREGIR LÓGICA VERIFICACIÓN
-//		if (estudiante.getDni() == null) {
+		if (this.obtenerEstudiantePorLibreta(estudiante.getLU()) == null) {
 			entityManager.persist(estudiante);
-//		} else {
-//			estudiante = entityManager.merge(estudiante);
-//		}
+		} else {
+			estudiante = entityManager.merge(estudiante);
+		}
 		entityManager.getTransaction().commit();	
 		return estudiante;
 	}
 
 	@Override
-	public List<Estudiante> obtenerEstudiantesOrdenadosporEdad() {
+	public List<Estudiante> obtenerEstudiantesOrdenadosPorEdad() {
 		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_EDAD, Estudiante.class);
 		List<Estudiante> estudiantes = q.getResultList();
 		return estudiantes;
@@ -50,15 +49,17 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	}
 
 	@Override
-	public Estudiante obtenerEstudianteporLibreta(int LU) {
-		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_LIBRETA, Estudiante.class)
-				.setParameter("libreta", LU);
-		Estudiante estudiante = q.getSingleResult();
-		return estudiante;
+	public Estudiante obtenerEstudiantePorLibreta(int LU) {
+		return entityManager.find(Estudiante.class, LU);
+
+//		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_LIBRETA, Estudiante.class)
+//				.setParameter("libreta", LU);
+//		Estudiante estudiante = q.getSingleResult();
+//		return estudiante;
 	}
 
 	@Override
-	public List<Estudiante> obtenerEstudiantesporGenero(String genero) {
+	public List<Estudiante> obtenerEstudiantesPorGenero(String genero) {
 		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_GENERO, Estudiante.class)
 				.setParameter("genero", genero);
 		List<Estudiante> estudiantes = q.getResultList();
@@ -66,7 +67,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 	}
 
 	@Override
-	public List<Estudiante> obtenerEstudiantesporCarrerayCiudad(Carrera carrera, String ciudad) {
+	public List<Estudiante> obtenerEstudiantesPorCarrerayCiudad(Carrera carrera, String ciudad) {
 		TypedQuery<Estudiante> q = entityManager
 				.createNamedQuery(Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, Estudiante.class)
 				.setParameter("carrera", carrera.getIdCarrera()).setParameter("ciudad", ciudad);

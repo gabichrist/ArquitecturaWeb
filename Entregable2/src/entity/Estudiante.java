@@ -12,13 +12,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-//@NamedQueries(value = {		
+@NamedQueries(value = {		
 //		@NamedQuery(name = Estudiante.OBTENER_POR_EDAD, query = "SELECT e FROM Estudiante e ORDER BY e.edad"),
 //		@NamedQuery(name = Estudiante.OBTENER_POR_LIBRETA, query = "SELECT e FROM Estudiante e WHERE e.lu = :libreta"),
 //		@NamedQuery(name = Estudiante.OBTENER_POR_GENERO, query = "SELECT e FROM Estudiante e WHERE e.genero = :genero"),
 //		@NamedQuery(name = Estudiante.OBTENER_POR_CARRERA_Y_CIUDAD, query = "SELECT e FROM Estudiante JOIN e.carreras i " + 
 //		"WHERE i.idCarrera = :carrera AND e.ciudad = :ciudad")
-//	})
+	})
 
 public class Estudiante {
 	

@@ -40,7 +40,7 @@ public class ServicioEstudiante {
 	}
 
 	public List<Estudiante> listarEstudiantesOrdenadosporEdad() {
-		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesOrdenadosporEdad();
+		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesOrdenadosPorEdad();
 		return estudiantes;
 	}
 
@@ -50,17 +50,17 @@ public class ServicioEstudiante {
 	}
 	
 	public Estudiante obtenerEstudianteporLibreta(int LU) {
-		Estudiante estudiante = this.estudianteRepository.obtenerEstudianteporLibreta(LU);		
+		Estudiante estudiante = this.estudianteRepository.obtenerEstudiantePorLibreta(LU);		
 		return estudiante;
 	}
 
 	public List<Estudiante> listarEstudiantesporGenero(String genero) {
-		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesporGenero(genero);
+		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesPorGenero(genero);
 		return estudiantes;	
 	}
 
 	public List<Estudiante> listarEstudiantesporCarrerayCiudad(Carrera carrera, String ciudad) {
-		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesporCarrerayCiudad(carrera, ciudad);
+		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesPorCarrerayCiudad(carrera, ciudad);
 		return estudiantes;
 	}
 
