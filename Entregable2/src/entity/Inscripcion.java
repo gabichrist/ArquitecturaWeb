@@ -56,6 +56,10 @@ public class Inscripcion {
 		this.esGraduado = false;
 	}
 
+	public InscripcionId getId() {
+		return this.id;
+	}
+	
 	public Estudiante getEstudiante() {
 		return this.id.getEstudiante();
 	}

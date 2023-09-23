@@ -3,8 +3,11 @@ package service;
 import java.util.List;
 import entity.Carrera;
 import entity.Estudiante;
+import entity.Inscripcion;
 import repository.EstudianteRepository;
 import repository.EstudianteRepositoryImpl;
+import repository.InscripcionRepository;
+import repository.InscripcionRepositoryImpl;
 
 public class ServicioEstudiante {
 
@@ -17,10 +20,6 @@ public class ServicioEstudiante {
 	public Estudiante altaEstudiante(Estudiante estudiante) {
 		Estudiante est = this.estudianteRepository.insertarEstudiante(estudiante);	
 		return(est);
-	}
-
-	public Estudiante matricularEstudiante(Estudiante estudiante, Carrera carrera) { 
-		return null;
 	}
 
 	public List<Estudiante> listarEstudiantesOrdenadosporEdad() {
