@@ -15,23 +15,7 @@ public class ServicioEstudiante {
 	}
 
 	public Estudiante altaEstudiante(Estudiante estudiante) {
-		Estudiante e = new Estudiante(
-				estudiante.getLU(), 
-				estudiante.getNombres(), 
-				estudiante.getApellido(), 
-				estudiante.getEdad(), 
-				estudiante.getGenero(), 
-				estudiante.getDni(), 
-				estudiante.getCiudad()
-				);
-//		TODO: REVISAR: FALTABA setLU - ver si se hace el seter, si se lo deja así o si se envía directamente el estudiante
-//		e.setNombres(estudiante.getNombres());
-//		e.setApellido(estudiante.getApellido());
-//		e.setEdad(estudiante.getEdad());
-//		e.setDni(estudiante.getDni());
-//		e.setGenero(estudiante.getGenero());
-//		e.setCiudad(estudiante.getCiudad());
-		Estudiante est = this.estudianteRepository.insertarEstudiante(e);	
+		Estudiante est = this.estudianteRepository.insertarEstudiante(estudiante);	
 		return(est);
 	}
 
