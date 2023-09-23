@@ -29,8 +29,9 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		} else {
 			estudiante = entityManager.merge(estudiante);
 		}
-		entityManager.getTransaction().commit();	
-		return estudiante;
+		entityManager.getTransaction().commit();
+		
+		return obtenerEstudiantePorLibreta(estudiante.getLU());
 	}
 
 	@Override
