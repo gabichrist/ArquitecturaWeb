@@ -5,20 +5,27 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class ConnectionFactory {
-
-	private EntityManagerFactory emf;
+	static EntityManagerFactory emf;
+	static EntityManager em;
 	
-	public EntityManager connection() {
-		if (this.emf == null) 
-			this.emf = Persistence.createEntityManagerFactory("Entregable2");
-		EntityManager em = emf.createEntityManager();
-	//System.out.println(emf);
-	// return null;
-		return em;
+	public static EntityManagerFactory getInstance() {
+		if (ConnectionFactory.emf == null || !ConnectionFactory.emf.isOpen()) 
+			ConnectionFactory.emf = Persistence.createEntityManagerFactory("Entregable2");
+		
+		return ConnectionFactory.emf;
 	}
 	
-	public void close(EntityManager em) {
-		em.close();
-		this.emf.close();
+	public static EntityManager connection() {
+		if (ConnectionFactory.em == null || !ConnectionFactory.em.isOpen()) {			
+			EntityManagerFactory entityManagerFactory = ConnectionFactory.getInstance();
+			ConnectionFactory.em = entityManagerFactory.createEntityManager();
+		}
+
+		return ConnectionFactory.em;
+	}
+	
+	public void close() {
+		ConnectionFactory.em.close();
+		ConnectionFactory.emf.close();
 	}
 }
