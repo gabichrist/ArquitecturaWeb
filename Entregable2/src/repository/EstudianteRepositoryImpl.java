@@ -50,12 +50,10 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 
 	@Override
 	public Estudiante obtenerEstudiantePorLibreta(int LU) {
-		return entityManager.find(Estudiante.class, LU);
-
-//		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_LIBRETA, Estudiante.class)
-//				.setParameter("libreta", LU);
-//		Estudiante estudiante = q.getSingleResult();
-//		return estudiante;
+		TypedQuery<Estudiante> q = entityManager.createNamedQuery(Estudiante.OBTENER_POR_LIBRETA, Estudiante.class)
+				.setParameter("libreta", LU);
+		Estudiante estudiante = q.getSingleResult();
+		return estudiante;
 	}
 
 	@Override

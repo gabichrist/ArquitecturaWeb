@@ -48,6 +48,10 @@ public class ServicioEstudiante {
 
 	public List<Estudiante> listarEstudiantesporGenero(String genero) {
 		List<Estudiante> estudiantes = this.estudianteRepository.obtenerEstudiantesPorGenero(genero);
+		System.out.println("\nLista de estudiantes ordenados por genero " + "(" + genero + ")");
+		for (Estudiante estudiante : estudiantes) {
+			System.out.println(estudiante.toString());
+		}
 		return estudiantes;	
 	}
 

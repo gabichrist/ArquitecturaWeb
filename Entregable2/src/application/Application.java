@@ -54,8 +54,8 @@ public class Application {
 		
 		
 		// e- Recuperar todos los estudiantes, en base a su genero
-		//List<Estudiante> listaEstudiantesMasculinos = servicioEstudiante.listarEstudiantesporGenero("M");
-		//	List<Estudiante> listaEstudiantesFemeninos = servicioEstudiante.listarEstudiantesporGenero("F");
+		List<Estudiante> listaEstudiantesMasculinos = servicioEstudiante.listarEstudiantesporGenero("M");
+		List<Estudiante> listaEstudiantesFemeninos = servicioEstudiante.listarEstudiantesporGenero("F");
 
 		// f- Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos
 		//List<Carrera> listaCarrerasOrdenadasPorinscriptos = servicioCarrera.listarCarrerasOrdenadasporInscriptos();
