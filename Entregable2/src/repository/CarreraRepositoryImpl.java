@@ -1,8 +1,12 @@
 package repository;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import dto.EstudiantesPorCarreraDTO;
 import dto.ReporteCarreraDTO;
@@ -59,12 +63,34 @@ public class CarreraRepositoryImpl implements CarreraRepository{
 
 	@Override
 	public List<ReporteCarreraDTO> generarReporteCarrera() {
-		entityManager.getTransaction().begin();		
-		TypedQuery<ReporteCarreraDTO> q = entityManager.createNamedQuery(Carrera.GENERAR_REPORTE_CARRERA, ReporteCarreraDTO.class);
-		List<ReporteCarreraDTO> carreras = q.getResultList();		
-		entityManager.getTransaction().commit();
-		return carreras;
+		String sql = "select c.nombre, "
+				+ "       COALESCE(year, 0) year, "
+				+ "       (SUM(CASE WHEN(EXTRACT(year from i.fecha_ingreso) = year.year) THEN 1 ELSE 0 END)) as inscriptos, "
+				+ "       (SUM(CASE WHEN(i.esGraduado = true and EXTRACT(year from i.fecha_egreso) = year.year) THEN 1 ELSE 0 END)) as egresados "
+				+ "from Carrera c "
+				+ "    left join Inscripcion i on c.idCarrera = i.idCarrera "
+				+ "    left join ( "
+				+ "        select idCarrera, extract(year from fecha_egreso) year from Inscripcion where fecha_egreso is not null "
+				+ "            union "
+				+ "        select idCarrera, extract(year from fecha_ingreso) year from Inscripcion "
+				+ "    ) year ON year.idCarrera = c.idCarrera "
+				+ "GROUP BY c.nombre, i.idCarrera, year.year "
+				+ "ORDER BY c.nombre, year.year";
+
+		Query query = entityManager.createNativeQuery(sql);
+		List<ReporteCarreraDTO> carreras = new ArrayList<ReporteCarreraDTO>();
+        List<Object[]> results = query.getResultList();
+
+        results.forEach(row ->
+        	carreras.add(
+    			new ReporteCarreraDTO(
+	        			(String)row[0], 
+	        			(BigDecimal)row[2], 
+	        			(BigDecimal)row[3], 
+	        			(BigInteger)row[1]
+	    			)
+				)
+    		);
+        return carreras;
 	}
-
-
 }

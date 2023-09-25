@@ -25,6 +25,7 @@ public class Application {
 		Carrera c1 = servicioCarrera.altaCarrera("TUDAI");
 		Carrera c2 = servicioCarrera.altaCarrera("TUARI");
 		Carrera c3 = servicioCarrera.altaCarrera("SISTEMAS");		
+		Carrera c4 = servicioCarrera.altaCarrera("HISTORIA");		
 
 //		// a- Dar de alta estudiante
 		List<Estudiante> estudiantes = Arrays.asList(

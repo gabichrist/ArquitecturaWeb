@@ -1,5 +1,7 @@
 package dto;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * ReporteCarrerasDTO
@@ -26,6 +28,14 @@ public class ReporteCarreraDTO {
 		this.cantidadInscriptos = cantidadInscriptos;
 		this.cantidadEgresados = cantidadEgresados;
 		this.anio = anio;
+	}
+	
+	public ReporteCarreraDTO(String carrera, BigDecimal cantidadInscriptos, BigDecimal cantidadEgresados, BigInteger anio) {
+		super();
+		this.carrera = carrera;
+		this.cantidadInscriptos = cantidadInscriptos.longValue();
+		this.cantidadEgresados = cantidadEgresados.longValue();
+		this.anio = anio.intValue();
 	}
 
 	public String getCarrera() {
