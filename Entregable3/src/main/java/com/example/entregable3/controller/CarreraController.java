@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,15 +49,26 @@ public class CarreraController {
         }
     }
 	
-	@PostMapping({"", "/"})
-	public ResponseEntity<?> save(@RequestBody Carrera carrera){
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.carreraServicio.save(carrera));
+			return ResponseEntity.status(HttpStatus.OK).body(this.carreraServicio.delete(id));
+		} catch (ExpectableException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-
-}
+	
+	@PostMapping({"", "/"})
+	public ResponseEntity<?> save(@RequestBody Carrera carrera){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.carreraServicio.save(carrera));
+		} catch (Exception e2) {
+			System.out.println("error " + e2.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}}

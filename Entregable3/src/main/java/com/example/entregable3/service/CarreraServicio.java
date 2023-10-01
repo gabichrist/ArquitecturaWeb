@@ -15,18 +15,18 @@ import com.example.entregable3.repository.CarreraRepository;
 public class CarreraServicio implements BaseService<Carrera> {
 
 	@Autowired
-	private CarreraRepository careraRepository;
+	private CarreraRepository carreraRepository;
 
 	@Override
 	public List<Carrera> findAll() throws Exception {
 		Sort sort = Sort.by(Sort.Direction.ASC, "nombre");
-		return careraRepository.findAll(sort);
+		return carreraRepository.findAll(sort);
 	}
 	
 	@Override
 	public Carrera findById(Long id) throws Exception {
         try{
-            Optional<Carrera> estudianteBuscado = careraRepository.findById(id);
+            Optional<Carrera> estudianteBuscado = carreraRepository.findById(id);
             return estudianteBuscado.get();
         }catch (Exception e){
             throw new Exception(e.getMessage());
@@ -36,8 +36,7 @@ public class CarreraServicio implements BaseService<Carrera> {
 	@Override
 	public Carrera save(Carrera entity) throws Exception {
 	try {
-		System.out.println("entit" + entity);
-		return careraRepository.save(entity);
+		return carreraRepository.save(entity);
 	} catch (Exception e) {
 		throw new Exception(e.getMessage());
 	}
@@ -51,7 +50,15 @@ public class CarreraServicio implements BaseService<Carrera> {
 
 	@Override
 	public boolean delete(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		if (carreraRepository.existsById(id)) {
+			try {
+				carreraRepository.deleteById(id);
+				return true;
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		} else {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+		}
 	}
 }
