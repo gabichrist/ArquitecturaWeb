@@ -20,7 +20,7 @@ import lombok.Setter;
 public class InscripcionId implements Serializable {
 
 	@ManyToOne
-	@JoinColumn(name = "LU")
+	@JoinColumn(name = "lu")
 	private Estudiante estudiante;
 
 	@ManyToOne
@@ -33,6 +33,22 @@ public class InscripcionId implements Serializable {
 
 	public InscripcionId(Estudiante estudiante, Carrera carrera) {
 		this.estudiante = estudiante;
+		this.carrera = carrera;
+	}
+
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
+	}
+
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(Carrera carrera) {
 		this.carrera = carrera;
 	}
 

@@ -9,17 +9,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
 
 @Entity
-@Data
 public class Inscripcion {
 	@Id
 	@EmbeddedId
 	private InscripcionId id;
 
 	@ManyToOne
-	@JoinColumn(name = "LU", referencedColumnName = "LU", insertable = false, updatable = false)
+	@JoinColumn(name = "lu", referencedColumnName = "lu", insertable = false, updatable = false)
 	private Estudiante estudiante;
 
 	@ManyToOne
@@ -27,10 +25,10 @@ public class Inscripcion {
 	private Carrera carrera;
 
 	@Column
-	private Timestamp fecha_ingreso;
+	private Timestamp fechaIngreso;
 
 	@Column(nullable = true)
-	private Timestamp fecha_egreso;
+	private Timestamp fechaEgreso;
 
 	@Column(nullable = false)
 	private boolean esGraduado;
@@ -38,12 +36,12 @@ public class Inscripcion {
 	public Inscripcion() {
 	}
 
-	public Inscripcion(Estudiante estudiante, Carrera carrera, Timestamp fecha_ingreso, Timestamp fecha_egreso,
+	public Inscripcion(Estudiante estudiante, Carrera carrera, Timestamp fechaIngreso, Timestamp fechaEgreso,
 			Boolean esGraduado) {
 		super();
 		this.id = new InscripcionId(estudiante, carrera);
-		this.fecha_ingreso = fecha_ingreso;
-		this.fecha_egreso = fecha_egreso;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaEgreso = fechaEgreso;
 		this.esGraduado = esGraduado;
 	}
 
@@ -51,9 +49,57 @@ public class Inscripcion {
 		super();
 		this.id = new InscripcionId(estudiante, carrera);
 		Date now = new Date();
-		this.fecha_ingreso = new Timestamp(now.getTime());
-		this.fecha_egreso = null;
+		this.fechaIngreso = new Timestamp(now.getTime());
+		this.fechaEgreso = null;
 		this.esGraduado = false;
+	}
+
+	public InscripcionId getId() {
+		return id;
+	}
+
+	public void setId(InscripcionId id) {
+		this.id = id;
+	}
+
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
+	}
+
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
+	public Timestamp getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Timestamp fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Timestamp getFechaEgreso() {
+		return fechaEgreso;
+	}
+
+	public void setFechaEgreso(Timestamp fechaEgreso) {
+		this.fechaEgreso = fechaEgreso;
+	}
+
+	public boolean isEsGraduado() {
+		return esGraduado;
+	}
+
+	public void setEsGraduado(boolean esGraduado) {
+		this.esGraduado = esGraduado;
 	}
 
 }
