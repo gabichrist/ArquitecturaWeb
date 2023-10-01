@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.entregable3.exception.ExpectableException;
 import com.example.entregable3.model.Estudiante;
 import com.example.entregable3.service.EstudianteServicio;
 
@@ -27,11 +30,13 @@ public class EstudianteController {
 
 
     @GetMapping({"", "/"})
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?>  getAll(@RequestParam(name = "sortBy", defaultValue = "edad") String sortBy) {
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findAll(sortBy));
+        }catch (ExpectableException e){
+        	return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
 

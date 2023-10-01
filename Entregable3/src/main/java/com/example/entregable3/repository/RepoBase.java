@@ -1,6 +1,7 @@
 package com.example.entregable3.repository;
 
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
@@ -34,6 +35,12 @@ public interface RepoBase<T,ID extends Serializable> extends org.springframework
      */
     List<T> findAll();
 
+    /**
+     * Retorna un listado de las entidades almacenadas ordenadas por el campo sortBy.
+     * @return Listado de entidades.
+     */
+    List<T> findAll(Sort sortBy);
+    
     /**
      * Busca y devuelve una entidad de acuerdo al id ingresado por parámetro.
      * @param id Identificador único de la entidad.

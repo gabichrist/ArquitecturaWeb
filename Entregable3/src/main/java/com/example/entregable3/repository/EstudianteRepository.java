@@ -9,6 +9,7 @@ import com.example.entregable3.model.Estudiante;
 
 @Repository("EstudianteRepository")
 public interface EstudianteRepository extends RepoBase<Estudiante, Long>{
+    static List<String> sorteableFields = List.of("lu", "nombres", "apellido", "edad", "genero", "dni", "ciudad");
 
 //	EJEMPLO DESDE PerroRepositorio
 //@Query("SELECT p FROM Perro p WHERE p.habilidad = :habilidad ORDER BY p.edad ASC")

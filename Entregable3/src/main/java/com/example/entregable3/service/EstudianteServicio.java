@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.entregable3.exception.ExpectableException;
 import com.example.entregable3.model.Estudiante;
 import com.example.entregable3.repository.EstudianteRepository;
 
@@ -18,6 +20,16 @@ public class EstudianteServicio implements BaseService<Estudiante> {
 	@Override
 	public List<Estudiante> findAll() throws Exception {
 		return estudianteRepository.findAll();
+	}
+
+	public List<Estudiante> findAll(String sortBy) throws Exception {
+		String field = sortBy.toLowerCase();
+		if (EstudianteRepository.sorteableFields.contains(field)) {
+			Sort sort = Sort.by(Sort.Direction.ASC, field);
+			return estudianteRepository.findAll(sort);
+		} else {
+			throw new ExpectableException("Debe ingresar un valor válido para sortBy " + EstudianteRepository.sorteableFields);
+		}
 	}
 
 	@Override
