@@ -57,38 +57,38 @@ public class InscripcionServicio implements BaseService<Inscripcion> {
 	}
 
 	public Inscripcion save(InscripcionDTO inscripcionDto) throws Exception {
+		System.out.println(inscripcionDto.getLu());
+		
+		Optional<Estudiante> optEstudiante = estudianteRepository.findById(inscripcionDto.getLu());
+		if (!optEstudiante.isPresent())
+			throw new ExpectableException("{\"error\":\"Error. Estudiante no encontrado.\"}");
+		Estudiante estudiante = optEstudiante.get();
+		
+		Optional<Carrera> optCarrera = carreraRepository.findById(inscripcionDto.getIdCarrera());
+		if (!optCarrera.isPresent())
+			throw new ExpectableException("{\"error\":\"Error. Carrera no encontrada.\"}");
+		Carrera carrera = optCarrera.get();
+			
+		InscripcionId id = new InscripcionId(estudiante, carrera);
+		
+		Optional<Inscripcion> optInscripcion = inscripcionRepository.findById(id);
+		Inscripcion inscripcion = null;
+		if (optInscripcion.isPresent()) {
+			inscripcion = optInscripcion.get();
+		} else {
+			inscripcion = new Inscripcion(estudiante, carrera);
+		}
+
+		if (inscripcionDto.isEsGraduado() != null)
+			inscripcion.setEsGraduado(inscripcionDto.isEsGraduado());
+
+		if (inscripcionDto.getFechaEgreso() != null)
+			inscripcion.setFechaEgreso(inscripcionDto.getFechaEgreso());
+		
+		if (inscripcionDto.getFechaIngreso() != null)
+			inscripcion.setFechaIngreso(inscripcionDto.getFechaIngreso());
+		
 		try {
-			System.out.println(inscripcionDto.getLu());
-			
-			Optional<Estudiante> optEstudiante = estudianteRepository.findById(inscripcionDto.getLu());
-			if (!optEstudiante.isPresent())
-				throw new ExpectableException("{\"error\":\"Error. Estudiante no encontrado.\"}");
-			Estudiante estudiante = optEstudiante.get();
-			
-			Optional<Carrera> optCarrera = carreraRepository.findById(inscripcionDto.getIdCarrera());
-			if (!optCarrera.isPresent())
-				throw new ExpectableException("{\"error\":\"Error. Carrera no encontrada.\"}");
-			Carrera carrera = optCarrera.get();
-			
-			InscripcionId id = new InscripcionId(estudiante, carrera);
-			
-			Optional<Inscripcion> optInscripcion = inscripcionRepository.findById(id);
-			Inscripcion inscripcion = null;
-			if (optInscripcion.isPresent()) {
-				inscripcion = optInscripcion.get();
-			} else {
-				inscripcion = new Inscripcion(estudiante, carrera);
-			}
-
-			if (inscripcionDto.isEsGraduado() != null)
-				inscripcion.setEsGraduado(inscripcionDto.isEsGraduado());
-
-			if (inscripcionDto.getFechaEgreso() != null)
-				inscripcion.setFechaEgreso(inscripcionDto.getFechaEgreso());
-			
-			if (inscripcionDto.getFechaIngreso() != null)
-				inscripcion.setFechaIngreso(inscripcionDto.getFechaIngreso());
-			
 			return inscripcionRepository.save(inscripcion);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());

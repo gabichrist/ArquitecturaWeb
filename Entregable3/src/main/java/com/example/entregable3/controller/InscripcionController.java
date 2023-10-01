@@ -65,6 +65,8 @@ public class InscripcionController {
 	public ResponseEntity<?> save(@RequestBody InscripcionDTO inscripcionDto){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.inscripcionServicio.save(inscripcionDto));
+		} catch (ExpectableException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
