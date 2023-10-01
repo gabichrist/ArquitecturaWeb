@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "estudiantes")
 public class Estudiante {
     @Id
-    private int LU;
+    private int lu;
 
 	@Column(nullable = false)
 	private String nombres;
@@ -34,9 +34,9 @@ public class Estudiante {
 		super();
 	}
 
-	public Estudiante(int lU, String nombres, String apellido, int edad, String genero, String dni, String ciudad) {
+	public Estudiante(int lu, String nombres, String apellido, int edad, String genero, String dni, String ciudad) {
 		super();
-		LU = lU;
+		this.lu = lu;
 		this.nombres = nombres;
 		this.apellido = apellido;
 		this.edad = edad;
@@ -47,16 +47,16 @@ public class Estudiante {
 
 	@Override
 	public String toString() {
-		return LU + ", " + nombres + " " + apellido + ", edad: " + edad + ", " + genero + ", DNI: " + dni + ", "
+		return lu + ", " + nombres + " " + apellido + ", edad: " + edad + ", " + genero + ", DNI: " + dni + ", "
 				+ ciudad;
 	}
 
-	public int getLU() {
-		return LU;
+	public int getLu() {
+		return lu;
 	}
 
-	public void setLU(int lU) {
-		LU = lU;
+	public void setLu(int lu) {
+		this.lu = lu;
 	}
 
 	public String getNombres() {
