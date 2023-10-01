@@ -23,7 +23,8 @@ public class Entregable31Application {
 
 	@PostConstruct
 	public void init() throws IOException {
-		cargaDeDatos.cargarDatosDesdeCSV();
+		cargaDeDatos.cargarCarrerasDesdeCSV();
+		cargaDeDatos.cargarEstudiantesDesdeCSV();
 	}
 
 }
