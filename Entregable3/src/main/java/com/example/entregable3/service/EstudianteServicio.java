@@ -69,7 +69,15 @@ public class EstudianteServicio implements BaseService<Estudiante> {
 
 	@Override
 	public boolean delete(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		if (estudianteRepository.existsById(id)) {
+			try {
+				estudianteRepository.deleteById(id);
+				return true;
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		} else {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+		}
 	}
 }
