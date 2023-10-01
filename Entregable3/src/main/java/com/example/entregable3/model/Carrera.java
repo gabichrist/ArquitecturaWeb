@@ -8,10 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
 
 @Entity
-@Data
 public class Carrera {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +35,22 @@ public class Carrera {
 	@Override
 	public String toString() {
 		return "Nombre carrera: " + nombre;
+	}
+
+	public int getIdCarrera() {
+		return idCarrera;
+	}
+
+	public void setIdCarrera(int idCarrera) {
+		this.idCarrera = idCarrera;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }
