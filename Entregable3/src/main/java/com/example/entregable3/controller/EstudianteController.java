@@ -30,9 +30,12 @@ public class EstudianteController {
 
 
     @GetMapping({"", "/"})
-    public ResponseEntity<?>  getAll(@RequestParam(name = "sortBy", defaultValue = "edad") String sortBy) {
+    public ResponseEntity<?>  getAll(
+    		@RequestParam(name = "orden", defaultValue = "lu") String sortBy,
+    		@RequestParam(name = "genero", defaultValue = "") String genre
+    		) {
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findAll(sortBy));
+            return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findAll(sortBy, genre));
         }catch (ExpectableException e){
         	return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }catch (Exception e){

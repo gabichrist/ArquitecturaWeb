@@ -31,6 +31,15 @@ public class EstudianteServicio implements BaseService<Estudiante> {
 			throw new ExpectableException("Debe ingresar un valor válido para sortBy " + EstudianteRepository.sorteableFields);
 		}
 	}
+	
+	public List<Estudiante> findAll(String sortBy, String genre) throws Exception {
+		if (genre.isBlank()) {
+			return findAll(sortBy);
+		}
+		List<Estudiante> estudiantes = estudianteRepository.getByGenre(genre);
+		
+		return estudiantes;
+	}
 
 	@Override
 	public Estudiante findById(Long id) throws Exception {
