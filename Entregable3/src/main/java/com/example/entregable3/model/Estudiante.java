@@ -1,27 +1,11 @@
 package com.example.entregable3.model;
 
-import java.io.Serializable;
 import java.util.Set;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
 
-@SuppressWarnings("serial")
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@Builder
-@EqualsAndHashCode
 @Table(name = "estudiantes")
-public class Estudiante implements Serializable{
+public class Estudiante {
     @Id
     private int LU;
 
@@ -65,5 +49,61 @@ public class Estudiante implements Serializable{
 	public String toString() {
 		return LU + ", " + nombres + " " + apellido + ", edad: " + edad + ", " + genero + ", DNI: " + dni + ", "
 				+ ciudad;
+	}
+
+	public int getLU() {
+		return LU;
+	}
+
+	public void setLU(int lU) {
+		LU = lU;
+	}
+
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+ 
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 }
