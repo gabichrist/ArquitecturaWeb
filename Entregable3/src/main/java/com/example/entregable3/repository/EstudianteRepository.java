@@ -1,11 +1,18 @@
 package com.example.entregable3.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.entregable3.model.Estudiante;
 
-@Repository
-public interface EstudianteRepository extends JpaRepository<Estudiante, Long>{
-	
+@Repository("EstudianteRepository")
+public interface EstudianteRepository extends RepoBase<Estudiante, Long>{
+
+//	EJEMPLO DESDE PerroRepositorio
+//@Query("SELECT p FROM Perro p WHERE p.habilidad = :habilidad ORDER BY p.edad ASC")
+//public List<Perro> getPerrosPorHabilidadOrderByEdadAsc(String habilidad);
+//    List<Perro> findByHabilidad(String habilidad);
+
 }
