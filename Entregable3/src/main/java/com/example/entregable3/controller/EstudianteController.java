@@ -1,9 +1,7 @@
 package com.example.entregable3.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,13 +43,26 @@ public class EstudianteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?>getOne(@PathVariable Long id){
+    public ResponseEntity<?> getOne(@PathVariable Long id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findById(id));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
                     ".\"}");
         }
+    }
+    
+    @GetMapping({"/{carrera}/{ciudad}"})
+    public ResponseEntity<?> getPorCarreraYCiudad(    		
+    		@PathVariable int  carrera, 
+    		@PathVariable String ciudad
+    		){
+    	try {
+            return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findByCarreraYCiudad(carrera, ciudad));
+		} catch (Exception e) {
+			 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
+	                    ".\"}");
+		}
     }
 	
 	@PostMapping({"", "/"})

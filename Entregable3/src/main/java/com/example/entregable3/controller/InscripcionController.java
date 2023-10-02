@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entregable3.dtos.InscripcionDTO;
 import com.example.entregable3.exception.ExpectableException;
-import com.example.entregable3.model.Inscripcion;
 import com.example.entregable3.service.InscripcionServicio;
 
 

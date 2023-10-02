@@ -1,7 +1,5 @@
 package com.example.entregable3;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,9 +20,10 @@ public class Entregable31Application {
 	}
 
 	@PostConstruct
-	public void init() throws IOException {
+	public void init() throws NumberFormatException, Exception {
 		cargaDeDatos.cargarCarrerasDesdeCSV();
 		cargaDeDatos.cargarEstudiantesDesdeCSV();
+		cargaDeDatos.cargarInscripcionesDesdeCSV();
 	}
 
 }

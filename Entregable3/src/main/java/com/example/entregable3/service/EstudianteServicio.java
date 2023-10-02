@@ -50,6 +50,15 @@ public class EstudianteServicio implements BaseService<Estudiante> {
             throw new Exception(e.getMessage());
         }
 	}
+	
+	public List<Estudiante> findByCarreraYCiudad(int carrera, String ciudad) throws Exception{
+		try {
+			List<Estudiante> estudiantes = estudianteRepository.getByCarreraYCiudad(carrera,ciudad);
+			return estudiantes;		
+		} catch (Exception e) {
+			 throw new Exception(e.getMessage());
+		}		
+	}
 
 	@Override
 	public Estudiante save(Estudiante entity) throws Exception {
