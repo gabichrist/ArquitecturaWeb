@@ -56,6 +56,16 @@ public class CarreraController {
                     ".\"}");
 		}
     }
+	
+    @GetMapping("/reporte")
+    public ResponseEntity<?> getReporteCarreras(){
+    	try {
+            return ResponseEntity.status(HttpStatus.OK).body(carreraServicio.getReporteCarreras());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
+                    ".\"}");
+		}
+    }
     
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
