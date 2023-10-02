@@ -36,9 +36,7 @@ public class CarreraServicio implements BaseService<Carrera> {
 
 	public List<CarreraConInscriptosDTO> findByInscriptos() throws Exception {
 		try{
-          //  List<CarreraConInscriptosDTO> carreras = carreraRepository.findByInscriptos();
-          //  return carreras;
-			return null;
+            return carreraRepository.findByInscriptos();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

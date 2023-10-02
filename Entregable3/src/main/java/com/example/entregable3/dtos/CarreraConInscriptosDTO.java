@@ -1,15 +1,34 @@
 package com.example.entregable3.dtos;
 
+import com.example.entregable3.model.Carrera;
+
 public class CarreraConInscriptosDTO {
+	private int idCarrera;
+
 	private String nombre;
-	private Long cantidadEstudiantes;
+
+	private int cantidadInscriptos;
 	
 	public CarreraConInscriptosDTO() {
 	}
 	
-	public CarreraConInscriptosDTO(String nombre, Long cantidadEstudiantes) {
+	public CarreraConInscriptosDTO(Carrera c) {
+		this.idCarrera = c.getIdCarrera();
+		this.nombre = c.getNombre();
+		this.cantidadInscriptos = c.cantidadInscriptos();
+	}
+
+	public CarreraConInscriptosDTO(String nombre, int cantidadInscriptos) {
 		this.nombre = nombre;
-		this.cantidadEstudiantes = cantidadEstudiantes;
+		this.cantidadInscriptos = cantidadInscriptos;
+	}
+
+	public int getIdCarrera() {
+		return idCarrera;
+	}
+
+	public void setIdCarrera(int idCarrera) {
+		this.idCarrera = idCarrera;
 	}
 
 	public String getNombre() {
@@ -20,12 +39,12 @@ public class CarreraConInscriptosDTO {
 		this.nombre = nombre;
 	}
 
-	public Long getCantidadEstudiantes() {
-		return cantidadEstudiantes;
+	public int getCantidadInscriptos() {
+		return cantidadInscriptos;
 	}
 
-	public void setCantidadEstudiantes(Long cantidadEstudiantes) {
-		this.cantidadEstudiantes = cantidadEstudiantes;
-	}	
+	public void setCantidadInscriptos(int cantidadInscriptos) {
+		this.cantidadInscriptos = cantidadInscriptos;
+	}
 	
 }

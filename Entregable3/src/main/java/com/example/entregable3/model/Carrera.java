@@ -52,5 +52,9 @@ public class Carrera {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public int cantidadInscriptos() {
+		return this.inscripcionSet.size();
+	}
 
 }
