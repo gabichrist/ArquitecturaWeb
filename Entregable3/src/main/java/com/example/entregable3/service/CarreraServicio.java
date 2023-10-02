@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.entregable3.dtos.CarreraConInscriptosDTO;
 import com.example.entregable3.exception.ExpectableException;
 import com.example.entregable3.model.Carrera;
 import com.example.entregable3.repository.CarreraRepository;
@@ -26,13 +27,23 @@ public class CarreraServicio implements BaseService<Carrera> {
 	@Override
 	public Carrera findById(Long id) throws Exception {
         try{
-            Optional<Carrera> estudianteBuscado = carreraRepository.findById(id);
-            return estudianteBuscado.get();
+            Optional<Carrera> carreraBuscada = carreraRepository.findById(id);
+            return carreraBuscada.get();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
 	}
 
+	public List<CarreraConInscriptosDTO> findByInscriptos() throws Exception {
+		try{
+          //  List<CarreraConInscriptosDTO> carreras = carreraRepository.findByInscriptos();
+          //  return carreras;
+			return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+	}
+	
 	@Override
 	public Carrera save(Carrera entity) throws Exception {
 	try {

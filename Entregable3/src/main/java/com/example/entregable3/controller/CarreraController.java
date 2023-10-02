@@ -38,7 +38,7 @@ public class CarreraController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?>getOne(@PathVariable Long id){
+    public ResponseEntity<?> getOne(@PathVariable Long id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(carreraServicio.findById(id));
         }catch (Exception e){
@@ -47,6 +47,16 @@ public class CarreraController {
         }
     }
 	
+    @GetMapping("/ordenar-por-inscriptos")
+    public ResponseEntity<?> getPorInscriptos(){
+    	try {
+            return ResponseEntity.status(HttpStatus.OK).body(carreraServicio.findByInscriptos());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
+                    ".\"}");
+		}
+    }
+    
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		try {

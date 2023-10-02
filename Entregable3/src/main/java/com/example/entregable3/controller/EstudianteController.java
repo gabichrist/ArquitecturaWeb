@@ -52,10 +52,10 @@ public class EstudianteController {
         }
     }
     
-    @GetMapping({"/{carrera}/{ciudad}"})
-    public ResponseEntity<?> getPorCarreraYCiudad(    		
-    		@PathVariable int  carrera, 
-    		@PathVariable String ciudad
+    @GetMapping({"/carrera-ciudad"})
+    public ResponseEntity<?> getPorCarreraYCiudad( 
+    		@RequestParam(name = "carrera", defaultValue = "lu") int carrera,
+    		@RequestParam(name = "ciudad", defaultValue = "") String ciudad    	
     		){
     	try {
             return ResponseEntity.status(HttpStatus.OK).body(estudianteServicio.findByCarreraYCiudad(carrera, ciudad));
