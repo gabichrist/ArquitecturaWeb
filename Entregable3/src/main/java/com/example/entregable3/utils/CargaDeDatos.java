@@ -82,9 +82,7 @@ public class CargaDeDatos {
         		Carrera carrera = carreraRepository.getById(Integer.parseInt(csvRecord.get("idCarrera")));
         		Inscripcion i = new Inscripcion(estudiante, carrera);             
                 i.setFechaIngreso(Timestamp.valueOf(csvRecord.get("fechaIngreso")));
-                if(csvRecord.get("fechaEgreso").equals("null")) {
-                	i.setFechaEgreso(null);  
-                } else{
+                if(!csvRecord.get("fechaEgreso").equals("null")) {                
                 	i.setFechaEgreso(Timestamp.valueOf(csvRecord.get("fechaEgreso")));  
                 }                             
                 i.setEsGraduado(Boolean.parseBoolean(csvRecord.get("esGraduado")));
