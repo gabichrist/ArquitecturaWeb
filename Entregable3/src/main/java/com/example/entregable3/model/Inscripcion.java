@@ -3,6 +3,8 @@ package com.example.entregable3.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -14,14 +16,17 @@ import jakarta.persistence.ManyToOne;
 public class Inscripcion {
 	@Id
 	@EmbeddedId
+	@JsonIgnore
 	private InscripcionId id;
 
 	@ManyToOne
 	@JoinColumn(name = "lu", referencedColumnName = "lu", insertable = false, updatable = false)
+	@JsonIgnore
 	private Estudiante estudiante;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera", insertable = false, updatable = false)
+	@JsonIgnore
 	private Carrera carrera;
 
 	@Column
@@ -54,6 +59,27 @@ public class Inscripcion {
 		this.esGraduado = false;
 	}
 
+	@JsonProperty("lu")
+	private int jsonLu() {
+		return this.id.getEstudiante().getLu();
+	}	
+	
+	@JsonProperty("idCarrera")
+	private int jsonIdCarrera() {
+		return this.id.getCarrera().getIdCarrera();
+	}
+	
+	@JsonProperty("estudiante")
+	private String jsonEstudiante() {
+		Estudiante e = this.id.getEstudiante();
+		return e.getApellido() + ", " + e.getNombres();
+	}
+
+	@JsonProperty("carrera")
+	private String stringCarrera() {
+		return this.id.getCarrera().getNombre();
+	}
+	
 	public InscripcionId getId() {
 		return id;
 	}
@@ -63,7 +89,7 @@ public class Inscripcion {
 	}
 
 	public Estudiante getEstudiante() {
-		return estudiante;
+		return id.getEstudiante();
 	}
 
 	public void setEstudiante(Estudiante estudiante) {
@@ -71,7 +97,7 @@ public class Inscripcion {
 	}
 
 	public Carrera getCarrera() {
-		return carrera;
+		return id.getCarrera();
 	}
 
 	public void setCarrera(Carrera carrera) {
