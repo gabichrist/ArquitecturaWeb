@@ -38,7 +38,10 @@ public class CarreraServicio implements BaseService<Carrera> {
 
 	public List<CarreraConInscriptosDTO> findByInscriptos() throws Exception {
 		try{
-            return carreraRepository.findByInscriptos();
+            return carreraRepository.findByInscriptos()
+            		.stream()
+            		.map(c -> new CarreraConInscriptosDTO(c))
+            		.toList();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
