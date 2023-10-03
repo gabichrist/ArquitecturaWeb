@@ -8,26 +8,12 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Inscripcion {
-	@Id
+	@JsonIgnore
 	@EmbeddedId
-	@JsonIgnore
 	private InscripcionId id;
-
-	@ManyToOne
-	@JoinColumn(name = "lu", referencedColumnName = "lu", insertable = false, updatable = false)
-	@JsonIgnore
-	private Estudiante estudiante;
-	
-	@ManyToOne
-	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera", insertable = false, updatable = false)
-	@JsonIgnore
-	private Carrera carrera;
 
 	@Column
 	private Timestamp fechaIngreso;
@@ -86,22 +72,6 @@ public class Inscripcion {
 
 	public void setId(InscripcionId id) {
 		this.id = id;
-	}
-
-	public Estudiante getEstudiante() {
-		return id.getEstudiante();
-	}
-
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
-	}
-
-	public Carrera getCarrera() {
-		return id.getCarrera();
-	}
-
-	public void setCarrera(Carrera carrera) {
-		this.carrera = carrera;
 	}
 
 	public Timestamp getFechaIngreso() {

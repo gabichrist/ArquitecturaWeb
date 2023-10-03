@@ -18,9 +18,9 @@ public interface EstudianteRepository extends RepoBase<Estudiante, Long>{
 	public List<Estudiante> getByGenre(String genero);
 	
 	@Query("SELECT e FROM Estudiante e, Inscripcion i, Carrera c "
-			+ "WHERE c.idCarrera = i.carrera.idCarrera "
-			+ "AND e.lu = i.estudiante.lu "
-			+ "AND i.carrera.idCarrera = :carrera AND e.ciudad = :ciudad")
+			+ "WHERE c.idCarrera = i.id.carrera.idCarrera "
+			+ "AND e.lu = i.id.estudiante.lu "
+			+ "AND i.id.carrera.idCarrera = :carrera AND e.ciudad = :ciudad")
 	public List<Estudiante> getByCarreraYCiudad(int carrera, String ciudad);
 
 	
