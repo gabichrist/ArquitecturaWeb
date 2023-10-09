@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.entregable3.exception.ExpectableException;
+import com.example.entregable3.model.Carrera;
 import com.example.entregable3.model.Estudiante;
 import com.example.entregable3.repository.EstudianteRepository;
 
@@ -71,9 +72,30 @@ public class EstudianteServicio implements BaseService<Estudiante> {
 }
 
 	@Override
-	public Estudiante update(Long id, Estudiante entity) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Estudiante update(Long id, Estudiante entity) throws Exception {		
+		if (estudianteRepository.existsById(id)) {
+			try {
+				Estudiante estudiante = estudianteRepository.findById(id).get();
+				if(entity.getNombres() != null) {
+					estudiante.setNombres(entity.getNombres());
+				}
+				if(entity.getApellido() != null) {
+					estudiante.setApellido(entity.getApellido());
+				}
+				estudiante.setEdad(entity.getEdad());
+				if(entity.getDni()!= null) {
+					estudiante.setDni(entity.getDni());
+				}
+				if(entity.getCiudad()!= null) {
+					estudiante.setCiudad(entity.getCiudad());
+				}					
+				return estudianteRepository.save(estudiante);
+			} catch (Exception e){
+				throw new Exception(e.getMessage());
+			}		
+		} else {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+		}		
 	}
 
 	@Override

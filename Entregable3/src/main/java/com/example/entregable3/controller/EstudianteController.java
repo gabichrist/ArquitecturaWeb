@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entregable3.exception.ExpectableException;
+import com.example.entregable3.model.Carrera;
 import com.example.entregable3.model.Estudiante;
 import com.example.entregable3.service.EstudianteServicio;
 
@@ -85,6 +87,17 @@ public class EstudianteController {
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Estudiante estudiante){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.estudianteServicio.update(id, estudiante));
+		} catch (Exception e2) {
+			System.out.println("error " + e2.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
