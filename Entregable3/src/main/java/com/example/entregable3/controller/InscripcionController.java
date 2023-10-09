@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entregable3.dtos.InscripcionDTO;
 import com.example.entregable3.exception.ExpectableException;
+import com.example.entregable3.model.InscripcionId;
 import com.example.entregable3.service.InscripcionServicio;
 
 
@@ -37,20 +38,22 @@ public class InscripcionController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?>getOne(@PathVariable Long id){
+    @GetMapping("/{luEstudiante}/{idCarrera}")
+    public ResponseEntity<?>getOne(@PathVariable Long luEstudiante, @PathVariable Long idCarrera){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(inscripcionServicio.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(inscripcionServicio.findById(luEstudiante, idCarrera));
+        }catch (ExpectableException e){
+        	return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
                     ".\"}");
         }
     }
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id){
+	@DeleteMapping("/{luEstudiante}/{idCarrera}")
+	public ResponseEntity<?> delete(@PathVariable Long luEstudiante, @PathVariable Long idCarrera){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.inscripcionServicio.delete(id));
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.inscripcionServicio.delete(luEstudiante, idCarrera));
 		} catch (ExpectableException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		} catch (Exception e2) {
