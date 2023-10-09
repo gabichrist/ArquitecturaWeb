@@ -58,8 +58,19 @@ public class CarreraServicio implements BaseService<Carrera> {
 
 	@Override
 	public Carrera update(Long id, Carrera entity) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if (carreraRepository.existsById(id)) {
+			try {
+				Carrera carrera = carreraRepository.findById(id).get();
+				if(entity.getNombre() != null) {
+					carrera.setNombre(entity.getNombre());
+				}
+				return carreraRepository.save(carrera);
+			} catch (Exception e){
+				throw new Exception(e.getMessage());
+			}		
+		} else {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+		}
 	}
 
 	@Override
