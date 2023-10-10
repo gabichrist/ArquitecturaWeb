@@ -1,7 +1,6 @@
 package com.example.entregable3.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entregable3.exception.ExpectableException;
-import com.example.entregable3.model.Carrera;
 import com.example.entregable3.model.Estudiante;
 import com.example.entregable3.service.EstudianteServicio;
 
 @RestController
-// @RequestMapping(value = "estudiantes", consumes = "application/json", produces = "application/json")
 @RequestMapping("/estudiantes")
 //@Api(value = "EstudianteController", description = "REST API Estudiante descripcion")
 public class EstudianteController {

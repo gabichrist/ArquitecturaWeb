@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entregable3.dtos.InscripcionDTO;
 import com.example.entregable3.exception.ExpectableException;
-import com.example.entregable3.model.InscripcionId;
 import com.example.entregable3.service.InscripcionServicio;
-
 
 @RestController
 @RequestMapping("/inscripciones")
@@ -74,4 +72,5 @@ public class InscripcionController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
-	}}
+	}
+}

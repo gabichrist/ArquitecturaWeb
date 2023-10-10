@@ -6,12 +6,6 @@ import java.util.List;
 /**
  * Servicio base(interface) común al resto de servicios con las funcionalidades CRUD.
  *
- * @author  Elva Kheler: mekdy.20@gmail.com
- *          Héctor Liceaga: lice2187@gmail.com
- *  		Nicolás Carsaniga: nikitobombero@gmail.com
- *  		Sergio Yañez: sergiomyanez02@gmail.com
- * @version 1.0
- * @since 25/06/2022
  * @param <E> Tipo de la entidad que manipula
  */
 public interface BaseService<E>{

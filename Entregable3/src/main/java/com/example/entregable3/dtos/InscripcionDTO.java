@@ -13,7 +13,6 @@ public class InscripcionDTO {
 
 	private Boolean esGraduado;
 
-
 	public InscripcionDTO() {
 	}
 	

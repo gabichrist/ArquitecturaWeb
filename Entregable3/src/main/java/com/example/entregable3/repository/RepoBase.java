@@ -11,13 +11,6 @@ import java.util.Optional;
 /**
  * Repositorio base(interface) común al resto de repositorios que extiende de Repository .
  *
- * @author  Elva Kheler: mekdy.20@gmail.com
- *          Héctor Liceaga: lice2187@gmail.com
- *  		Nicolás Carsaniga: nikitobombero@gmail.com
- *  		Sergio Yañez: sergiomyanez02@gmail.com
- * @version 1.0
- * @since 25/06/2022
- * @see org.springframework.data.repository.Repository
  * @param <T> Tipo de la entidad que manipula
  * @param <ID> Identificador único de la entidad que manipula
  */
@@ -51,7 +44,7 @@ public interface RepoBase<T,ID extends Serializable> extends org.springframework
     /**
      * Indica si existe la entidad con el id ingresado por parámetro.
      * @param id Identificador único de la entidad.
-     * @return True en caso de existir, caso contraio, false.
+     * @return True en caso de existir, caso contrario, false.
      */
     boolean existsById(ID id);
 

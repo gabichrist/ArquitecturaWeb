@@ -23,10 +23,4 @@ public interface EstudianteRepository extends RepoBase<Estudiante, Long>{
 			+ "AND i.id.carrera.idCarrera = :carrera AND e.ciudad = :ciudad")
 	public List<Estudiante> getByCarreraYCiudad(int carrera, String ciudad);
 
-	
-//	EJEMPLO DESDE PerroRepositorio
-//@Query("SELECT p FROM Perro p WHERE p.habilidad = :habilidad ORDER BY p.edad ASC")
-//public List<Perro> getPerrosPorHabilidadOrderByEdadAsc(String habilidad);
-//    List<Perro> findByHabilidad(String habilidad);
-
 }
