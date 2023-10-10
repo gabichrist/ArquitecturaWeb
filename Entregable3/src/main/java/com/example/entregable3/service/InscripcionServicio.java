@@ -123,7 +123,39 @@ public class InscripcionServicio implements BaseService<Inscripcion> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Inscripcion update(InscripcionId id, InscripcionDTO entity) throws Exception {
+		if (inscripcionRepository.existsById(id)) {
+			try {
+				Inscripcion inscripcion = inscripcionRepository.findById(id).get();
+				inscripcion.setFechaIngreso(entity.getFechaIngreso());				
+				inscripcion.setFechaEgreso(entity.getFechaEgreso());
+				inscripcion.setEsGraduado(entity.isEsGraduado());						
+				return inscripcionRepository.save(inscripcion);				
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		} else {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+		}
+	}
 
+	public Inscripcion update(Long luEstudiante, Long idCarrera, InscripcionDTO entity) throws Exception {
+		Estudiante estudiante = null;
+		try {
+			estudiante = estudianteRepository.findById(luEstudiante).get();
+		} catch (Exception e) {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el estudiante.\"}");
+		};
+		Carrera carrera = null;
+		try {
+			carrera = carreraRepository.findById(idCarrera).get();
+		} catch (Exception e) {
+			throw new ExpectableException("{\"error\":\"Error. No se encontró la carrera.\"}");
+		};
+		return this.update(new InscripcionId(estudiante, carrera), entity);
+	}
+	
 	@Override
 	public boolean delete(Long id) throws Exception {
 		// TODO Auto-generated method stub
