@@ -53,7 +53,7 @@ public class EstudianteController {
     
     @GetMapping({"/carrera-ciudad"})
     public ResponseEntity<?> getPorCarreraYCiudad( 
-    		@RequestParam(name = "carrera", defaultValue = "lu") int carrera,
+    		@RequestParam(name = "carrera", defaultValue = "") int carrera,
     		@RequestParam(name = "ciudad", defaultValue = "") String ciudad    	
     		){
     	try {

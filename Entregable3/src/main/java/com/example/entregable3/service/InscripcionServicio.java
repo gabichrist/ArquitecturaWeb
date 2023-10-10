@@ -128,9 +128,14 @@ public class InscripcionServicio implements BaseService<Inscripcion> {
 		if (inscripcionRepository.existsById(id)) {
 			try {
 				Inscripcion inscripcion = inscripcionRepository.findById(id).get();
-				inscripcion.setFechaIngreso(entity.getFechaIngreso());				
-				inscripcion.setFechaEgreso(entity.getFechaEgreso());
-				inscripcion.setEsGraduado(entity.isEsGraduado());						
+
+				if (entity.getFechaIngreso() != null)
+					inscripcion.setFechaIngreso(entity.getFechaIngreso());	
+				if (entity.isEsGraduado() != null)
+					inscripcion.setEsGraduado(entity.isEsGraduado());
+				if (entity.getFechaEgreso() != null)
+					inscripcion.setFechaEgreso(entity.getFechaEgreso());
+				
 				return inscripcionRepository.save(inscripcion);				
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());

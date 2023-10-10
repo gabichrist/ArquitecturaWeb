@@ -88,6 +88,8 @@ public class Inscripcion {
 
 	public void setFechaEgreso(Timestamp fechaEgreso) {
 		this.fechaEgreso = fechaEgreso;
+
+		this.esGraduado = (fechaEgreso != null);
 	}
 
 	public boolean isEsGraduado() {
@@ -96,6 +98,8 @@ public class Inscripcion {
 
 	public void setEsGraduado(boolean esGraduado) {
 		this.esGraduado = esGraduado;
+		if (!esGraduado)
+			this.fechaEgreso = null;
 	}
 
 }
