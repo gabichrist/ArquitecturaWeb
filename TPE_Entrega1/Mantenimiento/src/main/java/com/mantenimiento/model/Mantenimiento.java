@@ -1,6 +1,7 @@
 package com.mantenimiento.model;
 
 import java.sql.Timestamp;
+
 import com.viajesmonopatin.model.Monopatin;
 
 import jakarta.persistence.Column;
@@ -22,7 +23,7 @@ public class Mantenimiento {
 	@ManyToOne
 	private Monopatin monopatin;
 	
-	@Column
+	@Column(nullable = false)
 	private	Timestamp inicio;
 	
 	@Column 
