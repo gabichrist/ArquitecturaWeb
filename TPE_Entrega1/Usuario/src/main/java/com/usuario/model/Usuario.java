@@ -2,9 +2,12 @@ package com.usuario.model;
 
 import java.util.Set;
 
-import org.hibernate.mapping.List;
+
+import enums.Roles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +18,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_usuario;
+	private Long id_usuario;
 
 	@Column(nullable = false)
 	private String nombre;
@@ -29,8 +32,9 @@ public class Usuario {
 	@Column(nullable = false)
 	private String email;
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private List roles;
+	private Roles roles;
 
 	@ManyToMany(mappedBy = "usuarios")
 	private Set<Cuenta> cuentas;
@@ -39,7 +43,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(int id, String nombre, String apellido, String nro_celular, String email, List roles) {
+	public Usuario(Long id, String nombre, String apellido, String nro_celular, String email, Roles roles) {
 		super();
 		this.id_usuario = id;
 		this.nombre = nombre;
@@ -49,11 +53,11 @@ public class Usuario {
 		this.roles = roles;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id_usuario;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id_usuario = id;
 	}
 
@@ -89,11 +93,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public List getRoles() {
+	public Roles getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List roles) {
+	public void setRoles(Roles roles) {
 		this.roles = roles;
 	}
 
