@@ -23,23 +23,23 @@ public class Monopatin {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column
+	@Column(nullable = false)
 	private float latitud;
 	
-	@Column
+	@Column(nullable = false)
 	private float longitud;
 	
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoMonopatinEnum estado;
 	
-	@Column
+	@Column(nullable = false)
 	private float kilometrosRecorridos;
 	
-	@Column
+	@Column(nullable = false)
 	private float tiempoUsoConPausas;
 	
-	@Column
+	@Column(nullable = false)
 	private float tiempoUsoSinPausas;
 
 	@JoinColumn
@@ -76,7 +76,6 @@ public class Monopatin {
 		this.tiempoUsoConPausas = tiempoUsoConPausas;
 		this.tiempoUsoSinPausas = tiempoUsoSinPausas;
 	}
-	
 
 	public int getId() {
 		return id;
