@@ -41,9 +41,11 @@ public class ViajeService implements BaseService<Viaje>{
 			}
 		}
 		
-		// Genera un viaje
-		public Viaje generarViaje(ViajeMonopatinUsuarioDto viajeMonopatinUsuarioDTO) {
+		// Inicia un viaje en monopatin
+		public Viaje iniciarViaje(ViajeMonopatinUsuarioDto viajeMonopatinUsuarioDTO) {
 			Viaje v = new Viaje();	
+			
+			
 			return v;			
 		}
 

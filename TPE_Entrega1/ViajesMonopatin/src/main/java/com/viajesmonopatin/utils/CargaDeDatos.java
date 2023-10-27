@@ -11,10 +11,13 @@ import java.sql.Timestamp;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.el.stream.Optional;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import com.viajesmonopatin.enums.EstadoMonopatinEnum;
+import com.viajesmonopatin.enums.EstadoViajeEnum;
+import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.model.Monopatin;
 import com.viajesmonopatin.model.Tarifa;
 import com.viajesmonopatin.model.Viaje;
@@ -80,7 +83,7 @@ public class CargaDeDatos {
 	        }
 	}
 	
-	public void cargarViajesDesdeCSV() throws IOException {
+	public void cargarViajesDesdeCSV() throws IOException, ExpectableException {
 		  File archivoCSV = ResourceUtils.getFile("src/main/java/com/viajesmonopatin/csv/viajes.csv");
 
 	        try (FileReader reader = new FileReader(archivoCSV);
@@ -89,9 +92,24 @@ public class CargaDeDatos {
 	            for (CSVRecord csvRecord : csvParser) {
 	                Viaje v = new Viaje();	                
 	                v.setId(Long.parseLong(csvRecord.get("id")));
-	                //monopatin
-	                //idUsuario
-	                //idCuenta
+	                
+	                try {
+	                	Monopatin monopatin = monopatinRepository.getById(Integer.parseInt(csvRecord.get("id_monopatin")));
+	 	                v.setMonopatin(monopatin);     
+					} catch (Exception e) {
+						throw new ExpectableException("{\"error\":\"Error. No se encontró el monopatin.\"}");
+					}
+	           	           		                
+	                v.setIdUsuario(Integer.parseInt(csvRecord.get("id_usuario")));
+	                v.setIdCuenta(Integer.parseInt(csvRecord.get("id_cuenta")));
+	                
+	        		String estado = String.valueOf(csvRecord.get("estado"));
+	                if(estado.equalsIgnoreCase("ACTIVO")) {	                	
+	        			v.setEstado(EstadoViajeEnum.ACTIVO);
+	        		} else if(estado.equalsIgnoreCase("FINALIZADO")) {
+	        			v.setEstado(EstadoViajeEnum.FINALIZADO);
+	        		}
+	        			           
 	                //Parada inicio
 	                //Parada destino
 	                v.setTiempoInicio(Timestamp.valueOf(csvRecord.get("tiempo_inicio")));     
