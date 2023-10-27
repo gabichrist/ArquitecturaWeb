@@ -46,6 +46,7 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 				try {
 					Mantenimiento mantenimiento = mantenimientoRepository.findById(id).get();
 					
+				
 					if (entity.getInicio() != null) {
 						mantenimiento.setInicio(entity.getInicio());
 					}
