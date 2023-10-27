@@ -1,7 +1,5 @@
 package com.viajesmonopatin.dto;
 
-import java.sql.Timestamp;
-
 public class ViajeMonopatinUsuarioDto {
 	
 	public Long idMonopatin;
