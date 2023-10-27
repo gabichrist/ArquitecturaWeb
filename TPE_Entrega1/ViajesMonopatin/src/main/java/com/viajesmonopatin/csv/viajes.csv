@@ -1,0 +1,2 @@
+id,id_monopatin,id_usuario,id_cuenta,parada_inicio,parada_destino,estado,tiempo_inicio,tiempo_fin,tiempo_pausa_inicio,tiempo_pausa_fin,kilometros_recorridos
+1,10252,6,2,,,FINALIZADO,2022-11-13 16:05:19,2022-11-13 18:15:35,2022-11-13 17:28:25,2022-11-13 17:48:29,4.3
