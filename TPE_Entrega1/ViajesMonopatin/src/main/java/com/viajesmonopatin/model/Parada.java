@@ -13,14 +13,14 @@ public class Parada {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column
+	@Column(nullable = false)
 	private String direccion;
 
-	@Column
-	private float latitud;
+	@Column(nullable = false)
+	private Float latitud;
 
-	@Column
-	private float longitud;
+	@Column(nullable = false)
+	private Float longitud;
 
 	public Parada() {
 		super();
@@ -50,7 +50,7 @@ public class Parada {
 		this.direccion = direccion;
 	}
 
-	public float getLatitud() {
+	public Float getLatitud() {
 		return latitud;
 	}
 
@@ -58,7 +58,7 @@ public class Parada {
 		this.latitud = latitud;
 	}
 
-	public float getLongitud() {
+	public Float getLongitud() {
 		return longitud;
 	}
 
