@@ -28,9 +28,8 @@ import com.viajesmonopatin.repository.ViajeRepository;
 @Component
 public class CargaDeDatos {
 	private final TarifaRepository tarifaRepository;
-
 	private final MonopatinRepository monopatinRepository;
-	private final ViajeRepository viajeRepository;
+	private final ViajeRepository viajeRepository;	
 
 	
 	public CargaDeDatos(TarifaRepository tarifaRepository, MonopatinRepository monopatinRepository, ViajeRepository viajeRepository ) {
@@ -109,9 +108,22 @@ public class CargaDeDatos {
 	        		} else if(estado.equalsIgnoreCase("FINALIZADO")) {
 	        			v.setEstado(EstadoViajeEnum.FINALIZADO);
 	        		}
-	        			           
-	                //Parada inicio
-	                //Parada destino
+	        			
+	               // try {
+	                //	Parada paradaInicio = paradaRepository.getById(Integer.parseInt(csvRecord.get("parada_inicio")));
+	 	             //   v.setParadaInicio(paradaInicio);     
+					//} catch (Exception e) {
+					//	throw new ExpectableException("{\"error\":\"Error. No se encontró la parada de inicio.\"}");
+				//	}
+	                
+	                // try {
+	                //	Parada paradaDestino = paradaRepository.getById(Integer.parseInt(csvRecord.get("parada_destino")));
+	 	             //   v.setParadaDestino(paradaDestino);     
+					//} catch (Exception e) {
+					//	throw new ExpectableException("{\"error\":\"Error. No se encontró la parada destino.\"}");
+				//	}
+	               
+	               
 	                v.setTiempoInicio(Timestamp.valueOf(csvRecord.get("tiempo_inicio")));     
 	                v.setTiempoFin(Timestamp.valueOf(csvRecord.get("tiempo_fin")));   
 	                v.setTiempoPausaInicio(Timestamp.valueOf(csvRecord.get("tiempo_pausa_inicio")));     
