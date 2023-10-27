@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.viajesmonopatin.dto.MonopatinDto;
 import com.viajesmonopatin.enums.EstadoMonopatinEnum;
 
 import jakarta.persistence.Column;
@@ -24,23 +25,23 @@ public class Monopatin {
 	private int id;
 
 	@Column(nullable = false)
-	private float latitud;
+	private Float latitud;
 	
 	@Column(nullable = false)
-	private float longitud;
+	private Float longitud;
 	
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoMonopatinEnum estado;
 	
 	@Column(nullable = false)
-	private float kilometrosRecorridos;
+	private Float kilometrosRecorridos;
 	
 	@Column(nullable = false)
-	private float tiempoUsoConPausas;
+	private Float tiempoUsoConPausas;
 	
 	@Column(nullable = false)
-	private float tiempoUsoSinPausas;
+	private Float tiempoUsoSinPausas;
 
 	@JoinColumn
 	@OneToMany
@@ -51,8 +52,8 @@ public class Monopatin {
 		this.viajes = new HashSet<>();
 	}
 
-	public Monopatin(int id, float latitud, float longitud, EstadoMonopatinEnum estado, float kilometrosRecorridos,
-			float tiempoUsoConPausas, float tiempoUsoSinPausas) {
+	public Monopatin(int id, Float latitud, Float longitud, EstadoMonopatinEnum estado, Float kilometrosRecorridos,
+			Float tiempoUsoConPausas, Float tiempoUsoSinPausas) {
 		super();
 		this.viajes = new HashSet<>();
 		this.id = id;
@@ -64,8 +65,8 @@ public class Monopatin {
 		this.tiempoUsoSinPausas = tiempoUsoSinPausas;
 	}
 	
-	public Monopatin(int id, float latitud, float longitud, EstadoMonopatinEnum estado, float kilometrosRecorridos,
-			float tiempoUsoConPausas, float tiempoUsoSinPausas, Collection<Viaje> viajes) {
+	public Monopatin(int id, Float latitud, Float longitud, EstadoMonopatinEnum estado, Float kilometrosRecorridos,
+			Float tiempoUsoConPausas, Float tiempoUsoSinPausas, Collection<Viaje> viajes) {
 		super();
 		this.viajes = new HashSet<>(viajes);
 		this.id = id;
@@ -76,6 +77,17 @@ public class Monopatin {
 		this.tiempoUsoConPausas = tiempoUsoConPausas;
 		this.tiempoUsoSinPausas = tiempoUsoSinPausas;
 	}
+	
+	public Monopatin(MonopatinDto monopatin) {
+		super();
+		this.viajes = new HashSet<>();
+		this.latitud = monopatin.getLatitud();
+		this.longitud = monopatin.getLongitud();
+		this.estado = monopatin.getEstado();
+		this.kilometrosRecorridos = (float) 0;
+		this.tiempoUsoConPausas = (float) 0;
+		this.tiempoUsoSinPausas = (float) 0;
+	}
 
 	public int getId() {
 		return id;
@@ -85,19 +97,19 @@ public class Monopatin {
 		this.id = id;
 	}
 
-	public float getLatitud() {
+	public Float getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(float latitud) {
+	public void setLatitud(Float latitud) {
 		this.latitud = latitud;
 	}
 
-	public float getLongitud() {
+	public Float getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(float longitud) {
+	public void setLongitud(Float longitud) {
 		this.longitud = longitud;
 	}
 
@@ -109,27 +121,27 @@ public class Monopatin {
 		this.estado = estado;
 	}
 
-	public float getKilometrosRecorridos() {
+	public Float getKilometrosRecorridos() {
 		return kilometrosRecorridos;
 	}
 
-	public void setKilometrosRecorridos(float kilometrosRecorridos) {
+	public void setKilometrosRecorridos(Float kilometrosRecorridos) {
 		this.kilometrosRecorridos = kilometrosRecorridos;
 	}
 
-	public float getTiempoUsoConPausas() {
+	public Float getTiempoUsoConPausas() {
 		return tiempoUsoConPausas;
 	}
 
-	public void setTiempoUsoConPausas(float tiempoUsoConPausas) {
+	public void setTiempoUsoConPausas(Float tiempoUsoConPausas) {
 		this.tiempoUsoConPausas = tiempoUsoConPausas;
 	}
 
-	public float getTiempoUsoSinPausas() {
+	public Float getTiempoUsoSinPausas() {
 		return tiempoUsoSinPausas;
 	}
 
-	public void setTiempoUsoSinPausas(float tiempoUsoSinPausas) {
+	public void setTiempoUsoSinPausas(Float tiempoUsoSinPausas) {
 		this.tiempoUsoSinPausas = tiempoUsoSinPausas;
 	}
 }
