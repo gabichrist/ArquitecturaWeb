@@ -19,12 +19,8 @@ public class Mantenimiento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	//@JoinColumn
-	//@ManyToOne
-	//private Monopatin monopatin;
-	
-	//@Column(name = "id_monopatin")
-	//private Long monopatin;
+	@Column(name = "id_monopatin")
+	private Long idMonopatin;
 	
 	@Column(nullable = false)
 	private	Timestamp inicio;
@@ -39,22 +35,22 @@ public class Mantenimiento {
 		super();
 	}
 
-	public Mantenimiento(Long id, Timestamp inicio, Timestamp fin, String descripcion) {
+	public Mantenimiento(Long id, Long idMonopatin, Timestamp inicio, Timestamp fin, String descripcion) {
 		super();
 		this.id = id;
-		//this.monopatin = monopatin;
+		this.idMonopatin = idMonopatin;
 		this.inicio = inicio;
 		this.fin = fin;
 		this.descripcion = descripcion;
 	}
 
-	//public Monopatin getMonopatin() {
-	//	return monopatin;
-	//}
+	public Long getIdMonopatin() {
+		return idMonopatin;
+	}
 
-	//public void setMonopatin(long idMonopatin) {
-	//	this.monopatin = idMonopatin;
-	//}
+	public void setIdMonopatin(Long idMonopatin) {
+		this.idMonopatin = idMonopatin;
+	}
 
 	public Timestamp getInicio() {
 		return inicio;
@@ -88,10 +84,8 @@ public class Mantenimiento {
 		this.descripcion = descripcion;
 	}
 
-	//@Override
-	//public String toString() {
-	//	return "Mantenimiento [id=" + id + ", monopatin=" + monopatin + ", inicio=" + inicio + ", fin=" + fin + "]";
-//	}
-
-	
+	@Override
+	public String toString() {
+		return "Mantenimiento [id=" + id + ", idMonopatin=" + idMonopatin + ", inicio=" + inicio + ", fin=" + fin + "]";
+	}	
 }

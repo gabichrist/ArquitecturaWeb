@@ -1,4 +1,4 @@
-id,monopatin,inicio,fin,descripcion
+id,id_monopatin,inicio,fin,descripcion
 1,10000,2023-10-23 09:13:37.595000,2023-10-24 12:25:37.125000,Se ajustaron frenos 
 2,10010,2023-08-12 16:35:58.112586,2023-08-13 08:25:40.159622,Mantenimiento de rutina
 3,222,2020-05-22 08:12:15.002846,2020-05-22 18:35:50.285633,Retoques de pintura
