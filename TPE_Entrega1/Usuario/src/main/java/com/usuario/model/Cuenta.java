@@ -1,6 +1,6 @@
 package com.usuario.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 
@@ -16,15 +16,15 @@ public class Cuenta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_cuenta;
+	private Long id_cuenta;
 
-	@Column
-	private Date fecha_alta;
+	@Column(nullable = false)
+	private Timestamp fecha_alta;
 
-	@Column
+	@Column(nullable = false)
 	private int id_mercado_pago;
 
-	@Column
+	@Column(nullable = false)
 	private float saldo;
 
 	@ManyToMany
@@ -40,7 +40,7 @@ public class Cuenta {
 		super();
 	}
 
-	public Cuenta(int id_cuenta, Date fecha_alta, int id_mercado_pago, float saldo, Set<Usuario> usuarios) {
+	public Cuenta(Long id_cuenta, Timestamp fecha_alta, int id_mercado_pago, float saldo, Set<Usuario> usuarios) {
 		super();
 		this.id_cuenta = id_cuenta;
 		this.fecha_alta = fecha_alta;
@@ -49,19 +49,19 @@ public class Cuenta {
 		this.usuarios = usuarios;
 	}
 
-	public int getId_cuenta() {
+	public Long getId_cuenta() {
 		return id_cuenta;
 	}
 
-	public void setId_cuenta(int id_cuenta) {
+	public void setId_cuenta(Long id_cuenta) {
 		this.id_cuenta = id_cuenta;
 	}
 
-	public Date getFecha_alta() {
+	public Timestamp getFecha_alta() {
 		return fecha_alta;
 	}
 
-	public void setFecha_alta(Date fecha_alta) {
+	public void setFecha_alta(Timestamp fecha_alta) {
 		this.fecha_alta = fecha_alta;
 	}
 
