@@ -16,20 +16,18 @@ public class Tarifa {
 	private int id;
 
 	@Column
-	private float tarifa;
+	private Float tarifa;
 
 	@Column
-	private float tarifaExtra;
+	private Float tarifaExtra;
 
 	@Column
 	private Timestamp validoDesde;
 
 	public Tarifa() {
-		super();
 	}
 
-	public Tarifa(int id, float tarifa, float tarifaExtra, Timestamp validoDesde) {
-		super();
+	public Tarifa(int id, Float tarifa, Float tarifaExtra, Timestamp validoDesde) {
 		this.id = id;
 		this.tarifa = tarifa;
 		this.tarifaExtra = tarifaExtra;
@@ -44,19 +42,19 @@ public class Tarifa {
 		this.id = id;
 	}
 
-	public float getTarifa() {
+	public Float getTarifa() {
 		return tarifa;
 	}
 
-	public void setTarifa(float tarifa) {
+	public void setTarifa(Float tarifa) {
 		this.tarifa = tarifa;
 	}
 
-	public float getTarifaExtra() {
+	public Float getTarifaExtra() {
 		return tarifaExtra;
 	}
 
-	public void setTarifaExtra(float tarifaExtra) {
+	public void setTarifaExtra(Float tarifaExtra) {
 		this.tarifaExtra = tarifaExtra;
 	}
 
