@@ -36,7 +36,7 @@ public class CargaDeDatos {
 	            for (CSVRecord csvRecord : csvParser) {
 	                Mantenimiento m = new Mantenimiento();
 	                m.setId(Long.parseLong(csvRecord.get("id")));
-	             //   m.setMonopatin
+	                m.setIdMonopatin(Long.parseLong(csvRecord.get("id_monopatin")));
 	                m.setInicio(Timestamp.valueOf(csvRecord.get("inicio")));
 	                m.setFin(Timestamp.valueOf(csvRecord.get("fin")));     
 	                m.setDescripcion(csvRecord.get("descripcion"));
