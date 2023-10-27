@@ -1,5 +1,7 @@
 package com.usuario.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +36,10 @@ public class CuentaService implements BaseService<Cuenta> {
 	@Override
 	public Cuenta save(Cuenta entity) throws Exception {
 		try {
+			if (entity.getFecha_alta() == null) {
+				Date now = new Date();
+				entity.setFecha_alta(new Timestamp(now.getTime()));
+			}
 			return cuentaRepository.save(entity);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
