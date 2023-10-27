@@ -71,7 +71,7 @@ public class TarifaService implements BaseService<Tarifa>{
 				throw new Exception (e.getMessage());
 			}
 		} else {
-			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento que quiere actualizar.\"}");
 		}
 	}
 
@@ -85,7 +85,7 @@ public class TarifaService implements BaseService<Tarifa>{
 				throw new Exception(e.getMessage());
 			}
 		} else {
-			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
+			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento que quiere eliminar.\"}");
 		}
 	}
 }

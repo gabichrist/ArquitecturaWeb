@@ -1,7 +1,9 @@
 package com.viajesmonopatin.utils;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -23,12 +25,13 @@ import com.viajesmonopatin.repository.ViajeRepository;
 @Component
 public class CargaDeDatos {
 	private final TarifaRepository tarifaRepository;
+
 	private final MonopatinRepository monopatinRepository;
 	private final ViajeRepository viajeRepository;
 
 	
-	public CargaDeDatos(TarifaRepository tarifaRapository, MonopatinRepository monopatinRepository, ViajeRepository viajeRepository ) {
-		this.tarifaRepository = tarifaRapository;
+	public CargaDeDatos(TarifaRepository tarifaRepository, MonopatinRepository monopatinRepository, ViajeRepository viajeRepository ) {
+		this.tarifaRepository = tarifaRepository;
 		this.monopatinRepository = monopatinRepository;
 		this.viajeRepository = viajeRepository;
 	}
@@ -102,3 +105,6 @@ public class CargaDeDatos {
 	}
 	
 }
+
+
+

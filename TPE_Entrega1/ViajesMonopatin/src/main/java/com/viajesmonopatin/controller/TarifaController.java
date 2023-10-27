@@ -34,7 +34,7 @@ public class TarifaController {
 		}catch(ExpectableException e){
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}catch(Exception e){
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\":\"Error. No se encuentran esos elementos. Por favor intente más tarde.\"}");
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class TarifaController {
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+					.body("{\"error\":\"Error. No se puede crear ese elemento. Por favor intente más tarde.\"}");
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class TarifaController {
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+					.body("{\"error\":\"Error. No se puede borrar ese elemento. Por favor intente más tarde.\"}");
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class TarifaController {
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+					.body("{\"error\":\"Error. No se puede actualizar ese elemento. Por favor intente más tarde.\"}");
 		}
 	}
 }

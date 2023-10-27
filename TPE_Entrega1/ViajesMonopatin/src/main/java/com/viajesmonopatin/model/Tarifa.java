@@ -15,13 +15,13 @@ public class Tarifa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column
+	@Column(nullable = false)
 	private Float tarifa;
 
-	@Column
+	@Column(nullable = false)
 	private Float tarifaExtra;
 
-	@Column
+	@Column(nullable = false)
 	private Timestamp validoDesde;
 
 	public Tarifa() {
