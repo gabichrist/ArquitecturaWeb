@@ -1,5 +1,6 @@
 package com.usuario.model;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,16 +46,18 @@ public class Usuario {
 
 	public Usuario() {
 		super();
+		this.cuentas = new HashSet<>();
 	}
 
-	public Usuario(Long id, String nombre, String apellido, String nro_celular, String email, Roles roles) {
+	public Usuario(Long id, String nombre, String apellido, String nro_celular, String email, Roles rol) {
 		super();
 		this.id_usuario = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.nro_celular = nro_celular;
 		this.email = email;
-		this.rol = roles;
+		this.rol = rol;
+		this.cuentas = new HashSet<>();
 	}
 
 	public Long getId() {
@@ -126,5 +129,9 @@ public class Usuario {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+    
+    public void addCuenta(Cuenta cuenta) {
+    	this.cuentas.add(cuenta);
     }
 }

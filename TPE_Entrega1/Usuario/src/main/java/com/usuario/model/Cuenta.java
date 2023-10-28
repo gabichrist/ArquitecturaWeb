@@ -1,6 +1,7 @@
 package com.usuario.model;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,6 +35,9 @@ public class Cuenta {
 	@Column(nullable = false)
 	private float saldo;
 
+	@Column(nullable = false)
+	private Boolean habilitada;
+	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
@@ -56,9 +60,28 @@ public class Cuenta {
 
 	public Cuenta() {
 		super();
+		this.usuarios = new HashSet<>();
 	}
 	
-	
+	public Boolean getHabilitada() {
+		return habilitada;
+	}
+
+	public void setHabilitada(Boolean habilitada) {
+		this.habilitada = habilitada;
+	}
+
+	public Cuenta(Long id_cuenta, Timestamp fecha_alta, int id_mercado_pago, float saldo, Boolean habilitada,
+			Set<Usuario> usuarios) {
+		super();
+		this.id_cuenta = id_cuenta;
+		this.fecha_alta = fecha_alta;
+		this.id_mercado_pago = id_mercado_pago;
+		this.saldo = saldo;
+		this.habilitada = habilitada;
+		this.usuarios =  new HashSet<>(usuarios);
+	}
+
 	public Cuenta(Long id_cuenta, Timestamp fecha_alta, int id_mercado_pago, float saldo, Set<Usuario> usuarios) {
 		super();
 		this.id_cuenta = id_cuenta;
@@ -66,6 +89,11 @@ public class Cuenta {
 		this.id_mercado_pago = id_mercado_pago;
 		this.saldo = saldo;
 		this.usuarios = usuarios;
+		this.habilitada = true;
+	}
+	
+	public void addUsuario(Usuario usuario) {
+		this.usuarios.add(usuario);
 	}
 
 }

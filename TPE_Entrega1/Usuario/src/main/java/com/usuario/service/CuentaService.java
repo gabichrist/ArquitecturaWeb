@@ -40,6 +40,9 @@ public class CuentaService implements BaseService<Cuenta> {
 				Date now = new Date();
 				entity.setFecha_alta(new Timestamp(now.getTime()));
 			}
+			if (entity.getHabilitada() == null) {
+				entity.setHabilitada(true);
+			}
 			return cuentaRepository.save(entity);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -53,6 +56,9 @@ public class CuentaService implements BaseService<Cuenta> {
 				Cuenta cuenta = cuentaRepository.findById(id).get();
 				if (entity.getFecha_alta() != null) {
 					cuenta.setFecha_alta(entity.getFecha_alta());
+				}
+				if (entity.getHabilitada() != null) {
+					cuenta.setHabilitada(entity.getHabilitada());
 				}
 				cuenta.setId_mercado_pago(entity.getId_mercado_pago());
 				cuenta.setSaldo(entity.getSaldo());
