@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -32,18 +34,12 @@ public class CargaDeDatos {
 	}
 	
 	 public void cargarUsuariosDesdeCSV() throws IOException {
-	        File archivoCSV = ResourceUtils.getFile("src/main/java/com/usuario/csv/usuarios.csv");
+	        File archivoCSV = ResourceUtils.getFile("src/main/java/com/usuario/csv/usuarios_cuenta.csv");
 
 	        try (FileReader reader = new FileReader(archivoCSV);
 	             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader)) {
-
+	        	
 	            for (CSVRecord csvRecord : csvParser) {
-//	            	System.out.println("id" + csvRecord.get("id"));
-//	            	System.out.println("nombre" + csvRecord.get("nombre"));
-//	            	System.out.println("apellido" + csvRecord.get("apellido"));
-//	            	System.out.println("nro_celular" + csvRecord.get("nro_celular"));
-//	            	System.out.println("email" + csvRecord.get("email"));
-//	            	System.out.println("roles" + csvRecord.get("roles"));
 	                Usuario u = new Usuario();
 	                u.setId(Long.parseLong(csvRecord.get("id")));
 	                u.setNombre(csvRecord.get("nombre"));
@@ -51,41 +47,51 @@ public class CargaDeDatos {
 	                u.setNro_celular(csvRecord.get("nro_celular"));
 	                
 	                u.setEmail(csvRecord.get("email"));
-	                switch (csvRecord.get("roles")) {
+	                switch (csvRecord.get("rol")) {
 					case "USER":
-						u.setRoles(Roles.USER);
+						u.setRol(Roles.USER);
 						break;
 					case "ADMIN":
-						u.setRoles(Roles.ADMIN);
+						u.setRol(Roles.ADMIN);
 						break;
 					case "MAINTAINER":
-						u.setRoles(Roles.MAINTAINER);
+						u.setRol(Roles.MAINTAINER);
 						break;
 					default:
 						System.out.println("nada " + csvRecord.get("roles"));
 						break;
 					}
+	                Cuenta c = new Cuenta();
+	                c.setFecha_alta(Timestamp.valueOf(csvRecord.get("fecha_alta")));
+	                c.setId_mercado_pago(Integer.parseInt(csvRecord.get("id_mercado_pago")));
+	                c.setSaldo(Float.parseFloat(csvRecord.get("saldo")));
+	                Set<Cuenta> cuentas = new HashSet<Cuenta>();
+	                Set<Usuario> usuariosCuenta = new HashSet<Usuario>();
+	                usuariosCuenta.add(u);
+	                c.setUsuarios(usuariosCuenta);
+	                cuentas.add(c);
+	                u.setCuentas(cuentas);
 	                usuarioRepository.save(u);
 	            }
 	        }
 	    }
 	 
-	 public void cargarCuentasDesdeCSV() throws IOException {
-	        File archivoCSV = ResourceUtils.getFile("src/main/java/com/usuario/csv/cuentas.csv");
-
-	        try (FileReader reader = new FileReader(archivoCSV);
-	             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader)) {
-
-	            for (CSVRecord csvRecord : csvParser) {            	
-	                Cuenta c = new Cuenta();
-	                c.setId_cuenta(Long.parseLong(csvRecord.get("id")));
-	                c.setFecha_alta(Timestamp.valueOf(csvRecord.get("fecha_alta")));
-	                c.setId_mercado_pago(Integer.parseInt(csvRecord.get("id_mercado_pago")));
-	                c.setSaldo(Float.parseFloat(csvRecord.get("saldo")));
-	                cuentaRepository.save(c);
-	            }
-	        }
-	    }
+//	 public void cargarCuentasDesdeCSV() throws IOException {
+//	        File archivoCSV = ResourceUtils.getFile("src/main/java/com/usuario/csv/cuentas.csv");
+//
+//	        try (FileReader reader = new FileReader(archivoCSV);
+//	             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader)) {
+//
+//	            for (CSVRecord csvRecord : csvParser) {            	
+//	                Cuenta c = new Cuenta();
+//	                c.setId_cuenta(Long.parseLong(csvRecord.get("id")));
+//	                c.setFecha_alta(Timestamp.valueOf(csvRecord.get("fecha_alta")));
+//	                c.setId_mercado_pago(Integer.parseInt(csvRecord.get("id_mercado_pago")));
+//	                c.setSaldo(Float.parseFloat(csvRecord.get("saldo")));
+//	                cuentaRepository.save(c);
+//	            }
+//	        }
+//	    }
 	
 	
 	

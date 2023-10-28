@@ -1,11 +1,15 @@
 package com.usuario.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.usuario.exception.ExpectableException;
+import com.usuario.model.Cuenta;
 import com.usuario.model.Usuario;
 import com.usuario.repository.UsuarioRepository;
 
@@ -56,8 +60,8 @@ public class UsuarioService implements BaseService<Usuario> {
 				if (entity.getEmail() != null) {
 					usuario.setEmail(entity.getEmail());
 				}
-				if (entity.getRoles() != null) {
-					usuario.setRoles(entity.getRoles());
+				if (entity.getRol() != null) {
+					usuario.setRol(entity.getRol());
 				}
 				return usuarioRepository.save(usuario);
 
@@ -82,5 +86,24 @@ public class UsuarioService implements BaseService<Usuario> {
 			throw new ExpectableException("{\"error\":\"Error. No se encontró el elemento.\"}");
 		}
 	}
-}
 
+	public Usuario agregarCuentaUsuario(Long id, Cuenta cuenta) throws Exception {
+		if (usuarioRepository.existsById(id)) {
+			try {
+				Usuario usuario = usuarioRepository.findById(id).get();
+				Set<Cuenta> usuariosCuenta = usuario.getCuentas();
+				Set<Usuario> usuarios = new HashSet<Usuario>();
+				usuarios.add(usuario);
+				cuenta.setUsuarios(usuarios);
+				usuariosCuenta.add(cuenta);
+				usuarioRepository.save(usuario);
+				return usuario;
+			} catch (Exception e) {
+				System.out.println("Error " + e);
+				throw new Exception(e.getMessage());
+			}
+		}
+		throw new ExpectableException("{\"error\":\"Error. No existe el usuario.\"}");
+
+	}
+}

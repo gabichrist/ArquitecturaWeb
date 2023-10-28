@@ -1,16 +1,20 @@
 package com.usuario.model;
 
 import java.util.Set;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import enums.Roles;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -34,9 +38,9 @@ public class Usuario {
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private Roles roles;
+	private Roles rol;
 
-	@ManyToMany(mappedBy = "usuarios")
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Cuenta> cuentas;
 
 	public Usuario() {
@@ -50,7 +54,7 @@ public class Usuario {
 		this.apellido = apellido;
 		this.nro_celular = nro_celular;
 		this.email = email;
-		this.roles = roles;
+		this.rol = roles;
 	}
 
 	public Long getId() {
@@ -90,15 +94,17 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) {
+		if (!this.isValidEmail(email))
+			throw new Error("Email no válido");
 		this.email = email;
 	}
 
-	public Roles getRoles() {
-		return roles;
+	public Roles getRol() {
+		return rol;
 	}
 
-	public void setRoles(Roles roles) {
-		this.roles = roles;
+	public void setRol(Roles rol) {
+		this.rol = rol;
 	}
 
 	public Set<Cuenta> getCuentas() {
@@ -111,8 +117,14 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id_usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", nro_celular=" + nro_celular
-				+ ", email=" + email + ", roles=" + roles + "]";
+		return "Usuario [id=" + id_usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", nro_celular="
+				+ nro_celular + ", email=" + email + ", rol=" + rol + "]";
 	}
-
+	
+    private boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 }

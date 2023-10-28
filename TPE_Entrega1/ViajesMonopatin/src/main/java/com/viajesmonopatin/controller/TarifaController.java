@@ -48,6 +48,15 @@ public class TarifaController {
         }
     }
 	
+	@GetMapping({"/fecha/actual"})
+	public ResponseEntity<?> getCurrentPrice(){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(tarifaService.findCurrentPrice());
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado.\"}");
+		}
+	}
+	
 	@PostMapping({"", "/"})
 	public ResponseEntity<?> save(@RequestBody Tarifa e){
 		try {
