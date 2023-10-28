@@ -31,6 +31,15 @@ public class TarifaService implements BaseService<Tarifa>{
 			throw new ExpectableException("Debe ingresar un valor válido para sortBy " + TarifaRepository.sorteableFields);
 		}
 	}
+	
+	public Optional<Tarifa> findCurrentPrice() throws Exception{
+		try {
+			Optional<Tarifa> tarifaActual = tarifaRepository.getCurrentPrice();
+			return tarifaActual;
+		}catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 
 	@Override
 	public Tarifa findById(Long id) throws Exception {

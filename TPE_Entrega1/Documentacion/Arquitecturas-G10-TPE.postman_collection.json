@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "213bd884-8a52-400a-a22a-da221381a49b",
+		"_postman_id": "fff7be03-bd64-49d6-97d5-8e099bfdd2b7",
 		"name": "Arquitecturas-G10-TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "9071126"
+		"_exporter_id": "19007322"
 	},
 	"item": [
 		{
@@ -324,6 +324,25 @@
 											"key": "id",
 											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve tarifa actual",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/tarifas/fecha/actual",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"tarifas",
+										"fecha",
+										"actual"
 									]
 								}
 							},
