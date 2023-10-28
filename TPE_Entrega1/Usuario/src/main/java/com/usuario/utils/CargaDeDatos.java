@@ -65,12 +65,8 @@ public class CargaDeDatos {
 	                c.setFecha_alta(Timestamp.valueOf(csvRecord.get("fecha_alta")));
 	                c.setId_mercado_pago(Integer.parseInt(csvRecord.get("id_mercado_pago")));
 	                c.setSaldo(Float.parseFloat(csvRecord.get("saldo")));
-	                Set<Cuenta> cuentas = new HashSet<Cuenta>();
-	                Set<Usuario> usuariosCuenta = new HashSet<Usuario>();
-	                usuariosCuenta.add(u);
-	                c.setUsuarios(usuariosCuenta);
-	                cuentas.add(c);
-	                u.setCuentas(cuentas);
+	                c.setHabilitada(true);
+	                u.addCuenta(c);
 	                usuarioRepository.save(u);
 	            }
 	        }
