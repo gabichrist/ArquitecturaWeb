@@ -15,20 +15,20 @@ public class UsuarioDTO {
 
 	private String email;
 
-	private Roles roles;
+	private Roles rol;
 
 	public UsuarioDTO() {
 		super();
 	}
 
-	public UsuarioDTO(int id_usuario, String nombre, String apellido, String nro_celular, String email, Roles roles) {
+	public UsuarioDTO(int id_usuario, String nombre, String apellido, String nro_celular, String email, Roles rol) {
 		super();
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.nro_celular = nro_celular;
 		this.email = email;
-		this.roles = roles;
+		this.rol = rol;
 	}
 
 	public int getId_usuario() {
@@ -71,12 +71,12 @@ public class UsuarioDTO {
 		this.email = email;
 	}
 
-	public Roles getRoles() {
-		return roles;
+	public Roles getRol() {
+		return rol;
 	}
 
-	public void setRoles(Roles roles) {
-		this.roles = roles;
+	public void setRol(Roles rol) {
+		this.rol = rol;
 	}
 	
 	
