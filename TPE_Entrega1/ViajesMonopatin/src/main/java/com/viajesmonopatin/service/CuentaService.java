@@ -15,8 +15,7 @@ public class CuentaService implements BaseService<Cuenta> {
     
 	private final WebClient webClient;
 
-    public CuentaService() {
-    	
+    public CuentaService() {    	
         this.webClient = WebClient.create();
     }
     

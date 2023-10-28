@@ -2,9 +2,11 @@ package com.viajesmonopatin.dto;
 
 public class ViajeMonopatinUsuarioDto {
 	
-	public Long idMonopatin;
+	public int idMonopatin;
 	
-	public Long idUsuario;
+	public int idUsuario;
+	
+	public int idCuenta;
 	
 	public int idParadaInicio;
 	
@@ -14,28 +16,38 @@ public class ViajeMonopatinUsuarioDto {
 		super();
 	}
 
-	public ViajeMonopatinUsuarioDto(Long idMonopatin, Long idUsuario, int idParadaInicio, int idParadaDestino) {
+	public ViajeMonopatinUsuarioDto(int idMonopatin, int idUsuario, int idCuenta, int idParadaInicio, int idParadaDestino) {
 		super();
 		this.idMonopatin = idMonopatin;
 		this.idUsuario = idUsuario;
+		this.idCuenta = idCuenta;
 		this.idParadaInicio = idParadaInicio;
 		this.idParadaDestino = idParadaDestino;
 	}
 
-	public Long getIdMonopatin() {
+	public int getIdMonopatin() {
 		return idMonopatin;
 	}
 
-	public void setIdMonopatin(Long idMonopatin) {
+	public void setIdMonopatin(int idMonopatin) {
 		this.idMonopatin = idMonopatin;
 	}
 
-	public Long getIdUsuario() {
+	public int getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
+	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	
+	
+	public int getIdCuenta() {
+		return idCuenta;
+	}
+
+	public void setIdCuenta(int idCuenta) {
+		this.idCuenta = idCuenta;
 	}
 
 	public int getIdParadaInicio() {

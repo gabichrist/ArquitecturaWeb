@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.viajesmonopatin.dto.ViajeMonopatinUsuarioDto;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.service.ViajeService;
 
@@ -43,7 +46,17 @@ public class ViajeController {
 	}
 	
 	//@PostMapping({ "", "/" })
-
+	
+	@PostMapping({"/iniciar"})
+	public ResponseEntity<?> iniciar(@RequestBody ViajeMonopatinUsuarioDto viajeMonopatinUsuarioDTO) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(viajeService.iniciarViaje(viajeMonopatinUsuarioDTO));
+		
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se pudo iniciar el viaje" + ".\"}");
+		}		
+	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
