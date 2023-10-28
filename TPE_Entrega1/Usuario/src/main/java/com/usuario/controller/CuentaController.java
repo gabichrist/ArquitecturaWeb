@@ -78,8 +78,8 @@ public class CuentaController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-	
-	@PostMapping({"/{id}/cargar-saldo", "/{id}/cargar-saldo/"})
+
+	@PostMapping({ "/{id}/cargar-saldo", "/{id}/cargar-saldo/" })
 	public ResponseEntity<?> cargarSaldo(@RequestBody ModificarSaldoDto body, @PathVariable Long id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(cuentaService.cargarSaldo(id, body.getImporte()));
@@ -90,11 +90,23 @@ public class CuentaController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-	
-	@PostMapping({"/{id}/descontar-saldo", "/{id}/descontar-saldo/"})
+
+	@PostMapping({ "/{id}/descontar-saldo", "/{id}/descontar-saldo/" })
 	public ResponseEntity<?> descontarSaldo(@RequestBody ModificarSaldoDto body, @PathVariable Long id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(cuentaService.descontarSaldo(id, body.getImporte()));
+		} catch (ExpectableException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		} catch (Exception e2) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+	@PostMapping("/{id}/anular")
+	public ResponseEntity<?> anularCuenta(@PathVariable Long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(cuentaService.anularCuenta(id));
 		} catch (ExpectableException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		} catch (Exception e2) {

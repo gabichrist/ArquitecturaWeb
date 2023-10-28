@@ -12,7 +12,8 @@ import com.mantenimiento.repository.MantenimientoRepository;
 
 @Service("MantenimientoService")
 public class MantenimientoService implements BaseService<Mantenimiento>{
-
+	
+	
 		@Autowired
 		private MantenimientoRepository mantenimientoRepository;
 
@@ -82,6 +83,5 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 			}
 		}
 
-	
 
 }
