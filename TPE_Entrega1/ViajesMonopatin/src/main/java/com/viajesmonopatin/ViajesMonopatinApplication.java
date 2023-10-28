@@ -21,6 +21,8 @@ public class ViajesMonopatinApplication {
 	@PostConstruct
 	public void init() throws NumberFormatException, Exception{
 		cargaDeDatos.cargarTarifasDesdeCSV();
+		cargaDeDatos.cargarMonopatinesDesdeCSV();
+		cargaDeDatos.cargarViajesDesdeCSV();
 	}
 
 }

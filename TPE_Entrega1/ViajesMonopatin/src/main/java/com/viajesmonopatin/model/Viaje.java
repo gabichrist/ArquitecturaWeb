@@ -19,7 +19,7 @@ public class Viaje {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@JoinColumn
 	@ManyToOne
@@ -61,5 +61,128 @@ public class Viaje {
 	public Viaje() {
 		super();
 	}
+
+	public Viaje(Long id, Monopatin monopatin, int idUsuario, int idCuenta, Parada paradaInicio, Parada paradaDestino,
+			EstadoViajeEnum estado, Timestamp tiempoInicio, Timestamp tiempoFin, Timestamp tiempoPausaInicio,
+			Timestamp tiempoPausaFin, float kilometrosRecorridos) {
+		super();
+		this.id = id;
+		this.monopatin = monopatin;
+		this.idUsuario = idUsuario;
+		this.idCuenta = idCuenta;
+		this.paradaInicio = paradaInicio;
+		this.paradaDestino = paradaDestino;
+		this.estado = estado;
+		this.tiempoInicio = tiempoInicio;
+		this.tiempoFin = tiempoFin;
+		this.tiempoPausaInicio = tiempoPausaInicio;
+		this.tiempoPausaFin = tiempoPausaFin;
+		this.kilometrosRecorridos = kilometrosRecorridos;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Monopatin getMonopatin() {
+		return monopatin;
+	}
+
+	public void setMonopatin(Monopatin monopatin) {
+		this.monopatin = monopatin;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public int getIdCuenta() {
+		return idCuenta;
+	}
+
+	public void setIdCuenta(int idCuenta) {
+		this.idCuenta = idCuenta;
+	}
+
+	public Parada getParadaInicio() {
+		return paradaInicio;
+	}
+
+	public void setParadaInicio(Parada paradaInicio) {
+		this.paradaInicio = paradaInicio;
+	}
+
+	public Parada getParadaDestino() {
+		return paradaDestino;
+	}
+
+	public void setParadaDestino(Parada paradaDestino) {
+		this.paradaDestino = paradaDestino;
+	}
+
+	public EstadoViajeEnum getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoViajeEnum estado) {
+		this.estado = estado;
+	}
+
+	public Timestamp getTiempoInicio() {
+		return tiempoInicio;
+	}
+
+	public void setTiempoInicio(Timestamp tiempoInicio) {
+		this.tiempoInicio = tiempoInicio;
+	}
+
+	public Timestamp getTiempoFin() {
+		return tiempoFin;
+	}
+
+	public void setTiempoFin(Timestamp tiempoFin) {
+		this.tiempoFin = tiempoFin;
+	}
+
+	public Timestamp getTiempoPausaInicio() {
+		return tiempoPausaInicio;
+	}
+
+	public void setTiempoPausaInicio(Timestamp tiempoPausaInicio) {
+		this.tiempoPausaInicio = tiempoPausaInicio;
+	}
+
+	public Timestamp getTiempoPausaFin() {
+		return tiempoPausaFin;
+	}
+
+	public void setTiempoPausaFin(Timestamp tiempoPausaFin) {
+		this.tiempoPausaFin = tiempoPausaFin;
+	}
+
+	public float getKilometrosRecorridos() {
+		return kilometrosRecorridos;
+	}
+
+	public void setKilometrosRecorridos(float kilometrosRecorridos) {
+		this.kilometrosRecorridos = kilometrosRecorridos;
+	}
+
+	@Override
+	public String toString() {
+		return "Viaje [id=" + id + ", monopatin=" + monopatin + ", idUsuario=" + idUsuario + ", idCuenta=" + idCuenta
+				+ ", paradaInicio=" + paradaInicio + ", paradaDestino=" + paradaDestino + ", estado=" + estado
+				+ ", tiempoInicio=" + tiempoInicio + ", tiempoFin=" + tiempoFin + ", tiempoPausaInicio="
+				+ tiempoPausaInicio + ", tiempoPausaFin=" + tiempoPausaFin + ", kilometrosRecorridos="
+				+ kilometrosRecorridos + "]";
+	}	
 	
 }
