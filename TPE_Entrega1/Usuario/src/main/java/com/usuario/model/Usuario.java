@@ -1,6 +1,8 @@
 package com.usuario.model;
 
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import enums.Roles;
 import jakarta.persistence.CascadeType;
@@ -92,6 +94,8 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) {
+		if (!this.isValidEmail(email))
+			throw new Error("Email no válido");
 		this.email = email;
 	}
 
@@ -116,5 +120,11 @@ public class Usuario {
 		return "Usuario [id=" + id_usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", nro_celular="
 				+ nro_celular + ", email=" + email + ", rol=" + rol + "]";
 	}
-
+	
+    private boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 }
