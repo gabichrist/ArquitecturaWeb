@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.NullValue;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.MonopatinDto;
@@ -36,16 +37,19 @@ public class MonopatinService implements BaseService<Monopatin> {
 
 	@Override
 	public Monopatin save(Monopatin entity) throws Exception {
-		if (monopatinRepository.existsById(Long.valueOf(entity.getId())))
-			throw new ExpectableException("Ya existe una entidad con el id especificado");
-		return this.monopatinRepository.save(entity);
+		try {
+			return this.monopatinRepository.save(entity);			
+		}catch(Exception e) {
+			throw new Exception (e.getMessage());
+		}
 	}
 
 	public Monopatin save(MonopatinDto dto) throws Exception {
-		Monopatin entity = new Monopatin(dto);
-		if (monopatinRepository.existsById(Long.valueOf(entity.getId())))
-			throw new ExpectableException("Ya existe una entidad con el id especificado");
-		return this.monopatinRepository.save(entity);
+		try {
+			return this.monopatinRepository.save(new Monopatin(dto));			
+		}catch(Exception e) {
+			throw new Exception (e.getMessage());
+		}
 	}
 
 	@Override

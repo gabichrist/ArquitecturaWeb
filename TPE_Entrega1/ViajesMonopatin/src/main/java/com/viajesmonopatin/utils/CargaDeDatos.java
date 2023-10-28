@@ -44,7 +44,7 @@ public class CargaDeDatos {
 			
 			for(CSVRecord csvRecord : csvParser) {
 				Tarifa t = new Tarifa();
-				t.setId(Integer.parseInt(csvRecord.get("id")));
+				t.setId(Long.parseLong(csvRecord.get("id")));
 				t.setTarifa(Float.parseFloat(csvRecord.get("tarifa")));
 				t.setTarifaExtra(Float.parseFloat(csvRecord.get("tarifaExtra")));
 				t.setValidoDesde(Timestamp.valueOf(csvRecord.get("validoDesde")));
@@ -61,7 +61,7 @@ public class CargaDeDatos {
 
 	        	for (CSVRecord csvRecord : csvParser) {
 	        		Monopatin m = new Monopatin();
-	        		m.setId(Integer.parseInt(csvRecord.get("id")));
+	        		m.setId(Long.parseLong(csvRecord.get("id")));
 	        		m.setLatitud(Float.parseFloat(csvRecord.get("latitud")));
 	        		m.setLongitud(Float.parseFloat(csvRecord.get("longitud")));
 	        		String estado = String.valueOf(csvRecord.get("estado"));
