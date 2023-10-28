@@ -6,12 +6,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-import com.viajesmonopatin.dto.Cuenta;
+import com.viajesmonopatin.dto.CuentaDto;
 
 import reactor.core.publisher.Flux;
 
 @Service("cuentaServicio")
-public class CuentaService implements BaseService<Cuenta> {
+public class CuentaService implements BaseService<CuentaDto> {
     
 	private final WebClient webClient;
 
@@ -20,26 +20,26 @@ public class CuentaService implements BaseService<Cuenta> {
     }
     
 	@Override
-	public Cuenta findById(Long id) throws Exception {
+	public CuentaDto findById(Long id) throws Exception {
 	      return webClient.get()
 	                .uri("http://localhost:8080/cuentas/" + id)
 	                .retrieve()
-	                .bodyToMono(Cuenta.class)
+	                .bodyToMono(CuentaDto.class)
 	                .block();
 	}
 	
 	@Override
-	public List<Cuenta> findAll() throws Exception {
-		Flux<Cuenta> cuentas = webClient.get()
+	public List<CuentaDto> findAll() throws Exception {
+		Flux<CuentaDto> cuentas = webClient.get()
 	                .uri("http://localhost:8080/cuentas/")
 	                .accept(MediaType.APPLICATION_JSON)
 	                .retrieve()
-	                .bodyToFlux(Cuenta.class);
+	                .bodyToFlux(CuentaDto.class);
 	    return cuentas.collectList().block();
 	}
 
 	@Override
-	public Cuenta save(Cuenta entity) throws Exception {
+	public CuentaDto save(CuentaDto entity) throws Exception {
 		throw new Error("To implement?");
 //		if (paradaRepository.existsById(Long.valueOf(entity.getId())))
 //			throw new ExpectableException("Ya existe una entidad con el id especificado");
@@ -47,7 +47,7 @@ public class CuentaService implements BaseService<Cuenta> {
 	}
 
 	@Override
-	public Cuenta update(Long id, Cuenta entity) throws Exception {
+	public CuentaDto update(Long id, CuentaDto entity) throws Exception {
 		throw new Error("To implement?");
 	}
 

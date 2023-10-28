@@ -1,9 +1,11 @@
 package com.usuario.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +15,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import lombok.Data;
 
+@Data
 @Entity
 public class Cuenta {
 
@@ -39,6 +43,11 @@ public class Cuenta {
 	)
 	private Set<Usuario> usuarios;
 
+	@JsonProperty("idUsuarios")
+	public List<Long> idUsuarios() {
+		return this.usuarios.stream().map(usuario -> usuario.getId()).toList();
+	}
+	
 	@Override
 	public String toString() {
 		return "Cuenta [id_cuenta=" + id_cuenta + ", fecha_alta=" + fecha_alta + ", id_mercado_pago=" + id_mercado_pago
@@ -58,47 +67,5 @@ public class Cuenta {
 		this.saldo = saldo;
 		this.usuarios = usuarios;
 	}
-
-	public Long getId_cuenta() {
-		return id_cuenta;
-	}
-
-	public void setId_cuenta(Long id_cuenta) {
-		this.id_cuenta = id_cuenta;
-	}
-
-	public Timestamp getFecha_alta() {
-		return fecha_alta;
-	}
-
-	public void setFecha_alta(Timestamp fecha_alta) {
-		this.fecha_alta = fecha_alta;
-	}
-
-	public int getId_mercado_pago() {
-		return id_mercado_pago;
-	}
-
-	public void setId_mercado_pago(int id_mercado_pago) {
-		this.id_mercado_pago = id_mercado_pago;
-	}
-
-	public float getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(float saldo) {
-		this.saldo = saldo;
-	}
-
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-	
-	
 
 }
