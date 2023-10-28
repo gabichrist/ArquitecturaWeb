@@ -54,7 +54,6 @@ public class TarifaService implements BaseService<Tarifa>{
 	@Override
 	public Tarifa save(Tarifa entity) throws Exception {
 		try {
-			System.out.println("entity " + entity);
 			return tarifaRepository.save(entity);
 		}catch(Exception e) {
 			throw new Exception (e.getMessage());

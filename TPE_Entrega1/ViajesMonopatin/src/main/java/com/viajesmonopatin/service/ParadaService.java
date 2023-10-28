@@ -35,10 +35,11 @@ public class ParadaService implements BaseService<Parada> {
 
 	@Override
 	public Parada save(Parada entity) throws Exception {
-		
-		if (paradaRepository.existsById(Long.valueOf(entity.getId())))
-			throw new ExpectableException("Ya existe una entidad con el id especificado");
-		return this.paradaRepository.save(entity);
+		try {
+			return paradaRepository.save(entity);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 	@Override
