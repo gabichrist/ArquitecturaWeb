@@ -3,12 +3,15 @@ package com.usuario.model;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -27,7 +30,13 @@ public class Cuenta {
 	@Column(nullable = false)
 	private float saldo;
 
+	@JsonIgnore
 	@ManyToMany
+	@JoinTable(
+			name = "usuarios_cuenta",
+			joinColumns = @JoinColumn(name = "id_cuenta"),
+			inverseJoinColumns = @JoinColumn(name = "id_usuario")
+	)
 	private Set<Usuario> usuarios;
 
 	@Override
@@ -39,7 +48,8 @@ public class Cuenta {
 	public Cuenta() {
 		super();
 	}
-
+	
+	
 	public Cuenta(Long id_cuenta, Timestamp fecha_alta, int id_mercado_pago, float saldo, Set<Usuario> usuarios) {
 		super();
 		this.id_cuenta = id_cuenta;

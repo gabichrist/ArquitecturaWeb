@@ -39,7 +39,7 @@ public interface RepoBase<T,ID extends Serializable> extends org.springframework
      * @param id Identificador único de la entidad.
      * @return Entidad que coicide con el id ingresado.
      */
-    Optional<T> findById(ID id);
+    Optional<T> findById(Long id);    
 
     /**
      * Indica si existe la entidad con el id ingresado por parámetro.

@@ -1,5 +1,8 @@
 package com.usuario.controller;
 
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.usuario.exception.ExpectableException;
+import com.usuario.model.Cuenta;
 import com.usuario.model.Usuario;
 import com.usuario.service.UsuarioService;
 
@@ -68,9 +72,22 @@ public class UsuarioController {
 		}
 	}
 	
-	//ver validacion de mail?
+	@PostMapping("/{id}/cuentas")
+	public ResponseEntity<?> agregarCuentaUsuario(@PathVariable Long id, @RequestBody Cuenta cuenta) {
+		try {
+			if (cuenta.getFecha_alta() == null) {
+				cuenta.setFecha_alta(new Timestamp(System.currentTimeMillis()));
+			}
+			return ResponseEntity.status(HttpStatus.OK).body(usuarioService.agregarCuentaUsuario(id, cuenta));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+	// ver validacion de mail?
 	@PostMapping({ "", "/" })
-	public ResponseEntity<?> save(@RequestBody Usuario usuario){
+	public ResponseEntity<?> save(@RequestBody Usuario usuario) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.save(usuario));
 		} catch (Exception e2) {
@@ -79,5 +96,6 @@ public class UsuarioController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
+
 
 }
