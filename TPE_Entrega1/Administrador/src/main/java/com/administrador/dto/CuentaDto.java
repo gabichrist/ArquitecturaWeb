@@ -1,4 +1,4 @@
-package com.viajesmonopatin.dto;
+package com.administrador.dto;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -19,4 +19,9 @@ public class CuentaDto {
 	private List<Long> idUsuarios;
 	
 	private Boolean habilitada;
+	
+	@Override
+	public String toString() {
+		return "id_cienta " + id_cuenta + " habilidata" + habilitada;
+	}
 }
