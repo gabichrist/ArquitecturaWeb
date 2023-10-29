@@ -61,7 +61,7 @@ public class ViajeController {
 	}
 	
 	@PostMapping("/{id}/pausar")
-	public ResponseEntity<?> iniciar(@PathVariable Long id) {
+	public ResponseEntity<?> pausar(@PathVariable Long id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.pausarViaje(id));
 		} catch (ExpectableException expectableException) {
