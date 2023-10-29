@@ -59,6 +59,19 @@ public class ViajeController {
 					.body("{\"error\":\"Error. No se pudo iniciar el viaje" + ".\"}");
 		}	
 	}
+	
+	@PostMapping("/{id}/pausar")
+	public ResponseEntity<?> iniciar(@PathVariable Long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.pausarViaje(id));
+		} catch (ExpectableException expectableException) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(expectableException.getMessage());	
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se pudo pausar el viaje" + ".\"}");
+		}	
+	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {

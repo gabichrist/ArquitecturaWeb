@@ -114,6 +114,20 @@ public class ViajeService implements BaseService<Viaje>{
 				}										
 								 		
 		}
+		
+		public Viaje pausarViaje(Long id) throws ExpectableException {
+			Optional<Viaje> viajeBuscado = viajeRepository.findById(id);
+			if (viajeBuscado.isEmpty())
+				throw new ExpectableException("No se encontró el viaje indicado");
+			Viaje viaje = viajeBuscado.get();
+			
+			if (viaje.getTiempoPausaInicio( )== null) {
+				viaje.setTiempoPausaInicio(Timestamp.valueOf(LocalDateTime.now()));
+			} else {
+				throw new ExpectableException("El viaje ya se encuentra pausado");
+			}	
+			return viaje;
+		}
 
 		@Override
 		public Viaje update(Long id, Viaje entity) throws Exception {
@@ -130,6 +144,5 @@ public class ViajeService implements BaseService<Viaje>{
 				throw new ExpectableException("No existe un viaje con el id indicado");
 			}
 		}
-
-		
+	
 }
