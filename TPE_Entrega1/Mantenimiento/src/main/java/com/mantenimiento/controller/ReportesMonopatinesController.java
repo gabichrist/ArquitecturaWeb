@@ -39,5 +39,25 @@ public class ReportesMonopatinesController {
 		}
 	}
 	
+	@GetMapping({"tiempo-con-pausas", "tiempo-con-pausas/"})
+	public ResponseEntity<?> getReporteTiempoConPausas() {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(monopatinUsoService.reporteTiempoConPausas());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@GetMapping({"tiempo-sin-pausas", "tiempo-sin-pausas/"})
+	public ResponseEntity<?> getReporteTiempoSinPausas() {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(monopatinUsoService.reporteTiempoSinPausas());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
 }
 

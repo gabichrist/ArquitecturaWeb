@@ -8,6 +8,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.mantenimiento.dto.MonopatinReporteKilometros;
 import com.mantenimiento.dto.MonopatinReporteKilometrosConTiempoPausa;
+import com.mantenimiento.dto.MonopatinTiempoConPausas;
+import com.mantenimiento.dto.MonopatinTiempoSinPausas;
 import com.mantenimiento.dto.MonopatinUsoDto;
 
 import reactor.core.publisher.Flux;
@@ -40,6 +42,18 @@ public class MonopatinUsoService {
 	public List<MonopatinUsoDto> reporteUso(){
 		Flux<MonopatinUsoDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines")
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinUsoDto.class);
+		return monopatines.collectList().block();
+	}
+	
+	public List<MonopatinTiempoConPausas> reporteTiempoConPausas(){
+		Flux<MonopatinTiempoConPausas> monopatines = webClient.get().uri("http://localhost:8081/monopatines")
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinTiempoConPausas.class);
+		return monopatines.collectList().block();
+	}
+	
+	public List<MonopatinTiempoSinPausas> reporteTiempoSinPausas(){
+		Flux<MonopatinTiempoSinPausas> monopatines = webClient.get().uri("http://localhost:8081/monopatines")
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinTiempoSinPausas.class);
 		return monopatines.collectList().block();
 	}
 }
