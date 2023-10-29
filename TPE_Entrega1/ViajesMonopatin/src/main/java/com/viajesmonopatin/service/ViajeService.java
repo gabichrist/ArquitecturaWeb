@@ -2,10 +2,15 @@ package com.viajesmonopatin.service;
 
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.boot.model.source.internal.hbm.RelationalValueSourceHelper.AbstractColumnsAndFormulasSource;
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -123,8 +128,34 @@ public class ViajeService implements BaseService<Viaje>{
 			
 			if (viaje.getTiempoPausaInicio( )== null) {
 				viaje.setTiempoPausaInicio(Timestamp.valueOf(LocalDateTime.now()));
+				viajeRepository.save(viaje);
 			} else {
 				throw new ExpectableException("El viaje ya se encuentra pausado");
+			}	
+			return viaje;
+		}
+		
+		public Viaje reanudarViaje(Long id) throws ExpectableException {
+			Optional<Viaje> viajeBuscado = viajeRepository.findById(id);
+			if (viajeBuscado.isEmpty())
+				throw new ExpectableException("No se encontró el viaje indicado");
+			Viaje viaje = viajeBuscado.get();
+			
+			if (viaje.getTiempoPausaInicio() != null && viaje.getTiempoPausaFin() == null) {
+				viaje.setTiempoPausaFin(Timestamp.valueOf(LocalDateTime.now()));
+				
+				Long diferenciaMiliSegundos = viaje.getTiempoPausaFin().getTime() - viaje.getTiempoPausaInicio().getTime();
+				int tiempoPermitido = 5 * 60 * 1000;
+				
+				if (diferenciaMiliSegundos > tiempoPermitido ) {			
+					Instant tiempoPausaInicioNuevo = viaje.getTiempoPausaInicio().toInstant().plus(15, ChronoUnit.MINUTES);
+					viaje.setTiempoPausaInicio(Timestamp.from(tiempoPausaInicioNuevo));				
+				} else  {
+					System.out.println("tiempo menor");
+				}
+				viajeRepository.save(viaje);				
+			} else {
+				throw new ExpectableException("El viaje ya se encuentra en curso");
 			}	
 			return viaje;
 		}
