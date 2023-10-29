@@ -1,9 +1,13 @@
 package com.administrador.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.administrador.dto.CuentaDto;
+import com.administrador.dto.DisponibilidadMonopatinesDto;
+import com.administrador.dto.MonopatinDto;
 
 @Service
 public class AdministradorService {
@@ -11,7 +15,26 @@ public class AdministradorService {
 	@Autowired 
 	private CuentaService cuentaService;
 	
+	@Autowired
+	private ViajesMonopatinService viajesMonopatinService;
+	
 	public CuentaDto anularCuentaUsuario(Long id) {
 		return this.cuentaService.anularCuentaUsuario(id);
+	}
+	
+	public DisponibilidadMonopatinesDto obtenerDisponibilidadMonopatines() {
+		try {
+			List<MonopatinDto> monopatinesDisponibles = viajesMonopatinService.obtenerMonopatinesDisponibles();
+			List<MonopatinDto> monopatinesMantenimiento =  viajesMonopatinService.obtenerMonopatinesEnMantenimiento();
+			DisponibilidadMonopatinesDto reporteDisponibilidad = new DisponibilidadMonopatinesDto();
+			
+			reporteDisponibilidad.setMonopatinesDisponibles(monopatinesDisponibles.size());
+			reporteDisponibilidad.setMonopatinesEnMantenimiento(monopatinesMantenimiento.size());
+			
+			return reporteDisponibilidad;
+		} catch (Exception e) {
+			throw e;
+		}
+		
 	}
 }

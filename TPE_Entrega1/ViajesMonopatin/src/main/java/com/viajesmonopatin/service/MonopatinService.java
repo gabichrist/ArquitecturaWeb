@@ -27,6 +27,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 		try {
 			System.out.println(id);
 			Optional<Monopatin> monopatinBuscada = monopatinRepository.findById(id);
+			System.out.println("Moni" + monopatinBuscada.get());
 			if (monopatinBuscada.isEmpty())
 				throw new ExpectableException("No se encontró una monopatin con el id solicitado");
 			return monopatinBuscada.get();

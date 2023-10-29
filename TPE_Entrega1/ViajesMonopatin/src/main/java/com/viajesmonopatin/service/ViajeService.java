@@ -26,6 +26,7 @@ public class ViajeService implements BaseService<Viaje>{
 
 		@Autowired
 		private ViajeRepository viajeRepository;
+		@Autowired
 		private MonopatinRepository monopatinRepository;
 		//private ParadaRepository paradaRepository;
 		//private CuentaService cuentaService;
@@ -62,9 +63,10 @@ public class ViajeService implements BaseService<Viaje>{
 				
 			try {
 				Optional<Monopatin> monopatinBuscado = monopatinRepository.findById(viajeMonopatinUsuarioDTO.getIdMonopatin());
+				System.out.println("mon" + monopatinBuscado);
 				Monopatin monopatin = monopatinBuscado.get();
 				v.setMonopatin(monopatin);   				
-				
+				System.out.println("Monopatin " + monopatin);
 				//Parada paradaInicio = paradaRepository.getByLatitudLongitud(monopatin.getLatitud(), monopatin.getLongitud());	
 				
 				//CuentaDto cuenta = cuentaService.findById(viajeMonopatinUsuarioDTO.getIdCuenta());
@@ -109,6 +111,7 @@ public class ViajeService implements BaseService<Viaje>{
 				//	}	
 			
 			} catch (Exception e) {
+				System.out.println(" e " + e);
 				throw new ExpectableException("{\"error\":\"Error. No se encontró el monopatin.\"}");
 			}
 			 
