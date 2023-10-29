@@ -22,13 +22,13 @@ public class ViajesMonopatinService {
 	}
 
 	public List<MonopatinDto> obtenerMonopatinesDisponibles(){
-		Flux<MonopatinDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines?disponibles=true")
+		Flux<MonopatinDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines/disponibles")
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinDto.class);
 		return monopatines.collectList().block();
 	}
 	
 	public List<MonopatinDto> obtenerMonopatinesEnMantenimiento(){
-		Flux<MonopatinDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines?mantenimiento=true")
+		Flux<MonopatinDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines/en-mantenimiento")
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinDto.class);
 		return monopatines.collectList().block();
 	}

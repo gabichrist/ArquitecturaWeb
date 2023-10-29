@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.MonopatinDto;
+import com.viajesmonopatin.enums.EstadoMonopatinEnum;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.model.Monopatin;
 import com.viajesmonopatin.model.Parada;
@@ -30,9 +31,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 	@Override
 	public Monopatin findById(Long id) throws Exception {
 		try {
-			System.out.println(id);
 			Optional<Monopatin> monopatinBuscada = monopatinRepository.findById(id);
-			System.out.println("Moni" + monopatinBuscada.get());
 			if (monopatinBuscada.isEmpty())
 				throw new ExpectableException("No se encontró una monopatin con el id solicitado");
 			return monopatinBuscada.get();
@@ -98,5 +97,16 @@ public class MonopatinService implements BaseService<Monopatin> {
 		} else {
 			throw new ExpectableException("No existe una monopatin con el id indicado");
 		}
+	}
+	
+	public List<Monopatin> getMonopatinesDisponibles(){
+		List<Monopatin> monopatinesEnUso =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_USO);
+		List<Monopatin> monopatinesDisponibles =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.DISPONIBLE);
+		monopatinesDisponibles.addAll(monopatinesEnUso);
+		return monopatinesDisponibles;
+	}
+	
+	public List<Monopatin> getMonopatinesEnMantenimiento(){
+		return monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_MANTENIMIENTO);
 	}
 }
