@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viajesmonopatin.dto.MonopatinDto;
+import com.viajesmonopatin.enums.EstadoMonopatinEnum;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.service.MonopatinService;
+
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/monopatines")
@@ -79,6 +82,28 @@ public class MonopatinController {
 		} catch (ExpectableException expectableException) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"error\":\"" + expectableException.getMessage() + "\"}");
+		} catch (Exception e2) {
+			System.out.println("error " + e2.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+	@GetMapping("/disponibles")
+	public ResponseEntity<?> getMonopatinesDisponibles() throws ExpectableException {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.monopatinService.getMonopatinesDisponibles());
+		} catch (Exception e2) {
+			System.out.println("error " + e2.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@GetMapping("/en-mantenimiento")
+	public ResponseEntity<?> getMonopatinesEnMantenimiento() throws ExpectableException {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.monopatinService.getMonopatinesEnMantenimiento());
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
