@@ -24,11 +24,11 @@ public class AdministradorService {
 	
 	public DisponibilidadMonopatinesDto obtenerDisponibilidadMonopatines() {
 		try {
-			List<MonopatinDto> monopatinesDisponibles = viajesMonopatinService.obtenerMonopatinesDisponibles();
+			List<MonopatinDto> monopatinesOperativos = viajesMonopatinService.obtenerMonopatinesOperativos();
 			List<MonopatinDto> monopatinesMantenimiento =  viajesMonopatinService.obtenerMonopatinesEnMantenimiento();
 			DisponibilidadMonopatinesDto reporteDisponibilidad = new DisponibilidadMonopatinesDto();
 			
-			reporteDisponibilidad.setMonopatinesDisponibles(monopatinesDisponibles.size());
+			reporteDisponibilidad.setMonopatinesOperativos(monopatinesOperativos.size());
 			reporteDisponibilidad.setMonopatinesEnMantenimiento(monopatinesMantenimiento.size());
 			
 			return reporteDisponibilidad;

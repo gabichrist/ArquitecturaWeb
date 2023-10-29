@@ -21,8 +21,8 @@ public class ViajesMonopatinService {
 		this.webClient = WebClient.create();
 	}
 
-	public List<MonopatinDto> obtenerMonopatinesDisponibles(){
-		Flux<MonopatinDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines/disponibles")
+	public List<MonopatinDto> obtenerMonopatinesOperativos(){
+		Flux<MonopatinDto> monopatines = webClient.get().uri("http://localhost:8081/monopatines/operativos")
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinDto.class);
 		return monopatines.collectList().block();
 	}

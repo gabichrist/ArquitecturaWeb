@@ -99,7 +99,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 		}
 	}
 	
-	public List<Monopatin> getMonopatinesDisponibles(){
+	public List<Monopatin> getMonopatinesOperativos(){
 		List<Monopatin> monopatinesEnUso =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_USO);
 		List<Monopatin> monopatinesDisponibles =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.DISPONIBLE);
 		monopatinesDisponibles.addAll(monopatinesEnUso);

@@ -89,10 +89,10 @@ public class MonopatinController {
 		}
 	}
 
-	@GetMapping("/disponibles")
-	public ResponseEntity<?> getMonopatinesDisponibles() throws ExpectableException {
+	@GetMapping("/operativos")
+	public ResponseEntity<?> getMonopatinesOperativos() throws ExpectableException {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.monopatinService.getMonopatinesDisponibles());
+			return ResponseEntity.status(HttpStatus.OK).body(this.monopatinService.getMonopatinesOperativos());
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
