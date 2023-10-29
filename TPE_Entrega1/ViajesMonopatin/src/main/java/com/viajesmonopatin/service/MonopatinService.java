@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.support.NullValue;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.MonopatinDto;
@@ -26,6 +25,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 	@Override
 	public Monopatin findById(Long id) throws Exception {
 		try {
+			System.out.println(id);
 			Optional<Monopatin> monopatinBuscada = monopatinRepository.findById(id);
 			if (monopatinBuscada.isEmpty())
 				throw new ExpectableException("No se encontró una monopatin con el id solicitado");

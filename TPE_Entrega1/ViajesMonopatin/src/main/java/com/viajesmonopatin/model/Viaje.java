@@ -26,10 +26,10 @@ public class Viaje {
 	private Monopatin monopatin;
 
 	@Column
-	private int idUsuario;
+	private Long idUsuario;
 
 	@Column
-	private int idCuenta;
+	private Long idCuenta;
 
 	@JoinColumn
 	@ManyToOne
@@ -62,7 +62,7 @@ public class Viaje {
 		super();
 	}
 
-	public Viaje(Long id, Monopatin monopatin, int idUsuario, int idCuenta, Parada paradaInicio, Parada paradaDestino,
+	public Viaje(Long id, Monopatin monopatin, Long idUsuario, Long idCuenta, Parada paradaInicio, Parada paradaDestino,
 			EstadoViajeEnum estado, Timestamp tiempoInicio, Timestamp tiempoFin, Timestamp tiempoPausaInicio,
 			Timestamp tiempoPausaFin, float kilometrosRecorridos) {
 		super();
@@ -96,19 +96,19 @@ public class Viaje {
 		this.monopatin = monopatin;
 	}
 
-	public int getIdUsuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
-	public int getIdCuenta() {
+	public Long getIdCuenta() {
 		return idCuenta;
 	}
 
-	public void setIdCuenta(int idCuenta) {
+	public void setIdCuenta(Long idCuenta) {
 		this.idCuenta = idCuenta;
 	}
 

@@ -12,6 +12,6 @@ public interface MonopatinRepository extends RepoBase<Monopatin, Long>{
 	static List<String> sorteableFields = List.of("id", "latitud","longitud","direccion");
 	
 	@Query("SELECT m FROM Monopatin m WHERE m.id = :id")
-	public Monopatin getById(int id);
+	public Monopatin getById(Long id);
 	
 }

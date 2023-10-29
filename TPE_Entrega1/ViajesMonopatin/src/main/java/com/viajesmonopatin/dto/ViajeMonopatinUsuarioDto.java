@@ -1,75 +1,65 @@
 package com.viajesmonopatin.dto;
 
+import lombok.Data;
+
+@Data
 public class ViajeMonopatinUsuarioDto {
 	
-	public int idMonopatin;
+	public Long idMonopatin;
 	
-	public int idUsuario;
+	public Long idUsuario;
 	
-	public int idCuenta;
+	public Long idCuenta;
 	
-	public int idParadaInicio;
-	
-	public int idParadaDestino;
+	public Long idParadaDestino;
 	
  	public ViajeMonopatinUsuarioDto() {
-		super();
 	}
 
-	public ViajeMonopatinUsuarioDto(int idMonopatin, int idUsuario, int idCuenta, int idParadaInicio, int idParadaDestino) {
+	public ViajeMonopatinUsuarioDto(Long idMonopatin, Long idUsuario, Long idCuenta, Long idParadaDestino) {
 		super();
 		this.idMonopatin = idMonopatin;
 		this.idUsuario = idUsuario;
 		this.idCuenta = idCuenta;
-		this.idParadaInicio = idParadaInicio;
 		this.idParadaDestino = idParadaDestino;
 	}
 
-	public int getIdMonopatin() {
+	public Long getIdMonopatin() {
 		return idMonopatin;
 	}
 
-	public void setIdMonopatin(int idMonopatin) {
+	public void setIdMonopatin(Long idMonopatin) {
 		this.idMonopatin = idMonopatin;
 	}
 
-	public int getIdUsuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	
 	
-	public int getIdCuenta() {
+	public Long getIdCuenta() {
 		return idCuenta;
 	}
 
-	public void setIdCuenta(int idCuenta) {
+	public void setIdCuenta(Long idCuenta) {
 		this.idCuenta = idCuenta;
 	}
 
-	public int getIdParadaInicio() {
-		return idParadaInicio;
-	}
-
-	public void setIdParadaInicio(int idParadaInicio) {
-		this.idParadaInicio = idParadaInicio;
-	}
-
-	public int getIdParadaDestino() {
+	public Long getIdParadaDestino() {
 		return idParadaDestino;
 	}
 
-	public void setIdParadaDestino(int idParadaDestino) {
+	public void setIdParadaDestino(Long idParadaDestino) {
 		this.idParadaDestino = idParadaDestino;
 	}	
 
 	@Override
 	public String toString() {
-		return "ViajeMonopatinUsuarioDto [idMonopatin=" + idMonopatin + ", idUsuario=" + idUsuario + ", idParadaInicio="
-				+ idParadaInicio + ", idParadaDestino=" + idParadaDestino + "]";
+		return "ViajeMonopatinUsuarioDto [idMonopatin=" + idMonopatin + ", idUsuario=" + idUsuario + ", idParadaDestino=" + idParadaDestino + "]";
 	}
 				
 }

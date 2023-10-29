@@ -91,14 +91,14 @@ public class CargaDeDatos {
 	                v.setId(Long.parseLong(csvRecord.get("id")));
 	                
 	                try {
-	                	Monopatin monopatin = monopatinRepository.getById(Integer.parseInt(csvRecord.get("id_monopatin")));
+	                	Monopatin monopatin = monopatinRepository.getById(Long.parseLong(csvRecord.get("id_monopatin")));
 	 	                v.setMonopatin(monopatin);     
 					} catch (Exception e) {
 						throw new ExpectableException("{\"error\":\"Error. No se encontró el monopatin.\"}");
 					}
 	           	           		                
-	                v.setIdUsuario(Integer.parseInt(csvRecord.get("id_usuario")));
-	                v.setIdCuenta(Integer.parseInt(csvRecord.get("id_cuenta")));
+	                v.setIdUsuario(Long.parseLong(csvRecord.get("id_usuario")));
+	                v.setIdCuenta(Long.parseLong(csvRecord.get("id_cuenta")));
 	                
 	        		String estado = String.valueOf(csvRecord.get("estado"));
 	                if(estado.equalsIgnoreCase("ACTIVO")) {	                	

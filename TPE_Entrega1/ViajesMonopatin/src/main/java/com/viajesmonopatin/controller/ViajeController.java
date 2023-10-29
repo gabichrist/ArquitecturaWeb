@@ -26,9 +26,9 @@ public class ViajeController {
 	public ResponseEntity<?> getAll() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(viajeService.findAll());
-		} catch (ExpectableException e) {
+		} catch (ExpectableException expectableException) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(e.getMessage());
+					.body(expectableException.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
@@ -38,7 +38,7 @@ public class ViajeController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getOne(@PathVariable Long id) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(viajeService.findById(id));
+			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. No se encuentra el objeto buscado" + ".\"}");
@@ -47,15 +47,17 @@ public class ViajeController {
 	
 	//@PostMapping({ "", "/" })
 	
-	@PostMapping({"/iniciar"})
+	@PostMapping("/iniciar")
 	public ResponseEntity<?> iniciar(@RequestBody ViajeMonopatinUsuarioDto viajeMonopatinUsuarioDTO) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(viajeService.iniciarViaje(viajeMonopatinUsuarioDTO));
-		
+			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.iniciarViaje(viajeMonopatinUsuarioDTO));
+		} catch (ExpectableException expectableException) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(expectableException.getMessage());	
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. No se pudo iniciar el viaje" + ".\"}");
-		}		
+		}	
 	}
 
 	@DeleteMapping("/{id}")
