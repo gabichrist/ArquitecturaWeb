@@ -57,6 +57,9 @@ public class Viaje {
 	
 	@Column
 	private float kilometrosRecorridos;
+	
+	@Column
+	private Float costoViaje;
 
 	public Viaje() {
 		super();
@@ -175,6 +178,14 @@ public class Viaje {
 	public void setKilometrosRecorridos(float kilometrosRecorridos) {
 		this.kilometrosRecorridos = kilometrosRecorridos;
 	}
+	
+	public Float getCostoViaje() {
+		return this.costoViaje;
+	}
+	
+	public void setCostoViaje(Float costoViaje) {
+		this.costoViaje = costoViaje;
+	}	
 
 	@Override
 	public String toString() {
