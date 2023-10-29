@@ -15,6 +15,8 @@ public class MonopatinDto {
 	
     private EstadoMonopatinEnum estado;
 
+    private Long idParada;
+
 	public MonopatinDto() {
 	}
 	

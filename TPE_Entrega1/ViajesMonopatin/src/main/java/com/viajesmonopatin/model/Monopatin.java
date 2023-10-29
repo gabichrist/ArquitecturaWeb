@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -45,6 +46,10 @@ public class Monopatin {
 	@Column(nullable = false)
 	private Float tiempoUsoSinPausas;
 
+	@JoinColumn
+	@ManyToOne()
+	private Parada parada;
+	
 	@JoinColumn
 	@OneToMany
 	private Set<Viaje> viajes;

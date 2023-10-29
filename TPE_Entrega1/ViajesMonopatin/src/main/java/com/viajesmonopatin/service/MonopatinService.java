@@ -9,13 +9,18 @@ import org.springframework.stereotype.Service;
 import com.viajesmonopatin.dto.MonopatinDto;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.model.Monopatin;
+import com.viajesmonopatin.model.Parada;
 import com.viajesmonopatin.repository.MonopatinRepository;
+import com.viajesmonopatin.repository.ParadaRepository;
 
 @Service("monopatinServicio")
 public class MonopatinService implements BaseService<Monopatin> {
 
 	@Autowired
 	private MonopatinRepository monopatinRepository;
+	
+	@Autowired
+	private ParadaRepository paradaRepository;
 
 	@Override
 	public List<Monopatin> findAll() throws Exception {
@@ -45,9 +50,16 @@ public class MonopatinService implements BaseService<Monopatin> {
 		}
 	}
 
-	public Monopatin save(MonopatinDto dto) throws Exception {
+	public Monopatin save(MonopatinDto entity) throws Exception {
+		Monopatin monopatin = new Monopatin(entity);
+		if (entity.getIdParada() != null) {
+			Optional<Parada> optParada = paradaRepository.findById(entity.getIdParada());
+			if (optParada.isEmpty())
+				throw new ExpectableException("No existe una parada con el id especificado");
+			monopatin.setParada(optParada.get());
+		}
 		try {
-			return this.monopatinRepository.save(new Monopatin(dto));			
+			return this.monopatinRepository.save(monopatin);	
 		}catch(Exception e) {
 			throw new Exception (e.getMessage());
 		}
@@ -69,6 +81,12 @@ public class MonopatinService implements BaseService<Monopatin> {
 			monopatin.setLongitud(entity.getLongitud());		
 		if (entity.getEstado() != null)
 			monopatin.setEstado(entity.getEstado());
+		if (entity.getIdParada() != null) {
+			Optional<Parada> optParada = paradaRepository.findById(entity.getIdParada());
+			if (optParada.isEmpty())
+				throw new ExpectableException("No existe una parada con el id especificado");
+			monopatin.setParada(optParada.get());
+		}
 		return this.monopatinRepository.save(monopatin);
 	}
 
