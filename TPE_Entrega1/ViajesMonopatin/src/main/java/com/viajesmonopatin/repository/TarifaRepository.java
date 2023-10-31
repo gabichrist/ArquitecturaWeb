@@ -16,6 +16,6 @@ public interface TarifaRepository extends RepoBase<Tarifa, Long>{
 	@Query("SELECT t FROM Tarifa t WHERE validoDesde <= CURDATE() ORDER BY validoDesde DESC LIMIT 1")
 	public Optional<Tarifa> getCurrentPrice();
 	
-	@Query("SELECT t FROM Tarifa t WHERE validoDesde <= :validoDesde ORDER BY validoDesde DESC LIMIT 1")
+	@Query("SELECT t FROM Tarifa t WHERE validoDesde <= :fecha ORDER BY validoDesde DESC LIMIT 1")
 	public Optional<Tarifa> getPriceByDate(Timestamp fecha);
 }
