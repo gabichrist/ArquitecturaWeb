@@ -32,13 +32,25 @@ public class ParadaService implements BaseService<Parada> {
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	public Parada getByLatitudLongitud(Float latitud, Float longitud) throws Exception {
+		try {
+			Parada paradaBuscada = paradaRepository.getByLatitudLongitud(latitud, longitud);
+			if (paradaBuscada == null)
+				throw new ExpectableException("No se encontró una parada en las coordenadas especificadas");
+			return paradaBuscada;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}		
+	}
 
 	@Override
 	public Parada save(Parada entity) throws Exception {
-		
-		if (paradaRepository.existsById(Long.valueOf(entity.getId())))
-			throw new ExpectableException("Ya existe una entidad con el id especificado");
-		return this.paradaRepository.save(entity);
+		try {
+			return paradaRepository.save(entity);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 	@Override

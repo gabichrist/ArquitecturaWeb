@@ -15,14 +15,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
 
+@Data
 @Entity
 public class Monopatin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@Column(nullable = false)
 	private Float latitud;
@@ -44,6 +47,10 @@ public class Monopatin {
 	private Float tiempoUsoSinPausas;
 
 	@JoinColumn
+	@ManyToOne()
+	private Parada parada;
+	
+	@JoinColumn
 	@OneToMany
 	private Set<Viaje> viajes;
 	
@@ -52,7 +59,7 @@ public class Monopatin {
 		this.viajes = new HashSet<>();
 	}
 
-	public Monopatin(int id, Float latitud, Float longitud, EstadoMonopatinEnum estado, Float kilometrosRecorridos,
+	public Monopatin(Long id, Float latitud, Float longitud, EstadoMonopatinEnum estado, Float kilometrosRecorridos,
 			Float tiempoUsoConPausas, Float tiempoUsoSinPausas) {
 		super();
 		this.viajes = new HashSet<>();
@@ -65,7 +72,7 @@ public class Monopatin {
 		this.tiempoUsoSinPausas = tiempoUsoSinPausas;
 	}
 	
-	public Monopatin(int id, Float latitud, Float longitud, EstadoMonopatinEnum estado, Float kilometrosRecorridos,
+	public Monopatin(Long id, Float latitud, Float longitud, EstadoMonopatinEnum estado, Float kilometrosRecorridos,
 			Float tiempoUsoConPausas, Float tiempoUsoSinPausas, Collection<Viaje> viajes) {
 		super();
 		this.viajes = new HashSet<>(viajes);
@@ -87,61 +94,5 @@ public class Monopatin {
 		this.kilometrosRecorridos = (float) 0;
 		this.tiempoUsoConPausas = (float) 0;
 		this.tiempoUsoSinPausas = (float) 0;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Float getLatitud() {
-		return latitud;
-	}
-
-	public void setLatitud(Float latitud) {
-		this.latitud = latitud;
-	}
-
-	public Float getLongitud() {
-		return longitud;
-	}
-
-	public void setLongitud(Float longitud) {
-		this.longitud = longitud;
-	}
-
-	public EstadoMonopatinEnum getEstado() {
-		return estado;
-	}
-
-	public void setEstado(EstadoMonopatinEnum estado) {
-		this.estado = estado;
-	}
-
-	public Float getKilometrosRecorridos() {
-		return kilometrosRecorridos;
-	}
-
-	public void setKilometrosRecorridos(Float kilometrosRecorridos) {
-		this.kilometrosRecorridos = kilometrosRecorridos;
-	}
-
-	public Float getTiempoUsoConPausas() {
-		return tiempoUsoConPausas;
-	}
-
-	public void setTiempoUsoConPausas(Float tiempoUsoConPausas) {
-		this.tiempoUsoConPausas = tiempoUsoConPausas;
-	}
-
-	public Float getTiempoUsoSinPausas() {
-		return tiempoUsoSinPausas;
-	}
-
-	public void setTiempoUsoSinPausas(Float tiempoUsoSinPausas) {
-		this.tiempoUsoSinPausas = tiempoUsoSinPausas;
 	}
 }

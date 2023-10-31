@@ -7,15 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.MonopatinDto;
+import com.viajesmonopatin.enums.EstadoMonopatinEnum;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.model.Monopatin;
+import com.viajesmonopatin.model.Parada;
 import com.viajesmonopatin.repository.MonopatinRepository;
+import com.viajesmonopatin.repository.ParadaRepository;
 
 @Service("monopatinServicio")
 public class MonopatinService implements BaseService<Monopatin> {
 
 	@Autowired
 	private MonopatinRepository monopatinRepository;
+	
+	@Autowired
+	private ParadaRepository paradaRepository;
 
 	@Override
 	public List<Monopatin> findAll() throws Exception {
@@ -36,16 +42,26 @@ public class MonopatinService implements BaseService<Monopatin> {
 
 	@Override
 	public Monopatin save(Monopatin entity) throws Exception {
-		if (monopatinRepository.existsById(Long.valueOf(entity.getId())))
-			throw new ExpectableException("Ya existe una entidad con el id especificado");
-		return this.monopatinRepository.save(entity);
+		try {
+			return this.monopatinRepository.save(entity);			
+		}catch(Exception e) {
+			throw new Exception (e.getMessage());
+		}
 	}
 
-	public Monopatin save(MonopatinDto dto) throws Exception {
-		Monopatin entity = new Monopatin(dto);
-		if (monopatinRepository.existsById(Long.valueOf(entity.getId())))
-			throw new ExpectableException("Ya existe una entidad con el id especificado");
-		return this.monopatinRepository.save(entity);
+	public Monopatin save(MonopatinDto entity) throws Exception {
+		Monopatin monopatin = new Monopatin(entity);
+		if (entity.getIdParada() != null) {
+			Optional<Parada> optParada = paradaRepository.findById(entity.getIdParada());
+			if (optParada.isEmpty())
+				throw new ExpectableException("No existe una parada con el id especificado");
+			monopatin.setParada(optParada.get());
+		}
+		try {
+			return this.monopatinRepository.save(monopatin);	
+		}catch(Exception e) {
+			throw new Exception (e.getMessage());
+		}
 	}
 
 	@Override
@@ -64,6 +80,12 @@ public class MonopatinService implements BaseService<Monopatin> {
 			monopatin.setLongitud(entity.getLongitud());		
 		if (entity.getEstado() != null)
 			monopatin.setEstado(entity.getEstado());
+		if (entity.getIdParada() != null) {
+			Optional<Parada> optParada = paradaRepository.findById(entity.getIdParada());
+			if (optParada.isEmpty())
+				throw new ExpectableException("No existe una parada con el id especificado");
+			monopatin.setParada(optParada.get());
+		}
 		return this.monopatinRepository.save(monopatin);
 	}
 
@@ -75,5 +97,16 @@ public class MonopatinService implements BaseService<Monopatin> {
 		} else {
 			throw new ExpectableException("No existe una monopatin con el id indicado");
 		}
+	}
+	
+	public List<Monopatin> getMonopatinesOperativos(){
+		List<Monopatin> monopatinesEnUso =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_USO);
+		List<Monopatin> monopatinesDisponibles =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.DISPONIBLE);
+		monopatinesDisponibles.addAll(monopatinesEnUso);
+		return monopatinesDisponibles;
+	}
+	
+	public List<Monopatin> getMonopatinesEnMantenimiento(){
+		return monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_MANTENIMIENTO);
 	}
 }

@@ -1,24 +1,26 @@
 package com.viajesmonopatin.dto;
 
+import lombok.Data;
+
+@Data
 public class ViajeMonopatinUsuarioDto {
 	
 	public Long idMonopatin;
 	
 	public Long idUsuario;
 	
-	public int idParadaInicio;
+	public Long idCuenta;
 	
-	public int idParadaDestino;
+	public Long idParadaDestino;
 	
  	public ViajeMonopatinUsuarioDto() {
-		super();
 	}
 
-	public ViajeMonopatinUsuarioDto(Long idMonopatin, Long idUsuario, int idParadaInicio, int idParadaDestino) {
+	public ViajeMonopatinUsuarioDto(Long idMonopatin, Long idUsuario, Long idCuenta, Long idParadaDestino) {
 		super();
 		this.idMonopatin = idMonopatin;
 		this.idUsuario = idUsuario;
-		this.idParadaInicio = idParadaInicio;
+		this.idCuenta = idCuenta;
 		this.idParadaDestino = idParadaDestino;
 	}
 
@@ -37,27 +39,27 @@ public class ViajeMonopatinUsuarioDto {
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-
-	public int getIdParadaInicio() {
-		return idParadaInicio;
+	
+	
+	public Long getIdCuenta() {
+		return idCuenta;
 	}
 
-	public void setIdParadaInicio(int idParadaInicio) {
-		this.idParadaInicio = idParadaInicio;
+	public void setIdCuenta(Long idCuenta) {
+		this.idCuenta = idCuenta;
 	}
 
-	public int getIdParadaDestino() {
+	public Long getIdParadaDestino() {
 		return idParadaDestino;
 	}
 
-	public void setIdParadaDestino(int idParadaDestino) {
+	public void setIdParadaDestino(Long idParadaDestino) {
 		this.idParadaDestino = idParadaDestino;
 	}	
 
 	@Override
 	public String toString() {
-		return "ViajeMonopatinUsuarioDto [idMonopatin=" + idMonopatin + ", idUsuario=" + idUsuario + ", idParadaInicio="
-				+ idParadaInicio + ", idParadaDestino=" + idParadaDestino + "]";
+		return "ViajeMonopatinUsuarioDto [idMonopatin=" + idMonopatin + ", idUsuario=" + idUsuario + ", idParadaDestino=" + idParadaDestino + "]";
 	}
 				
 }

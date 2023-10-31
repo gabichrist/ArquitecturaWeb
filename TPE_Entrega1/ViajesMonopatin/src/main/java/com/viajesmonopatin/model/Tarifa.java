@@ -7,13 +7,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
+@Data
 @Entity
 public class Tarifa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@Column(nullable = false)
 	private Float tarifa;
@@ -27,42 +29,10 @@ public class Tarifa {
 	public Tarifa() {
 	}
 
-	public Tarifa(int id, Float tarifa, Float tarifaExtra, Timestamp validoDesde) {
+	public Tarifa(Long id, Float tarifa, Float tarifaExtra, Timestamp validoDesde) {
 		this.id = id;
 		this.tarifa = tarifa;
 		this.tarifaExtra = tarifaExtra;
-		this.validoDesde = validoDesde;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Float getTarifa() {
-		return tarifa;
-	}
-
-	public void setTarifa(Float tarifa) {
-		this.tarifa = tarifa;
-	}
-
-	public Float getTarifaExtra() {
-		return tarifaExtra;
-	}
-
-	public void setTarifaExtra(Float tarifaExtra) {
-		this.tarifaExtra = tarifaExtra;
-	}
-
-	public Timestamp getValidoDesde() {
-		return validoDesde;
-	}
-
-	public void setValidoDesde(Timestamp validoDesde) {
 		this.validoDesde = validoDesde;
 	}
 

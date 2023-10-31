@@ -1,11 +1,12 @@
 package com.viajesmonopatin.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class Cuenta {
+public class CuentaDto {
 
 	private Long id_cuenta;
 
@@ -14,4 +15,8 @@ public class Cuenta {
 	private int id_mercado_pago;
 
 	private float saldo;
+	
+	private List<Long> idUsuarios;
+	
+	private Boolean habilitada;
 }
