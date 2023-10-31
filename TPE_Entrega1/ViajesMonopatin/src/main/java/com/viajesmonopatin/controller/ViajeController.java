@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viajesmonopatin.dto.ViajeMonopatinUsuarioDto;
@@ -39,6 +40,18 @@ public class ViajeController {
 	public ResponseEntity<?> getOne(@PathVariable Long id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.findById(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se encuentra el objeto buscado" + ".\"}");
+		}
+	}
+	
+	@GetMapping("/cantidad-viajes-anual")
+	public ResponseEntity<?> getReportePorCantidadMinimaDeViajesAnual(
+			@RequestParam(name = "anio", defaultValue = "") int anio,
+			@RequestParam(name = "cantidad", defaultValue = "") Long cantidad){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.obtenerReportePorCantidadMinimaDeViajesAnual(anio, cantidad));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. No se encuentra el objeto buscado" + ".\"}");

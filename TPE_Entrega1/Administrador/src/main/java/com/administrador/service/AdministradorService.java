@@ -9,6 +9,7 @@ import com.administrador.dto.CuentaDto;
 import com.administrador.dto.DisponibilidadMonopatinesDto;
 import com.administrador.dto.MonopatinDto;
 import com.administrador.dto.TarifaDto;
+import com.administrador.dto.ViajeMonopatinDto;
 
 @Service
 public class AdministradorService {
@@ -43,6 +44,16 @@ public class AdministradorService {
 		try {
 			return this.viajesMonopatinService.crearTarifa(tarifa);
 		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public List<ViajeMonopatinDto> obtenerReportePorCantidadMinimaDeViajesAnual(int anio, Long cantidad) {
+		try {
+			return this.viajesMonopatinService.obtenerPorCantidadMinimaDeViajesAnual(anio, cantidad);
+		} catch (Exception e) {
+			 e.printStackTrace();
+
 			throw e;
 		}
 	}

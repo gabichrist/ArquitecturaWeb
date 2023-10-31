@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.CuentaDto;
+import com.viajesmonopatin.dto.ViajeMonopatinDto;
 import com.viajesmonopatin.dto.ViajeMonopatinUsuarioDto;
 import com.viajesmonopatin.enums.EstadoMonopatinEnum;
 import com.viajesmonopatin.enums.EstadoViajeEnum;
@@ -158,6 +159,16 @@ public class ViajeService implements BaseService<Viaje>{
 				throw new ExpectableException("El viaje ya se encuentra en curso");
 			}	
 			return viaje;
+		}
+		
+		public List<ViajeMonopatinDto> obtenerReportePorCantidadMinimaDeViajesAnual(int anio, Long cantidad) throws Exception{
+			try {
+				List<ViajeMonopatinDto> cantidadViajesMonopatin = viajeRepository.getPorCantidadMinimaViajesMonopatinAnual(anio, cantidad);
+				return cantidadViajesMonopatin;
+			} catch (Exception e) {
+				 e.printStackTrace();
+				throw new Exception(e.getMessage());
+			}
 		}
 
 		@Override

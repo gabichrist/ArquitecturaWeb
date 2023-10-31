@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.administrador.dto.MonopatinDto;
 import com.administrador.dto.TarifaDto;
+import com.administrador.dto.ViajeMonopatinDto;
 
 import reactor.core.publisher.Flux;
 
@@ -40,5 +41,16 @@ public class ViajesMonopatinService {
 		TarifaDto tarifaMonopatin = webClient.post().uri("http://localhost:8081/tarifas").body(BodyInserters.fromValue(tarifa))
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(TarifaDto.class).blockFirst();
 		return tarifaMonopatin;
+	}
+	
+	public List<ViajeMonopatinDto> obtenerPorCantidadMinimaDeViajesAnual(int anio, Long cantidad) {
+		Flux<ViajeMonopatinDto> monopatines = webClient.get()
+				.uri(uriBuilder -> uriBuilder
+				.path("http://localhost:8081/viajes/cantidad-viajes-anual")
+				.queryParam("anio", anio)
+				.queryParam("cantidad", cantidad)
+				.build())
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ViajeMonopatinDto.class);
+		return monopatines.collectList().block();
 	}
 }
