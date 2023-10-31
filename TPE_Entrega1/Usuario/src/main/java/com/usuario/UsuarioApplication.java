@@ -21,7 +21,6 @@ public class UsuarioApplication {
 	@PostConstruct
 	public void init() throws NumberFormatException, Exception {
 		cargaDeDatos.cargarUsuariosDesdeCSV();
-//		cargaDeDatos.cargarCuentasDesdeCSV();
 	}
 
 }

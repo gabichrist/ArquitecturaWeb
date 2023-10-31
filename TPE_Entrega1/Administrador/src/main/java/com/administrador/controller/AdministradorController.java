@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.administrador.dto.TarifaDto;
 import com.administrador.exception.ExpectableException;
 import com.administrador.service.AdministradorService;
 
@@ -38,5 +40,16 @@ public class AdministradorController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
+	
+	@PostMapping("/viajes/ajustar-tarifas")
+	public ResponseEntity<?> ajustarPrecios(@RequestBody TarifaDto tarifa){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.ajustarPrecios(tarifa));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
 
 }

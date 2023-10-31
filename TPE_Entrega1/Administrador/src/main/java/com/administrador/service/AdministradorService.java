@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.administrador.dto.CuentaDto;
 import com.administrador.dto.DisponibilidadMonopatinesDto;
 import com.administrador.dto.MonopatinDto;
+import com.administrador.dto.TarifaDto;
 
 @Service
 public class AdministradorService {
@@ -37,4 +38,13 @@ public class AdministradorService {
 		}
 		
 	}
+	
+	public TarifaDto ajustarPrecios(TarifaDto tarifa) {
+		try {
+			return this.viajesMonopatinService.crearTarifa(tarifa);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 }

@@ -66,29 +66,11 @@ public class CargaDeDatos {
 	                c.setId_mercado_pago(Integer.parseInt(csvRecord.get("id_mercado_pago")));
 	                c.setSaldo(Float.parseFloat(csvRecord.get("saldo")));
 	                c.setHabilitada(true);
+	                c.addUsuario(u);
 	                u.addCuenta(c);
 	                usuarioRepository.save(u);
 	            }
 	        }
 	    }
-	 
-//	 public void cargarCuentasDesdeCSV() throws IOException {
-//	        File archivoCSV = ResourceUtils.getFile("src/main/java/com/usuario/csv/cuentas.csv");
-//
-//	        try (FileReader reader = new FileReader(archivoCSV);
-//	             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader)) {
-//
-//	            for (CSVRecord csvRecord : csvParser) {            	
-//	                Cuenta c = new Cuenta();
-//	                c.setId_cuenta(Long.parseLong(csvRecord.get("id")));
-//	                c.setFecha_alta(Timestamp.valueOf(csvRecord.get("fecha_alta")));
-//	                c.setId_mercado_pago(Integer.parseInt(csvRecord.get("id_mercado_pago")));
-//	                c.setSaldo(Float.parseFloat(csvRecord.get("saldo")));
-//	                cuentaRepository.save(c);
-//	            }
-//	        }
-//	    }
-	
-	
-	
+
 }
