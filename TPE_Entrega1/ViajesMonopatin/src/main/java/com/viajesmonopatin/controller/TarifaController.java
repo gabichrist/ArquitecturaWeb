@@ -1,5 +1,7 @@
 package com.viajesmonopatin.controller;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +56,17 @@ public class TarifaController {
 			return ResponseEntity.status(HttpStatus.OK).body(tarifaService.findCurrentPrice());
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado.\"}");
+		}
+	}
+	
+	@GetMapping({"/fecha/{fecha}"})
+	public ResponseEntity<?> getPriceByDate(@PathVariable Timestamp fecha){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(tarifaService.findPriceByDate(fecha));
+		}catch(Exception e) {
+			System.out.println("error " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se puede encontrar ese elemento. Por favor intente más tarde.\"}");
 		}
 	}
 	

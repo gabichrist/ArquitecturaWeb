@@ -1,6 +1,7 @@
 package com.viajesmonopatin.service;
 
 import java.util.List;
+import java.sql.Timestamp;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,10 @@ public class TarifaService implements BaseService<Tarifa>{
 		}
 	}
 
+	public Optional<Tarifa> findPriceByDate(Timestamp fechaBuscada){
+		return tarifaRepository.getPriceByDate(fechaBuscada);
+	}
+	
 	@Override
 	public Tarifa findById(Long id) throws Exception {
 		try {
