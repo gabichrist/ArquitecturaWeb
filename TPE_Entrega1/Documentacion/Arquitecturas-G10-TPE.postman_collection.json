@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "fff7be03-bd64-49d6-97d5-8e099bfdd2b7",
+		"_postman_id": "498ef6ce-3c7b-4062-af5e-82be708f5cae",
 		"name": "Arquitecturas-G10-TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19007322"
+		"_exporter_id": "9071126"
 	},
 	"item": [
 		{
@@ -198,7 +198,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454\r\n}",
+									"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -224,7 +224,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"direccion\": \"test direccion\",\r\n    \"latitud\": -1.21455,\r\n    \"longitud\": -6.21454\r\n}",
+									"raw": "{\r\n    \"direccion\": \"test direccion\",\r\n    \"latitud\": -1.21455,\r\n    \"longitud\": -6.21454,\r\n    \"estado\": \"EN_MANTENIMIENTO\",\r\n    \"idParada\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -441,6 +441,145 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "viajes",
+					"item": [
+						{
+							"name": "Devuelve listado de viajes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve viaje con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/:id",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nuevo viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 2,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 1,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/iniciar",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										"iniciar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica un viaje existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 1,\r\n    \"idUsuario\": 1,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/:id",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina una tarifa existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/tarifa/:id",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"tarifa",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -450,6 +589,97 @@
 				{
 					"name": "mantenimientos",
 					"item": [
+						{
+							"name": "reportes",
+							"item": [
+								{
+									"name": "(3.a) Reporte uso por kilometros",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/kilometros?con-tiempo-de-pausa=true",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"kilometros"
+											],
+											"query": [
+												{
+													"key": "con-tiempo-de-pausa",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte uso por tiempo con pausas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/tiempo-con-pausas",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"tiempo-con-pausas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte uso por tiempo sin pausas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/tiempo-sin-pausas",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"tiempo-sin-pausas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte de uso  general",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
 						{
 							"name": "Devuelve listado de mantenimientos",
 							"request": {
@@ -588,6 +818,118 @@
 			]
 		},
 		{
+			"name": "Microservicio Administracion",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "(3.b) Anular una cuenta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/anular-cuenta/:id",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"anular-cuenta",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.c) consultar monopatines con más de X viajes en cierto año",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/viajes/cantidad-viajes-anual/?anio=2023&cantidad=2",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"viajes",
+										"cantidad-viajes-anual",
+										""
+									],
+									"query": [
+										{
+											"key": "anio",
+											"value": "2023"
+										},
+										{
+											"key": "cantidad",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.e) Reporte monopatines disponibles vs en mantenimiento",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/monopatines/disponibilidad",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"monopatines",
+										"disponibilidad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.f) Definir precio actual o a futuro. Si no se completa validoDesde toma el momento actual",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tarifa\": 50.0,\r\n    \"tarifaExtra\": 80.0,\r\n    \"validoDesde\": \"2023-10-31T21:31:37.511-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/viajes/ajustar-tarifas",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"viajes",
+										"ajustar-tarifas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Microservicio Usuarios",
 			"item": [
 				{
@@ -641,7 +983,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"nombre\": \"Alfonso\",\r\n\t\"apellido\": \"Perez\",\r\n\t\"nro_celular\": \"+54 9 249 432 3232\",\r\n\t\"email\": \"testuser@domain.com\",\r\n\t\"roles\": \"USER\"\r\n}",
+									"raw": "{\r\n\t\"nombre\": \"Alfonso\",\r\n\t\"apellido\": \"Perez\",\r\n\t\"nro_celular\": \"+54 9 249 432 3232\",\r\n\t\"email\": \"testuser@domain.com\",\r\n\t\"rol\": \"USER\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -732,7 +1074,7 @@
 					"name": "cuentas",
 					"item": [
 						{
-							"name": "Devuelve listado de usuarios",
+							"name": "Devuelve listado de cuentas",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -779,7 +1121,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"fecha_alta\": \"2022-12-21T19:11:36.000+00:00\",\r\n    \"id_mercado_pago\": 11,\r\n    \"saldo\": 2997.0\r\n}",
+									"raw": "{\r\n    \"fecha_alta\": \"2023-12-21T19:11:36.000-03:00\",\r\n    \"id_mercado_pago\": 11,\r\n    \"saldo\": 2997.0,\r\n    \"habilitada\": true\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -793,6 +1135,40 @@
 									],
 									"path": [
 										"cuentas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Carga saldo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_alta\": \"2023-12-21T19:11:36.000-03:00\",\r\n    \"id_mercado_pago\": 11,\r\n    \"saldo\": 2997.0,\r\n    \"habilitada\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas/:id/cargar-saldo",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas",
+										":id",
+										"cargar-saldo"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -902,6 +1278,11 @@
 		{
 			"key": "baseUrlMantenimiento",
 			"value": "localhost:8082",
+			"type": "string"
+		},
+		{
+			"key": "baseUrlAdministracion",
+			"value": "localhost:8083",
 			"type": "string"
 		}
 	]
