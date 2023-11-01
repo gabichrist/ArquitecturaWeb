@@ -1068,6 +1068,60 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Agregar un monopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/monopatines/agregar",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"monopatines",
+										"agregar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Quitar un monopatin",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/monopatines/quitar/:id",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"monopatines",
+										"quitar",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -1213,7 +1267,7 @@
 							"response": []
 						},
 						{
-							"name": "Monopatines en la zona",
+							"name": "(3.g) Monopatines en la zona",
 							"request": {
 								"method": "GET",
 								"header": [],
