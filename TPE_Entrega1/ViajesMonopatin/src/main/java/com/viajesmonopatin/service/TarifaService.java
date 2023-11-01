@@ -1,5 +1,6 @@
 package com.viajesmonopatin.service;
 
+import java.util.Date;
 import java.util.List;
 import java.sql.Timestamp;
 import java.util.Optional;
@@ -58,6 +59,11 @@ public class TarifaService implements BaseService<Tarifa>{
 
 	@Override
 	public Tarifa save(Tarifa entity) throws Exception {
+		// Define fecha de validez con now si no fue definida
+		if (entity.getValidoDesde() == null) {
+			Date now = new Date();
+			entity.setValidoDesde(new Timestamp(now.getTime()));
+		}
 		try {
 			return tarifaRepository.save(entity);
 		}catch(Exception e) {
