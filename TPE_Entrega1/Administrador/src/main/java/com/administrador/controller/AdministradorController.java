@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,7 +90,7 @@ public class AdministradorController {
 		}
 	}
 	
-	@PostMapping("/paradas/agregar")
+	@PostMapping("/paradas")
 	public ResponseEntity<?> agregarParada(@RequestBody ParadaDto parada){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(adminService.agregarParada(parada));
@@ -99,7 +100,17 @@ public class AdministradorController {
 		}
 	}
 	
-	@DeleteMapping("/paradas/quitar/{id}")
+	@PutMapping("/paradas/{id}")
+	public ResponseEntity<?> agregarParada(@PathVariable Long id, @RequestBody MonopatinDto monopatin){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.actualizarMonopatin(id, monopatin));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@DeleteMapping("/paradas/{id}")
 	public ResponseEntity<?> quitarParada(@PathVariable Long id){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.adminService.quitarParada(id));
@@ -108,7 +119,7 @@ public class AdministradorController {
 		}
 	}
 	
-	@PostMapping("/monopatines/agregar")
+	@PostMapping("/monopatines")
 	public ResponseEntity<?> agregarMonopatin(@RequestBody MonopatinDto monopatin){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(adminService.agregarMonopatin(monopatin));
@@ -118,7 +129,17 @@ public class AdministradorController {
 		}
 	}
 	
-	@DeleteMapping("/monopatines/quitar/{id}")
+	@PutMapping("/monopatines/{id}")
+	public ResponseEntity<?> actualizarMonopatin(@PathVariable Long id, @RequestBody MonopatinDto monopatin){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.actualizarMonopatin(id, monopatin));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@DeleteMapping("/monopatines/{id}")
 	public ResponseEntity<?> quitarMonopatin(@PathVariable Long id){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.adminService.quitarMonopatin(id));

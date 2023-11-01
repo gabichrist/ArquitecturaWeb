@@ -13,6 +13,7 @@ import com.administrador.dto.MonopatinDto;
 import com.administrador.dto.ParadaDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.dto.ViajeMonopatinDto;
+import com.administrador.exception.ExpectableException;
 
 @Service
 public class AdministradorService {
@@ -83,6 +84,14 @@ public class AdministradorService {
 		}
 	}
 	
+	public ParadaDto actualizarParada(Long id, ParadaDto parada) {
+		try{
+			return this.viajesMonopatinService.actualizarParada(id, parada);
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
 	public boolean quitarParada(Long id) {
 		return this.viajesMonopatinService.quitarParada(id);
 	}
@@ -90,6 +99,14 @@ public class AdministradorService {
 	public MonopatinDto agregarMonopatin(MonopatinDto monopatin) {
 		try{
 			return this.viajesMonopatinService.agregarMonopatin(monopatin);
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	public MonopatinDto actualizarMonopatin(Long id, MonopatinDto monopatin) throws ExpectableException {
+		try{
+			return this.viajesMonopatinService.actualizarMonopatin(id, monopatin);
 		}catch(Exception e) {
 			throw e;
 		}

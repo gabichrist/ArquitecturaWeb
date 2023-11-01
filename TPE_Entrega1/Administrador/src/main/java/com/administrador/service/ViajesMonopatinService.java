@@ -73,7 +73,13 @@ public class ViajesMonopatinService {
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ParadaDto.class).blockFirst();
 		return paradaNueva;
 	}
-	
+
+	public ParadaDto actualizarParada(Long id, ParadaDto parada) {
+		ParadaDto paradaNueva = webClient.put().uri("/paradas/" + id).body(BodyInserters.fromValue(parada))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ParadaDto.class).blockFirst();
+		return paradaNueva;
+	}
+
 	public boolean quitarParada(Long id) {
 		try {
 			webClient.delete().uri("/paradas/" + id).retrieve().toBodilessEntity().block();
@@ -89,6 +95,12 @@ public class ViajesMonopatinService {
 		return monopatinNuevo;
 	}
 	
+	public MonopatinDto actualizarMonopatin(Long id, MonopatinDto monopatin) {
+		MonopatinDto monopatinNuevo = webClient.put().uri("/monopatines/" + id).body(BodyInserters.fromValue(monopatin))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinDto.class).blockFirst();
+		return monopatinNuevo;
+	}
+
 	public boolean quitarMonopatin(Long id) {
 		try {
 			webClient.delete().uri("/monopatines/" + id).retrieve().toBodilessEntity().block();
