@@ -48,6 +48,12 @@ public class ViajesMonopatinService {
 		return tarifaMonopatin;
 	}
 	
+	public ParadaDto agregarParada(ParadaDto parada) {
+		ParadaDto paradaNueva = webClient.post().uri("/paradas").body(BodyInserters.fromValue(parada))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ParadaDto.class).blockFirst();
+		return paradaNueva;
+	}
+	
 	public List<ViajeMonopatinDto> obtenerPorCantidadMinimaDeViajesAnual(int anio, Long cantidad) {
 		Flux<ViajeMonopatinDto> monopatines = webClient.get()
 				.uri(uriBuilder -> uriBuilder
@@ -74,7 +80,7 @@ public class ViajesMonopatinService {
 	
 	public boolean quitarParada(Long id) {
 		try {
-			webClient.delete().uri("/paradas/quitar/" + id).retrieve().toBodilessEntity().block();
+			webClient.delete().uri("/paradas/" + id).retrieve().toBodilessEntity().block();
 			return true;
 		} catch(Exception e) {
 			return false;

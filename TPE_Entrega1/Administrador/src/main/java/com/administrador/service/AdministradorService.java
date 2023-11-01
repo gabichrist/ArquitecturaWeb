@@ -58,6 +58,14 @@ public class AdministradorService {
 		}
 	}
 	
+	public ParadaDto agregarParada(ParadaDto parada) {
+		try{
+			return this.viajesMonopatinService.agregarParada(parada);
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
 	public List<ViajeMonopatinDto> obtenerReportePorCantidadMinimaDeViajesAnual(int anio, Long cantidad) {
 		try {
 			return this.viajesMonopatinService.obtenerPorCantidadMinimaDeViajesAnual(anio, cantidad);

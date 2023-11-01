@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.administrador.dto.FacturacionAnualDto;
+import com.administrador.dto.ParadaDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.exception.ExpectableException;
 import com.administrador.service.AdministradorService;
@@ -83,6 +84,16 @@ public class AdministradorController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(adminService.ajustarPrecios(tarifa));
 		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@PostMapping("/paradas/agregar")
+	public ResponseEntity<?> agregarParada(@RequestBody ParadaDto parada){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.agregarParada(parada));
+		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
