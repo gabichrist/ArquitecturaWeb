@@ -48,12 +48,6 @@ public class ViajesMonopatinService {
 		return tarifaMonopatin;
 	}
 	
-	public ParadaDto agregarParada(ParadaDto parada) {
-		ParadaDto paradaNueva = webClient.post().uri("/paradas").body(BodyInserters.fromValue(parada))
-				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ParadaDto.class).blockFirst();
-		return paradaNueva;
-	}
-	
 	public List<ViajeMonopatinDto> obtenerPorCantidadMinimaDeViajesAnual(int anio, Long cantidad) {
 		Flux<ViajeMonopatinDto> monopatines = webClient.get()
 				.uri(uriBuilder -> uriBuilder
@@ -78,6 +72,12 @@ public class ViajesMonopatinService {
 				.blockFirst();
 	}
 	
+	public ParadaDto agregarParada(ParadaDto parada) {
+		ParadaDto paradaNueva = webClient.post().uri("/paradas").body(BodyInserters.fromValue(parada))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ParadaDto.class).blockFirst();
+		return paradaNueva;
+	}
+	
 	public boolean quitarParada(Long id) {
 		try {
 			webClient.delete().uri("/paradas/" + id).retrieve().toBodilessEntity().block();
@@ -85,6 +85,20 @@ public class ViajesMonopatinService {
 		} catch(Exception e) {
 			return false;
 		}
-		
+	}
+	
+	public MonopatinDto agregarMonopatin(MonopatinDto monopatin) {
+		MonopatinDto monopatinNuevo = webClient.post().uri("/monopatines").body(BodyInserters.fromValue(monopatin))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(MonopatinDto.class).blockFirst();
+		return monopatinNuevo;
+	}
+	
+	public boolean quitarMonopatin(Long id) {
+		try {
+			webClient.delete().uri("/monopatines/" + id).retrieve().toBodilessEntity().block();
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
 	}
 }

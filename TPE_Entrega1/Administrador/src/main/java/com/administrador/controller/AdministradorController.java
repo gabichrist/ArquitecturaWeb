@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.administrador.dto.FacturacionAnualDto;
+import com.administrador.dto.MonopatinDto;
 import com.administrador.dto.ParadaDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.exception.ExpectableException;
@@ -103,6 +104,25 @@ public class AdministradorController {
 	public ResponseEntity<?> quitarParada(@PathVariable Long id){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.adminService.quitarParada(id));
+		} catch (Exception e2) {		
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@PostMapping("/monopatines/agregar")
+	public ResponseEntity<?> agregarMonopatin(@RequestBody MonopatinDto monopatin){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(adminService.agregarMonopatin(monopatin));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@DeleteMapping("/monopatines/quitar/{id}")
+	public ResponseEntity<?> quitarMonopatin(@PathVariable Long id){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.adminService.quitarMonopatin(id));
 		} catch (Exception e2) {		
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}

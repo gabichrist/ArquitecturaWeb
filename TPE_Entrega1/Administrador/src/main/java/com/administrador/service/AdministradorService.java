@@ -58,14 +58,6 @@ public class AdministradorService {
 		}
 	}
 	
-	public ParadaDto agregarParada(ParadaDto parada) {
-		try{
-			return this.viajesMonopatinService.agregarParada(parada);
-		}catch(Exception e) {
-			throw e;
-		}
-	}
-	
 	public List<ViajeMonopatinDto> obtenerReportePorCantidadMinimaDeViajesAnual(int anio, Long cantidad) {
 		try {
 			return this.viajesMonopatinService.obtenerPorCantidadMinimaDeViajesAnual(anio, cantidad);
@@ -90,8 +82,27 @@ public class AdministradorService {
 		}
 	}
 	
+	public ParadaDto agregarParada(ParadaDto parada) {
+		try{
+			return this.viajesMonopatinService.agregarParada(parada);
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
 	public boolean quitarParada(Long id) {
 		return this.viajesMonopatinService.quitarParada(id);
 	}
 	
+	public MonopatinDto agregarMonopatin(MonopatinDto monopatin) {
+		try{
+			return this.viajesMonopatinService.agregarMonopatin(monopatin);
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	public boolean quitarMonopatin(Long id) {
+		return this.viajesMonopatinService.quitarMonopatin(id);
+	}
 }
