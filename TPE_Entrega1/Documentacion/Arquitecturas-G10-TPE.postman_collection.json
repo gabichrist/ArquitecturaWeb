@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "498ef6ce-3c7b-4062-af5e-82be708f5cae",
+		"_postman_id": "c806c77c-7b51-464e-a1af-1c5ef7d3d85b",
 		"name": "Arquitecturas-G10-TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "9071126"
+		"_exporter_id": "19007322"
 	},
 	"item": [
 		{
@@ -277,6 +277,38 @@
 										{
 											"key": "id",
 											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Monopatines en la zona",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/monopatines/disponibles/latitud/:latitud/longitud/:longitud",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"monopatines",
+										"disponibles",
+										"latitud",
+										":latitud",
+										"longitud",
+										":longitud"
+									],
+									"variable": [
+										{
+											"key": "latitud",
+											"value": ""
+										},
+										{
+											"key": "longitud",
+											"value": ""
 										}
 									]
 								}
@@ -987,6 +1019,55 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Agregar una parada",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"direccion\": \"test direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/paradas/agregar",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"paradas",
+										"agregar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Quitar una parada",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/paradas/quitar/:id",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"paradas",
+										"quitar",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "36"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -1125,6 +1206,35 @@
 										{
 											"key": "id",
 											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Monopatines en la zona",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlUsuario}}/usuarios/monopatines/en-la-zona?latitud=-93.1996&longitud=-50.0984",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"usuarios",
+										"monopatines",
+										"en-la-zona"
+									],
+									"query": [
+										{
+											"key": "latitud",
+											"value": "-93.1996"
+										},
+										{
+											"key": "longitud",
+											"value": "-50.0984"
 										}
 									]
 								}
