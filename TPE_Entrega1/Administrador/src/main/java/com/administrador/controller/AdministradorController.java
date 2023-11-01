@@ -42,7 +42,7 @@ public class AdministradorController {
 		}
 	}
 	
-	@GetMapping("viajes/cantidad-viajes-anual")
+	@GetMapping("/viajes/cantidad-viajes-anual")
 	public ResponseEntity<?> obtenerReporteMonopatinesPorCantidadDeViajesAnual(
 			@RequestParam(name = "anio", defaultValue = "") int anio,
 			@RequestParam(name = "cantidad", defaultValue = "") Long cantidad){
