@@ -446,6 +446,33 @@
 					"name": "viajes",
 					"item": [
 						{
+							"name": "Agrega nuevo viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/iniciar",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										"iniciar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Devuelve listado de viajes",
 							"request": {
 								"method": "GET",
@@ -487,33 +514,6 @@
 							"response": []
 						},
 						{
-							"name": "Agrega nuevo viaje",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idMonopatin\": 2,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 1,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrlViajeMonopatin}}/viajes/iniciar",
-									"host": [
-										"{{baseUrlViajeMonopatin}}"
-									],
-									"path": [
-										"viajes",
-										"iniciar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Modifica un viaje existente. Todos los campos son opcionales",
 							"request": {
 								"method": "PUT",
@@ -547,7 +547,7 @@
 							"response": []
 						},
 						{
-							"name": "Elimina una tarifa existente",
+							"name": "Elimina un viaje existente",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -561,18 +561,46 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlViajeMonopatin}}/tarifa/:id",
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/:id",
 									"host": [
 										"{{baseUrlViajeMonopatin}}"
 									],
 									"path": [
-										"tarifa",
+										"viajes",
 										":id"
 									],
 									"variable": [
 										{
 											"key": "id",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve facturacion de viajes entre fechas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/facturacion?desde=2022-10-31T23:14:40.781-03:00&hasta=2022-12-31T23:14:40.781-03:00",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										"facturacion"
+									],
+									"query": [
+										{
+											"key": "desde",
+											"value": "2022-10-31T23:14:40.781-03:00"
+										},
+										{
+											"key": "hasta",
+											"value": "2022-12-31T23:14:40.781-03:00"
 										}
 									]
 								}
@@ -854,15 +882,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/viajes/cantidad-viajes-anual/?anio=2023&cantidad=2",
+									"raw": "{{baseUrlAdministracion}}/admin/viajes/cantidad-viajes-anual?anio=2023&cantidad=1",
 									"host": [
 										"{{baseUrlAdministracion}}"
 									],
 									"path": [
 										"admin",
 										"viajes",
-										"cantidad-viajes-anual",
-										""
+										"cantidad-viajes-anual"
 									],
 									"query": [
 										{
@@ -871,7 +898,43 @@
 										},
 										{
 											"key": "cantidad",
-											"value": "2"
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.c) consultar monopatines con más de X viajes en cierto año Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"facturacion",
+										"anio",
+										":anio"
+									],
+									"query": [
+										{
+											"key": "mes-desde",
+											"value": "1"
+										},
+										{
+											"key": "mes-hasta",
+											"value": "12"
+										}
+									],
+									"variable": [
+										{
+											"key": "anio",
+											"value": "2023"
 										}
 									]
 								}
