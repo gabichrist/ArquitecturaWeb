@@ -62,4 +62,12 @@ public class MonopatinUsoService {
 				.bodyToFlux(MonopatinUsoDto.class).blockFirst();
 		return monopatin;
 	}
+	
+	public MonopatinUsoDto finalizarMantenimientoMonopatin(Long id) {
+		MonopatinUsoDto monopatin = webClient.post()
+				.uri("http://localhost:8081/monopatines/" + id + "/fin-mantenimiento")
+				.body(BodyInserters.fromValue(id)).accept(MediaType.APPLICATION_JSON).retrieve()
+				.bodyToFlux(MonopatinUsoDto.class).blockFirst();
+		return monopatin;
+	}
 }

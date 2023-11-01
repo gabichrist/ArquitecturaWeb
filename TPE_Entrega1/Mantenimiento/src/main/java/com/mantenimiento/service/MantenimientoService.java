@@ -103,4 +103,19 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 				throw new Exception(e.getMessage());
 			}
 		}
+		
+		//no anda la fecha fin de la tabla mantenimiento
+		public MonopatinUsoDto finalizarMantenimientoMonopatin(Long id, RegistrarMonopatinMantemientoDTO descripcion) throws Exception {
+			try {
+				Mantenimiento m = new Mantenimiento();
+				m.setIdMonopatin(id);
+				Date now = new Date();
+				m.setFin(new Timestamp(now.getTime()));
+				m.setDescripcion(descripcion.getDescripcion());
+				mantenimientoRepository.save(m);
+				return monopatinUsoService.finalizarMantenimientoMonopatin(id);
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		}
 }

@@ -1,8 +1,6 @@
 package com.administrador.service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 import org.springframework.http.MediaType;
@@ -10,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.administrador.dto.CuentaDto;
-import com.administrador.dto.FacturacionAnualDto;
 import com.administrador.dto.MonopatinDto;
 import com.administrador.dto.ParadaDto;
 import com.administrador.dto.TarifaDto;

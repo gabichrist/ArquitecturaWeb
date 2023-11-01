@@ -115,18 +115,39 @@ public class MonopatinService implements BaseService<Monopatin> {
 		if (monopatinRepository.existsById(id)) {
 			try {
 				Monopatin m = monopatinRepository.getById(id);
-				m.setEstado(EstadoMonopatinEnum.EN_MANTENIMIENTO);
-				return monopatinRepository.save(m);
+				if (m.getEstado() != EstadoMonopatinEnum.EN_MANTENIMIENTO) {
+					m.setEstado(EstadoMonopatinEnum.EN_MANTENIMIENTO);
+					return monopatinRepository.save(m);
+				}
+				throw new ExpectableException("El monopatin ya se encuentra en mantenimiento");
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
 			}
 		} else {
-			throw new ExpectableException("No existe una monopatin con el id indicado");
+			throw new ExpectableException("No existe un monopatin con el id indicado");
 		}
 
 	}
-	
-	public List<Monopatin> getMonopatinesDisponiblesEnLaZona(Float latitud, Float longitud){
+
+	public Monopatin registrarFinMantenimientoMonopatin(Long id) throws Exception {
+		if (monopatinRepository.existsById(id)) {
+			try {
+				Monopatin m = monopatinRepository.getById(id);
+				if (m.getEstado() != EstadoMonopatinEnum.DISPONIBLE) {
+					m.setEstado(EstadoMonopatinEnum.DISPONIBLE);
+					return monopatinRepository.save(m);
+				}
+				throw new ExpectableException("El monopatin ya se encuentra disponible");
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		} else {
+			throw new ExpectableException("No existe un monopatin con el id indicado");
+
+		}
+	}
+
+	public List<Monopatin> getMonopatinesDisponiblesEnLaZona(Float latitud, Float longitud) {
 		return monopatinRepository.getMonopatinesDisponiblesEnLaZona(latitud, longitud);
 	}
 }
