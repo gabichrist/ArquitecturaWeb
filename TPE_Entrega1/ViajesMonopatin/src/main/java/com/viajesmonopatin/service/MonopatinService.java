@@ -125,4 +125,8 @@ public class MonopatinService implements BaseService<Monopatin> {
 		}
 
 	}
+	
+	public List<Monopatin> getMonopatinesDisponiblesEnLaZona(Float latitud, Float longitud){
+		return monopatinRepository.getMonopatinesDisponiblesEnLaZona(latitud, longitud);
+	}
 }

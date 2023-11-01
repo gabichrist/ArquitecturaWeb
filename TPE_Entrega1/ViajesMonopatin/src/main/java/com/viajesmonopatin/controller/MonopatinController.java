@@ -1,5 +1,7 @@
 package com.viajesmonopatin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.viajesmonopatin.dto.MonopatinDto;
 import com.viajesmonopatin.exception.ExpectableException;
+import com.viajesmonopatin.model.Monopatin;
 import com.viajesmonopatin.service.MonopatinService;
 
 @RestController
@@ -118,4 +121,16 @@ public class MonopatinController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
+	
+	@GetMapping("/disponibles/latitud/{latitud}/longitud/{longitud}")
+	public ResponseEntity<?> getMonopatinesDisponiblesEnLaZona(@PathVariable Float latitud, @PathVariable Float longitud) throws ExpectableException{
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.monopatinService.getMonopatinesDisponiblesEnLaZona(latitud, longitud));
+		}catch(Exception e){
+			System.out.println("error " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
 }

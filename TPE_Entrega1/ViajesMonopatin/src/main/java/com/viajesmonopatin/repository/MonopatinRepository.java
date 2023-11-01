@@ -17,4 +17,7 @@ public interface MonopatinRepository extends RepoBase<Monopatin, Long>{
 	
 	@Query("SELECT m FROM Monopatin m WHERE m.estado = :estado")
 	public List<Monopatin> getMonopatinesByEstado(EstadoMonopatinEnum estado);
+	
+	@Query("SELECT m FROM Monopatin m WHERE m.estado = 'DISPONIBLE' AND POWER(POWER(m.latitud-:latitud, 2) + POWER(m.longitud-:longitud, 2), 1/2) < 5")
+	public List<Monopatin> getMonopatinesDisponiblesEnLaZona(Float latitud, Float longitud);
 }
