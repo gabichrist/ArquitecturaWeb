@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c806c77c-7b51-464e-a1af-1c5ef7d3d85b",
+		"_postman_id": "498ef6ce-3c7b-4062-af5e-82be708f5cae",
 		"name": "Arquitecturas-G10-TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19007322"
+		"_exporter_id": "9071126"
 	},
 	"item": [
 		{
@@ -151,6 +151,38 @@
 					"name": "monopatines",
 					"item": [
 						{
+							"name": "Monopatines en la zona",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/monopatines/disponibles/latitud/:latitud/longitud/:longitud",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"monopatines",
+										"disponibles",
+										"latitud",
+										":latitud",
+										"longitud",
+										":longitud"
+									],
+									"variable": [
+										{
+											"key": "latitud",
+											"value": "-93.1996"
+										},
+										{
+											"key": "longitud",
+											"value": "-50.0984"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Devuelve listado de monopatines",
 							"request": {
 								"method": "GET",
@@ -277,38 +309,6 @@
 										{
 											"key": "id",
 											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Monopatines en la zona",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlViajeMonopatin}}/monopatines/disponibles/latitud/:latitud/longitud/:longitud",
-									"host": [
-										"{{baseUrlViajeMonopatin}}"
-									],
-									"path": [
-										"monopatines",
-										"disponibles",
-										"latitud",
-										":latitud",
-										"longitud",
-										":longitud"
-									],
-									"variable": [
-										{
-											"key": "latitud",
-											"value": ""
-										},
-										{
-											"key": "longitud",
-											"value": ""
 										}
 									]
 								}
@@ -741,6 +741,76 @@
 							]
 						},
 						{
+							"name": "Iniciar mantenimiento de manopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/monopatines/:id/registrar-en-mantenimiento",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										"monopatines",
+										":id",
+										"registrar-en-mantenimiento"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finalizar mantenimiento de manopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/monopatines/:id/fin-mantenimiento",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										"monopatines",
+										":id",
+										"fin-mantenimiento"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Devuelve listado de mantenimientos",
 							"request": {
 								"method": "GET",
@@ -841,7 +911,7 @@
 							"response": []
 						},
 						{
-							"name": "Elimina un monopatín existente",
+							"name": "Elimina un mantenimiento existente",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -855,18 +925,18 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlViajeMonopatin}}/monopatines/:id",
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
 									"host": [
-										"{{baseUrlViajeMonopatin}}"
+										"{{baseUrlMantenimiento}}"
 									],
 									"path": [
-										"monopatines",
+										"mantenimientos",
 										":id"
 									],
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "1"
 										}
 									]
 								}
@@ -883,6 +953,124 @@
 				{
 					"name": "admin",
 					"item": [
+						{
+							"name": "paradas",
+							"item": [
+								{
+									"name": "Agregar una parada",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"direccion\": \"test direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/paradas/agregar",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"paradas",
+												"agregar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Quitar una parada",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/paradas/quitar/:id",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"paradas",
+												"quitar",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "36"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monopatines",
+							"item": [
+								{
+									"name": "Agregar un monopatin",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/monopatines/agregar",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"monopatines",
+												"agregar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Quitar un monopatin",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/monopatines/quitar/:id",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"monopatines",
+												"quitar",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
 						{
 							"name": "(3.b) Anular una cuenta",
 							"request": {
@@ -1019,109 +1207,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Agregar una parada",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"direccion\": \"test direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}"
-								},
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/paradas/agregar",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"paradas",
-										"agregar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Quitar una parada",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/paradas/quitar/:id",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"paradas",
-										"quitar",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "36"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Agregar un monopatin",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/monopatines/agregar",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"monopatines",
-										"agregar"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Quitar un monopatin",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/monopatines/quitar/:id",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"monopatines",
-										"quitar",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "10"
-										}
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				}
@@ -1131,7 +1216,7 @@
 			"name": "Microservicio Usuarios",
 			"item": [
 				{
-					"name": "usuaros",
+					"name": "usuarios",
 					"item": [
 						{
 							"name": "Devuelve listado de usuarios",
@@ -1260,35 +1345,6 @@
 										{
 											"key": "id",
 											"value": "3"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "(3.g) Monopatines en la zona",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlUsuario}}/usuarios/monopatines/en-la-zona?latitud=-93.1996&longitud=-50.0984",
-									"host": [
-										"{{baseUrlUsuario}}"
-									],
-									"path": [
-										"usuarios",
-										"monopatines",
-										"en-la-zona"
-									],
-									"query": [
-										{
-											"key": "latitud",
-											"value": "-93.1996"
-										},
-										{
-											"key": "longitud",
-											"value": "-50.0984"
 										}
 									]
 								}
@@ -1468,6 +1524,35 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "(3.g) Monopatines en la zona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlUsuario}}/usuarios/monopatines/en-la-zona?latitud=-94.1996&longitud=-50.0984",
+							"host": [
+								"{{baseUrlUsuario}}"
+							],
+							"path": [
+								"usuarios",
+								"monopatines",
+								"en-la-zona"
+							],
+							"query": [
+								{
+									"key": "latitud",
+									"value": "-94.1996"
+								},
+								{
+									"key": "longitud",
+									"value": "-50.0984"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
