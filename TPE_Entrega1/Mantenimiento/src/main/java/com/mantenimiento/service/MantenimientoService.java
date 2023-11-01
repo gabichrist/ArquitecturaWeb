@@ -1,11 +1,15 @@
 package com.mantenimiento.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mantenimiento.dto.MonopatinUsoDto;
+import com.mantenimiento.dto.RegistrarMonopatinMantemientoDTO;
 import com.mantenimiento.exception.ExpectableException;
 import com.mantenimiento.model.Mantenimiento;
 import com.mantenimiento.repository.MantenimientoRepository;
@@ -13,6 +17,8 @@ import com.mantenimiento.repository.MantenimientoRepository;
 @Service("MantenimientoService")
 public class MantenimientoService implements BaseService<Mantenimiento>{
 	
+		@Autowired
+		private MonopatinUsoService monopatinUsoService;
 	
 		@Autowired
 		private MantenimientoRepository mantenimientoRepository;
@@ -84,4 +90,17 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 		}
 
 
+		public MonopatinUsoDto registrarMonopatinEnMantenimiento(Long id, RegistrarMonopatinMantemientoDTO descripcion) throws Exception {
+			try {
+				Mantenimiento m = new Mantenimiento();
+				m.setIdMonopatin(id);
+				Date now = new Date();
+				m.setInicio(new Timestamp(now.getTime()));
+				m.setDescripcion(descripcion.getDescripcion());
+				mantenimientoRepository.save(m);
+				return monopatinUsoService.registrarMonopatinEnMantenimiento(id);
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		}
 }

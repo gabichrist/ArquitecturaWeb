@@ -16,7 +16,6 @@ import com.viajesmonopatin.dto.MonopatinDto;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.service.MonopatinService;
 
-
 @RestController
 @RequestMapping("/monopatines")
 public class MonopatinController {
@@ -97,13 +96,24 @@ public class MonopatinController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-	
+
 	@GetMapping("/en-mantenimiento")
 	public ResponseEntity<?> getMonopatinesEnMantenimiento() throws ExpectableException {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.monopatinService.getMonopatinesEnMantenimiento());
 		} catch (Exception e2) {
 			System.out.println("error " + e2.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+	@PostMapping("{id}/registrar-en-mantenimiento")
+	public ResponseEntity<?> registrarMonopatinEnMantenimiento(@PathVariable Long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(this.monopatinService.registrarMonopatinEnMantenimiento(id));
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}

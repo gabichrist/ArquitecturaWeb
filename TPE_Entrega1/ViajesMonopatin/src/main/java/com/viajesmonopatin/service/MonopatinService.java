@@ -19,7 +19,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 
 	@Autowired
 	private MonopatinRepository monopatinRepository;
-	
+
 	@Autowired
 	private ParadaRepository paradaRepository;
 
@@ -43,9 +43,9 @@ public class MonopatinService implements BaseService<Monopatin> {
 	@Override
 	public Monopatin save(Monopatin entity) throws Exception {
 		try {
-			return this.monopatinRepository.save(entity);			
-		}catch(Exception e) {
-			throw new Exception (e.getMessage());
+			return this.monopatinRepository.save(entity);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
 		}
 	}
 
@@ -58,9 +58,9 @@ public class MonopatinService implements BaseService<Monopatin> {
 			monopatin.setParada(optParada.get());
 		}
 		try {
-			return this.monopatinRepository.save(monopatin);	
-		}catch(Exception e) {
-			throw new Exception (e.getMessage());
+			return this.monopatinRepository.save(monopatin);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 	public Monopatin update(Long id, Monopatin entity) throws Exception {
 		throw new Exception("Not implemented. Use MonopatinDto");
 	}
-	
+
 	public Monopatin update(Long id, MonopatinDto entity) throws Exception {
 		Optional<Monopatin> optionalMonopatin = monopatinRepository.findById(id);
 		if (!optionalMonopatin.isPresent())
@@ -77,7 +77,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 		if (entity.getLatitud() != null)
 			monopatin.setLatitud(entity.getLatitud());
 		if (entity.getLongitud() != null)
-			monopatin.setLongitud(entity.getLongitud());		
+			monopatin.setLongitud(entity.getLongitud());
 		if (entity.getEstado() != null)
 			monopatin.setEstado(entity.getEstado());
 		if (entity.getIdParada() != null) {
@@ -98,15 +98,31 @@ public class MonopatinService implements BaseService<Monopatin> {
 			throw new ExpectableException("No existe una monopatin con el id indicado");
 		}
 	}
-	
-	public List<Monopatin> getMonopatinesOperativos(){
-		List<Monopatin> monopatinesEnUso =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_USO);
-		List<Monopatin> monopatinesDisponibles =  monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.DISPONIBLE);
+
+	public List<Monopatin> getMonopatinesOperativos() {
+		List<Monopatin> monopatinesEnUso = monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_USO);
+		List<Monopatin> monopatinesDisponibles = monopatinRepository
+				.getMonopatinesByEstado(EstadoMonopatinEnum.DISPONIBLE);
 		monopatinesDisponibles.addAll(monopatinesEnUso);
 		return monopatinesDisponibles;
 	}
-	
-	public List<Monopatin> getMonopatinesEnMantenimiento(){
+
+	public List<Monopatin> getMonopatinesEnMantenimiento() {
 		return monopatinRepository.getMonopatinesByEstado(EstadoMonopatinEnum.EN_MANTENIMIENTO);
+	}
+
+	public Monopatin registrarMonopatinEnMantenimiento(Long id) throws Exception {
+		if (monopatinRepository.existsById(id)) {
+			try {
+				Monopatin m = monopatinRepository.getById(id);
+				m.setEstado(EstadoMonopatinEnum.EN_MANTENIMIENTO);
+				return monopatinRepository.save(m);
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		} else {
+			throw new ExpectableException("No existe una monopatin con el id indicado");
+		}
+
 	}
 }

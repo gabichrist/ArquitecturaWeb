@@ -12,75 +12,81 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mantenimiento.dto.RegistrarMonopatinMantemientoDTO;
 import com.mantenimiento.exception.ExpectableException;
 import com.mantenimiento.model.Mantenimiento;
 import com.mantenimiento.service.MantenimientoService;
 
 @RestController
 @RequestMapping("/mantenimientos")
-public class MantenimientoController {	
-	
+public class MantenimientoController {
+
 	@Autowired
 	private MantenimientoService mantenimientoService;
-	
-	@GetMapping({"", "/"})
+
+	@GetMapping({ "", "/" })
 	public ResponseEntity<?> getAll() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(mantenimientoService.findAll());
 		} catch (ExpectableException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-	
+
 	@GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Long id){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(mantenimientoService.findById(id));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            		.body("{\"error\":\"Error. No se encuentra el objeto buscado" +
-                    ".\"}");
-        }
-    }
-	
+	public ResponseEntity<?> getOne(@PathVariable Long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(mantenimientoService.findById(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se encuentra el objeto buscado" + ".\"}");
+		}
+	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id){
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.mantenimientoService.delete(id));
 		} catch (ExpectableException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            		.body(e.getMessage());
-		} catch (Exception e2) {		
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		} catch (Exception e2) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-	
-	@PostMapping({"", "/"})
-	public ResponseEntity<?> save(@RequestBody Mantenimiento mantenimiento){
-		try {
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(this.mantenimientoService.save(mantenimiento));
-		} catch (Exception e) {		
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-		}
-	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Mantenimiento mantenimiento){
-		try {
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(this.mantenimientoService.update(id, mantenimiento));
-		} catch (Exception e) {		
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-		}
-	}
-	
-}
 
+	@PostMapping({ "", "/" })
+	public ResponseEntity<?> save(@RequestBody Mantenimiento mantenimiento) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.mantenimientoService.save(mantenimiento));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Mantenimiento mantenimiento) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.mantenimientoService.update(id, mantenimiento));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+	@PostMapping("/monopatines/{id}/registrar-en-mantenimiento")
+	public ResponseEntity<?> registrarMonopatinEnMantenimiento(@PathVariable Long id, @RequestBody RegistrarMonopatinMantemientoDTO descripcion) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(this.mantenimientoService.registrarMonopatinEnMantenimiento(id, descripcion));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+
+}
