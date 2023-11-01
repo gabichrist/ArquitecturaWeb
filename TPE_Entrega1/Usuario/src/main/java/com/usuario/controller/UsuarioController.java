@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.usuario.exception.ExpectableException;
@@ -96,5 +97,15 @@ public class UsuarioController {
 		}
 	}
 
-
+	@GetMapping("/monopatines/en-la-zona")
+	public ResponseEntity<?> getMonopatinesEnLaZona(
+			@RequestParam(name = "latitud", defaultValue = "") Float latitud, 
+			@RequestParam (name = "longitud", defaultValue = "") Float longitud){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(usuarioService.getMonopatinesEnLaZona(latitud, longitud));
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se encuentra el objeto buscado" + ".\"}");
+		}
+	}
 }

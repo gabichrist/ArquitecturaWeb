@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.usuario.dtos.MonopatinDto;
 import com.usuario.exception.ExpectableException;
 import com.usuario.model.Cuenta;
 import com.usuario.model.Usuario;
@@ -19,6 +20,9 @@ public class UsuarioService implements BaseService<Usuario> {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Autowired
+	private ViajesMonopatinService viajesMonopatinService;
+	
 	@Override
 	public List<Usuario> findAll() throws Exception {
 		return usuarioRepository.findAll();
@@ -105,5 +109,14 @@ public class UsuarioService implements BaseService<Usuario> {
 		}
 		throw new ExpectableException("{\"error\":\"Error. No existe el usuario.\"}");
 
+	}
+	
+	public List<MonopatinDto> getMonopatinesEnLaZona(Float latitud, Float longitud){
+		try {
+			return this.viajesMonopatinService.getMonopatinesEnLaZona(latitud, longitud);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }
