@@ -3,7 +3,9 @@ package com.viajesmonopatin.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -188,6 +190,28 @@ public class ViajeService implements BaseService<Viaje>{
 			} else {
 				throw new ExpectableException("No existe un viaje con el id indicado");
 			}
+		}
+
+		private Object obtenerFacturacion(Timestamp desde, Timestamp hasta) throws Exception {
+			try {
+				return viajeRepository.obtenerFacturacion(desde, hasta);
+			} catch (Exception e) {
+				 e.printStackTrace();
+				throw new Exception(e.getMessage());
+			}
+		}
+
+		public Object obtenerFacturacionAnual(Integer anio, Integer mesDesde, Integer mesHasta) throws Exception {
+
+			LocalDateTime dDesde = LocalDate.of(anio, mesDesde, 1)
+					.atStartOfDay();
+	        Timestamp desde = Timestamp.valueOf(dDesde);
+	        
+			LocalDateTime dHasta = LocalDate.of(anio, mesHasta, 1)
+					.plusMonths(1).atStartOfDay();
+	        Timestamp hasta = Timestamp.valueOf(dHasta);
+
+	        return this.obtenerFacturacion(desde, hasta);
 		}
 	
 }

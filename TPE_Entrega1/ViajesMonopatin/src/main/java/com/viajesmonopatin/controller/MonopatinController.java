@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viajesmonopatin.dto.MonopatinDto;
-import com.viajesmonopatin.enums.EstadoMonopatinEnum;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.service.MonopatinService;
 
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/monopatines")

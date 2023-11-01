@@ -1,5 +1,9 @@
 package com.viajesmonopatin.controller;
 
+import java.sql.Timestamp;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -115,6 +119,25 @@ public class ViajeController {
 
 	//@PutMapping("/{id}")
 
+	@GetMapping("/facturacion/anio/{anio}")
+	public ResponseEntity<?> obtenerFacturacion(
+			@PathVariable("anio") int anio,
+			@RequestParam(name = "mes-desde", defaultValue = "1") int mesDesde,
+			@RequestParam(name = "mes-hasta", defaultValue = "12") int mesHasta
+			) {
+		if (mesDesde < 1 || mesDesde > 12)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mes-desde debe ser un entero entre 1 y 12");
+		if (mesHasta < 1 || mesHasta > 12)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mes-hasta debe ser un entero entre 1 y 12");
 		
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(
+					viajeService.obtenerFacturacionAnual(anio, mesDesde, mesHasta)
+					);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error al procesar el reporte" + ".\"}");
+		}
+	}	
 
 }

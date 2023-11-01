@@ -1,6 +1,7 @@
 package com.viajesmonopatin.repository;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +18,7 @@ public interface ViajeRepository extends RepoBase<Viaje, Long>{
 			+ "GROUP BY v.monopatin.id "
 			+ "HAVING COUNT(v.monopatin.id) >= :cantidad ")
 	public List<ViajeMonopatinDto> getPorCantidadMinimaViajesMonopatinAnual(int anio, Long cantidad);
+	
+	@Query("SELECT SUM(v.costoViaje) FROM Viaje v WHERE v.tiempoInicio >= :desde AND v.tiempoInicio < :hasta")
+	public Float obtenerFacturacion(Timestamp desde, Timestamp hasta);
 }

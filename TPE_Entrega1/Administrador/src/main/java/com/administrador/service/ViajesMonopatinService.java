@@ -1,5 +1,8 @@
 package com.administrador.service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.http.MediaType;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.administrador.dto.FacturacionAnualDto;
 import com.administrador.dto.MonopatinDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.dto.ViajeMonopatinDto;
@@ -51,5 +55,18 @@ public class ViajesMonopatinService {
 				.build())
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(ViajeMonopatinDto.class);
 		return monopatines.collectList().block();
+	}
+
+	public Float obtenerFacturacion(int anio, int mesDesde, int mesHasta) {
+		return webClient.get()
+				.uri(uriBuilder -> uriBuilder
+						.path("/viajes/facturacion/anio/" + anio)
+						.queryParam("mes-desde", mesDesde)
+						.queryParam("mes-hasta", mesHasta)
+						.build())
+				.accept(MediaType.APPLICATION_JSON)
+				.retrieve()
+				.bodyToFlux(Float.class)
+				.blockFirst();
 	}
 }

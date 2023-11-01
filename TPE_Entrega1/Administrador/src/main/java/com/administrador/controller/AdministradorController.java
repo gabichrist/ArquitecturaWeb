@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.administrador.dto.FacturacionAnualDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.exception.ExpectableException;
 import com.administrador.service.AdministradorService;
@@ -42,6 +43,27 @@ public class AdministradorController {
 		}
 	}
 	
+	@GetMapping("/facturacion/anio/{anio}")
+	public ResponseEntity<?> obtenerFacturacionAnual(
+			@PathVariable("anio") int anio,
+			@RequestParam(name = "mes-desde", defaultValue = "1") int mesDesde,
+			@RequestParam(name = "mes-hasta", defaultValue = "12") int mesHasta
+			) {
+		if (mesDesde < 1 || mesDesde > 12)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mes-desde debe ser un entero entre 1 y 12");
+		if (mesHasta < 1 || mesHasta > 12)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mes-hasta debe ser un entero entre 1 y 12");
+		
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(
+					adminService.obtenerFacturacion(anio, mesDesde, mesHasta)
+				);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"Error al procesar el reporte" + ".\"}");
+		}
+	}
+	
 	@GetMapping("/viajes/cantidad-viajes-anual")
 	public ResponseEntity<?> obtenerReporteMonopatinesPorCantidadDeViajesAnual(
 			@RequestParam(name = "anio", defaultValue = "") int anio,
@@ -64,6 +86,4 @@ public class AdministradorController {
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
-
-
 }
