@@ -83,16 +83,22 @@ public class ViajeService implements BaseService<Viaje>{
 				
 				if (paradaDestinoBuscada.isEmpty())
 					throw new ExpectableException("No se encontró la parada destino indicada");
-				Parada paradaDestino = paradaDestinoBuscada.get();			
+				Parada paradaDestino = paradaDestinoBuscada.get();	
 				
-				try {
-					CuentaDto cuenta = this.cuentaService.findById(viajeMonopatinUsuarioDTO.getIdCuenta());
-					System.out.println(cuenta.getSaldo());
-					// VERIFICAR QUE LA CUENTA ESTA HABITADA			
+				System.out.println(viajeMonopatinUsuarioDTO.getIdCuenta());
+				
+		
+				CuentaDto cuenta = this.cuentaService.findById(viajeMonopatinUsuarioDTO.getIdCuenta());
+					
+				if (cuenta != null) {
+					List<Long> idUsuariosCuenta = cuenta.getIdUsuarios();
+					if (!idUsuariosCuenta.contains(viajeMonopatinUsuarioDTO.getIdUsuario()))
+						throw new ExpectableException("El usuario no pertenece a la cuenta indicada");	
+					if (!cuenta.getHabilitada()) 						
+						throw new ExpectableException("La cuenta no esta habilitada");		
 					if (cuenta.getSaldo() <= 0) 						
 						throw new ExpectableException("La cuenta no tiene sado disponible");				
-				} catch (Exception e) {
-					System.out.println(e);
+				}else {
 					throw new ExpectableException("No se encontro la cuenta indicada");
 				}
 								
