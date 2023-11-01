@@ -91,6 +91,9 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 
 
 		public MonopatinUsoDto registrarMonopatinEnMantenimiento(Long id, RegistrarMonopatinMantemientoDTO descripcion) throws Exception {
+			if (mantenimientoRepository.getMantenimientoEnCurso(id) != null) {
+				throw new ExpectableException("Ya hay un mantenimiento en curso para el monopatín");
+			}
 			try {
 				Mantenimiento m = new Mantenimiento();
 				m.setIdMonopatin(id);
@@ -105,8 +108,10 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 		}
 		
 		public MonopatinUsoDto finalizarMantenimientoMonopatin(Long id, RegistrarMonopatinMantemientoDTO descripcion) throws Exception {
+			if (mantenimientoRepository.getMantenimientoEnCurso(id) == null) {
+				throw new ExpectableException("No se encontró un mantenimiento en curso para el monopatín");
+			}
 			try {
-				
 				Mantenimiento m = mantenimientoRepository.getMantenimientoEnCurso(id); 
 				Date now = new Date();
 				m.setFin(new Timestamp(now.getTime()));

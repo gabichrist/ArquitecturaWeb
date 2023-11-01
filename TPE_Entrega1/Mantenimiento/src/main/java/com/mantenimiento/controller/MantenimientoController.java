@@ -84,6 +84,9 @@ public class MantenimientoController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(this.mantenimientoService.registrarMonopatinEnMantenimiento(id, descripcion));
+		} catch (ExpectableException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("{\"error\":\"" + e.getMessage() + "\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
@@ -96,6 +99,9 @@ public class MantenimientoController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(this.mantenimientoService.finalizarMantenimientoMonopatin(id, descripcion));
+		} catch (ExpectableException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"" + e.getMessage() + "\"}");
 		} catch (Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
