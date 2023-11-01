@@ -24,7 +24,7 @@ public class ViajesMonopatinService {
 	public List<MonopatinDto> getMonopatinesEnLaZona(Float latitud, Float longitud){
 		Flux<MonopatinDto> monopatines = webClient.get()
 				.uri(uriBuilder -> uriBuilder
-						.path("/monopatines/en-la-zona")
+						.path("/monopatines/disponibles/latitud/"+ latitud + "/longitud/" + longitud)
 						.queryParam("latitud", latitud)
 						.queryParam("longitud", longitud)
 						.build()
