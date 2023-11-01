@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.administrador.dto.CuentaDto;
 import com.administrador.dto.FacturacionAnualDto;
 import com.administrador.dto.MonopatinDto;
+import com.administrador.dto.ParadaDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.dto.ViajeMonopatinDto;
 
@@ -68,5 +70,15 @@ public class ViajesMonopatinService {
 				.retrieve()
 				.bodyToFlux(Float.class)
 				.blockFirst();
+	}
+	
+	public boolean quitarParada(Long id) {
+		try {
+			webClient.delete().uri("/paradas/quitar/" + id).retrieve().toBodilessEntity().block();
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
+		
 	}
 }

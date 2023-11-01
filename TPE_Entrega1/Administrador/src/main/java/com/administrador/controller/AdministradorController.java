@@ -3,6 +3,7 @@ package com.administrador.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,6 +85,15 @@ public class AdministradorController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+		}
+	}
+	
+	@DeleteMapping("/paradas/quitar/{id}")
+	public ResponseEntity<?> quitarParada(@PathVariable Long id){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.adminService.quitarParada(id));
+		} catch (Exception e2) {		
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
 }

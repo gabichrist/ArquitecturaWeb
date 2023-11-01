@@ -17,6 +17,7 @@ import com.administrador.dto.CuentaDto;
 import com.administrador.dto.DisponibilidadMonopatinesDto;
 import com.administrador.dto.FacturacionAnualDto;
 import com.administrador.dto.MonopatinDto;
+import com.administrador.dto.ParadaDto;
 import com.administrador.dto.TarifaDto;
 import com.administrador.dto.ViajeMonopatinDto;
 
@@ -79,6 +80,10 @@ public class AdministradorService {
 			 e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	public boolean quitarParada(Long id) {
+		return this.viajesMonopatinService.quitarParada(id);
 	}
 	
 }
