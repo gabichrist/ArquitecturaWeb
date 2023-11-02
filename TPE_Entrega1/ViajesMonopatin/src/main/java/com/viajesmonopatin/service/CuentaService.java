@@ -18,14 +18,14 @@ public class CuentaService implements BaseService<CuentaDto> {
 	private final WebClient webClient;
 
     public CuentaService() {    	
-        this.webClient = WebClient.create();
+        this.webClient = WebClient.create("http://localhost:8080");
     }
     
 	@Override
 	public CuentaDto findById(Long id) throws Exception {
 		try {
 			return webClient.get()
-					.uri("http://localhost:8080/cuentas/" + id)
+					.uri("/cuentas/" + id)
 					.retrieve()
 					.bodyToMono(CuentaDto.class)
 					.block();
@@ -38,7 +38,7 @@ public class CuentaService implements BaseService<CuentaDto> {
 	@Override
 	public List<CuentaDto> findAll() throws Exception {
 		Flux<CuentaDto> cuentas = webClient.get()
-	                .uri("http://localhost:8080/cuentas/")
+	                .uri("/cuentas/")
 	                .accept(MediaType.APPLICATION_JSON)
 	                .retrieve()
 	                .bodyToFlux(CuentaDto.class);
@@ -47,7 +47,7 @@ public class CuentaService implements BaseService<CuentaDto> {
 
 	@Override
 	public CuentaDto save(CuentaDto entity) throws Exception {		
-		CuentaDto cuenta = webClient.post().uri("http://localhost:8080/cuentas/").body(BodyInserters.fromValue(entity))
+		CuentaDto cuenta = webClient.post().uri("/cuentas/").body(BodyInserters.fromValue(entity))
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(CuentaDto.class).blockFirst();
 		return cuenta;	
 	}
@@ -55,7 +55,8 @@ public class CuentaService implements BaseService<CuentaDto> {
 	public CuentaDto descontarSaldo(Long id, Float importe) throws Exception {
 		ModificarSaldoDto dto = new ModificarSaldoDto();
 		dto.setImporte(importe);
-		CuentaDto cuenta = webClient.post().uri("http://localhost:8080/cuentas/" + id + "/descontar-saldo").body(BodyInserters.fromValue(dto))
+		CuentaDto cuenta = webClient.post().uri("/cuentas/" + id + "/descontar-saldo")
+				.body(BodyInserters.fromValue(dto))
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(CuentaDto.class).blockFirst();
 		return cuenta;	
 	}

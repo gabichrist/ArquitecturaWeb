@@ -205,10 +205,9 @@ public class ViajeService implements BaseService<Viaje>{
 			viaje.setParadaDestino(monopatin.getParada());				
 			viaje.setTiempoFin(Timestamp.valueOf(LocalDateTime.now()));
 			
-			Optional<Tarifa> tarifaBuscada = tarifaService.findPriceByDate(Timestamp.valueOf(LocalDateTime.now())); 
+			Optional<Tarifa> tarifaBuscada = tarifaService.findCurrentPrice(); 
 			if (tarifaBuscada.isEmpty())
 				throw new ExpectableException("No se encontró la tarifa actual");
-			
 			Tarifa tarifa = tarifaBuscada.get();		
 			
 			Float tarifaActual = tarifa.getTarifa();	
@@ -226,14 +225,12 @@ public class ViajeService implements BaseService<Viaje>{
 			
 		//	try {						
 				if (tiempoInicio != null && tiempoFin != null) {											
-					Float costoViaje = (float)0;
-					
+					Float costoViaje = Float.valueOf("0");
 					Long tiempoUsoTotal = tiempoFin.getTime() - tiempoInicio.getTime();
-					Float tiempoTotal = (float)tiempoUsoTotal / 3600000;
+					Float tiempoTotal = tiempoUsoTotal.floatValue() / 3600000;
 					monopatin.setTiempoUsoConPausas(tiempoTotal);
 					
 					if(tiempoPausaInicio != null && tiempoPausaFin != null) {
-						
 						Long tiempoPausa = tiempoPausaFin.getTime() - tiempoPausaInicio.getTime();			
 						Float tiempoSinPausas = (tiempoTotal - tiempoPausa);						
 						float tiempoUsoSinPausas= tiempoSinPausas / 3600000;
@@ -246,11 +243,11 @@ public class ViajeService implements BaseService<Viaje>{
 							Long tiempoTarifaNormal = tiempoPausaFin.getTime() - tiempoInicio.getTime();
 							Long tiempoTarifaExtra = tiempoFin.getTime() - tiempoPausaFin.getTime();
 		
-							costoViaje = ((float)tiempoTarifaNormal / 3600000) *  tarifaActual;
-							costoViaje =+ ((float)tiempoTarifaExtra / 3600000)* tarifaExtra;
+							costoViaje = (tiempoTarifaNormal.floatValue() / 3600000) *  tarifaActual;
+							costoViaje =+ (tiempoTarifaExtra.floatValue() / 3600000)* tarifaExtra;
 						}
 					} else {						
-						costoViaje = ((float)tiempoTotal/ 3600000) * tarifaActual;
+						costoViaje = (tiempoTotal.floatValue()/ 3600000) * tarifaActual;
 					}
 					
 					viaje.setCostoViaje(costoViaje);
