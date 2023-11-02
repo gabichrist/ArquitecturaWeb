@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "aa9825eb-04f8-46ed-a582-617141427e70",
+		"_postman_id": "b65c547f-57d6-46c5-88e8-523ed7ba7909",
 		"name": "Arquitecturas-G10-TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19007322"
+		"_exporter_id": "18134149"
 	},
 	"item": [
 		{
@@ -479,6 +479,87 @@
 					"item": [
 						{
 							"name": "Agrega nuevo viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/iniciar",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										"iniciar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inicia pausa de viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/iniciar",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										"iniciar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finaliza pausa de viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/iniciar",
+									"host": [
+										"{{baseUrlViajeMonopatin}}"
+									],
+									"path": [
+										"viajes",
+										"iniciar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finaliza viaje",
 							"request": {
 								"method": "POST",
 								"header": [],
