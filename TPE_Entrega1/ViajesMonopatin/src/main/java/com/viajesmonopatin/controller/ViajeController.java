@@ -1,6 +1,5 @@
 package com.viajesmonopatin.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,9 +57,7 @@ public class ViajeController {
 					.body("{\"error\":\"Error. No se encuentra el objeto buscado" + ".\"}");
 		}
 	}
-	
-	//@PostMapping({ "", "/" })
-	
+		
 	@PostMapping("/iniciar")
 	public ResponseEntity<?> iniciar(@RequestBody ViajeMonopatinUsuarioDto viajeMonopatinUsuarioDTO) {
 		try {
@@ -97,6 +94,20 @@ public class ViajeController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. No se pudo reanudar el viaje" + ".\"}");
+		}	
+	}
+	
+	@PostMapping("/{id}/finalizar")
+	public ResponseEntity<?> finalizar(@PathVariable Long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.viajeService.finalizarViaje(id));
+		} catch (ExpectableException expectableException) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(expectableException.getMessage());	
+		} catch (Exception e) {
+			e.getStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"error\":\"Error. No se pudo finalizar el viaje" + ".\"}");
 		}	
 	}
 

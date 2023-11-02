@@ -8,11 +8,13 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.CuentaDto;
+import com.viajesmonopatin.dto.MonopatinDto;
 import com.viajesmonopatin.dto.ViajeMonopatinDto;
 import com.viajesmonopatin.dto.ViajeMonopatinUsuarioDto;
 import com.viajesmonopatin.enums.EstadoMonopatinEnum;
@@ -20,6 +22,7 @@ import com.viajesmonopatin.enums.EstadoViajeEnum;
 import com.viajesmonopatin.exception.ExpectableException;
 import com.viajesmonopatin.model.Monopatin;
 import com.viajesmonopatin.model.Parada;
+import com.viajesmonopatin.model.Tarifa;
 import com.viajesmonopatin.model.Viaje;
 import com.viajesmonopatin.repository.MonopatinRepository;
 import com.viajesmonopatin.repository.ParadaRepository;
@@ -36,6 +39,10 @@ public class ViajeService implements BaseService<Viaje>{
 		private ParadaRepository paradaRepository;
 		@Autowired
 		private CuentaService cuentaService;
+		@Autowired
+		private MonopatinService monopatinService;
+		@Autowired
+		private TarifaService tarifaService;
 		
 
 		@Override
@@ -86,9 +93,6 @@ public class ViajeService implements BaseService<Viaje>{
 					throw new ExpectableException("No se encontró la parada destino indicada");
 				Parada paradaDestino = paradaDestinoBuscada.get();	
 				
-				System.out.println(viajeMonopatinUsuarioDTO.getIdCuenta());
-				
-		
 				CuentaDto cuenta = this.cuentaService.findById(viajeMonopatinUsuarioDTO.getIdCuenta());
 					
 				if (cuenta != null) {
@@ -150,20 +154,144 @@ public class ViajeService implements BaseService<Viaje>{
 				viaje.setTiempoPausaFin(Timestamp.valueOf(LocalDateTime.now()));
 				
 				Long diferenciaMiliSegundos = viaje.getTiempoPausaFin().getTime() - viaje.getTiempoPausaInicio().getTime();
-				int tiempoPermitido = 5 * 60 * 1000;
+				int tiempoPermitido = 15 * 60 * 1000;
 				
 				if (diferenciaMiliSegundos > tiempoPermitido ) {			
 					Instant tiempoPausaInicioNuevo = viaje.getTiempoPausaInicio().toInstant().plus(15, ChronoUnit.MINUTES);
 					viaje.setTiempoPausaInicio(Timestamp.from(tiempoPausaInicioNuevo));				
-				} else  {
-					System.out.println("tiempo menor");
-				}
+				} 
 				viajeRepository.save(viaje);				
 			} else {
 				throw new ExpectableException("El viaje ya se encuentra en curso");
 			}	
 			return viaje;
 		}
+		
+		public Viaje finalizarViaje(Long id) throws Exception {
+			Optional<Viaje> viajeBuscado = viajeRepository.findById(id);
+			if (viajeBuscado.isEmpty())
+				throw new ExpectableException("No se encontró el viaje indicado");			
+			Viaje viaje = viajeBuscado.get();			
+			if (viaje.getEstado().equals(EstadoViajeEnum.FINALIZADO)) 
+				throw new ExpectableException("El viaje ya esta finalizado.");		
+			
+			Parada paradaDestino = viaje.getParadaDestino();
+			Monopatin monopatin = viaje.getMonopatin();		
+			
+			try {				
+				Long idMonopatin = monopatin.getId();
+				Long idParadaDestino = paradaDestino.getId();
+				Float latitud = paradaDestino.getLatitud();
+				Float longitud = paradaDestino.getLongitud();
+				
+				MonopatinDto monopatinDto = new MonopatinDto(idMonopatin, latitud, longitud, EstadoMonopatinEnum.DISPONIBLE);
+				monopatinDto.setIdParada(idParadaDestino);				
+				monopatin = monopatinService.update(idMonopatin, monopatinDto);
+				
+			} catch (Exception e) {
+				throw new ExpectableException("No se pudo actualizar el nuevo estado del monopatin");
+			}
+			
+			viaje.setParadaDestino(monopatin.getParada());				
+			viaje.setTiempoFin(Timestamp.valueOf(LocalDateTime.now()));
+			
+			Optional<Tarifa> tarifaBuscada = tarifaService.findPriceByDate(Timestamp.valueOf(LocalDateTime.now())); 
+			if (tarifaBuscada.isEmpty())
+				throw new ExpectableException("No se encontró la tarifa actual");
+			
+			Tarifa tarifa = tarifaBuscada.get();		
+			
+			Float tarifaActual = tarifa.getTarifa();	
+			Float tarifaExtra = tarifa.getTarifaExtra();
+		
+			
+			Timestamp tiempoInicio = null;
+			tiempoInicio = viaje.getTiempoInicio();
+			Timestamp tiempoFin = null;
+			tiempoFin = viaje.getTiempoFin();
+			Timestamp tiempoPausaInicio = null;
+			tiempoPausaInicio = viaje.getTiempoPausaInicio();
+			Timestamp tiempoPausaFin = null;
+			tiempoPausaFin = viaje.getTiempoPausaFin();
+			
+		//	try {						
+				if (tiempoInicio != null && tiempoFin != null) {											
+					Float costoViaje = (float)0;
+					
+					Long tiempoUsoTotal = tiempoFin.getTime() - tiempoInicio.getTime();
+					Float tiempoTotal = (float)tiempoUsoTotal / 3600000;
+					monopatin.setTiempoUsoConPausas(tiempoTotal);
+					
+					if(tiempoPausaInicio != null && tiempoPausaFin != null) {
+						
+						Long tiempoPausa = tiempoPausaFin.getTime() - tiempoPausaInicio.getTime();			
+						Float tiempoSinPausas = (tiempoTotal - tiempoPausa);						
+						float tiempoUsoSinPausas= tiempoSinPausas / 3600000;
+						monopatin.setTiempoUsoConPausas(tiempoUsoSinPausas);
+												
+						Long diferenciaMiliSegundos = viaje.getTiempoPausaFin().getTime() - viaje.getTiempoPausaInicio().getTime();
+						int tiempoPermitido = 15 * 60 * 1000;
+				
+						if (diferenciaMiliSegundos >= tiempoPermitido ) {	
+							Long tiempoTarifaNormal = tiempoPausaFin.getTime() - tiempoInicio.getTime();
+							Long tiempoTarifaExtra = tiempoFin.getTime() - tiempoPausaFin.getTime();
+		
+							costoViaje = ((float)tiempoTarifaNormal / 3600000) *  tarifaActual;
+							costoViaje =+ ((float)tiempoTarifaExtra / 3600000)* tarifaExtra;
+						}
+					} else {						
+						costoViaje = ((float)tiempoTotal/ 3600000) * tarifaActual;
+					}
+					
+					viaje.setCostoViaje(costoViaje);
+					CuentaDto cuenta = this.cuentaService.findById(viaje.getIdCuenta());
+					
+					if (cuenta != null) {				
+						Float saldo = cuenta.getSaldo();
+						cuenta.setSaldo(saldo - costoViaje);
+						try {
+							cuentaService.save(cuenta);		
+						} catch (Exception e) {
+							e.getStackTrace();
+							throw new ExpectableException("Error al intentar modificar la cuenta del usuario indicada");
+						}
+						
+					} else {							
+						throw new ExpectableException("No se encontro la cuenta indicada en el viaje");
+					}		
+					
+					double velocidadPromedio = 30.0;
+				    double kilometrosRecorridos = velocidadPromedio * tiempoTotal;		     
+				    Random random = new Random();
+				    double kilometrosRandom = random.nextDouble() * 5.0;
+				    kilometrosRecorridos = kilometrosRecorridos + kilometrosRandom;
+					viaje.setKilometrosRecorridos((float)kilometrosRecorridos);					
+					
+					try {
+						monopatinRepository.save(monopatin);
+					} catch (Exception e) {
+						e.getStackTrace();
+						throw new ExpectableException("No se pudo actualizar el monopatin");
+					}
+											
+				} else {
+					throw new ExpectableException("Error en las fechas de inicio o de fin del viaje");
+				}
+			//} catch (Exception e) {
+			//	e.getStackTrace();
+			//	throw new ExpectableException("No se pudieron actualizar los datos de );
+			//}
+			
+			try {
+			
+				viajeRepository.save(viaje);
+			} catch (Exception e) {
+				e.getStackTrace();
+				throw new ExpectableException("No se pudo actualizar el viaje2");
+			}
+			
+			return viaje;			
+		}		
 		
 		public List<ViajeMonopatinDto> obtenerReportePorCantidadMinimaDeViajesAnual(int anio, Long cantidad) throws Exception{
 			try {

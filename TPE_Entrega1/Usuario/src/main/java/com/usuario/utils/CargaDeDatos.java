@@ -22,13 +22,9 @@ import enums.Roles;
 public class CargaDeDatos {
 	
 	private final UsuarioRepository usuarioRepository;
-	private final CuentaRepository cuentaRepository;
-	
-	
-	
+		
 	public CargaDeDatos(UsuarioRepository usuarioRepository, CuentaRepository cuentaRepository) {
-		this.usuarioRepository = usuarioRepository;
-		this.cuentaRepository = cuentaRepository;
+		this.usuarioRepository = usuarioRepository;	
 	}
 	
 	 public void cargarUsuariosDesdeCSV() throws IOException {

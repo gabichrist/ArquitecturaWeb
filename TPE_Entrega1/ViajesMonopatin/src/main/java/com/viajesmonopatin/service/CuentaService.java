@@ -2,6 +2,7 @@ package com.viajesmonopatin.service;
 
 import java.util.List;
 
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -39,12 +40,12 @@ public class CuentaService implements BaseService<CuentaDto> {
 	}
 
 	@Override
-	public CuentaDto save(CuentaDto entity) throws Exception {
-		throw new Error("To implement?");
-//		if (paradaRepository.existsById(Long.valueOf(entity.getId())))
-//			throw new ExpectableException("Ya existe una entidad con el id especificado");
-//		return this.paradaRepository.save(entity);
+	public CuentaDto save(CuentaDto entity) throws Exception {		
+		CuentaDto cuenta = webClient.post().uri("/cuentas").body(BodyInserters.fromValue(entity))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(CuentaDto.class).blockFirst();
+		return cuenta;	
 	}
+
 
 	@Override
 	public CuentaDto update(Long id, CuentaDto entity) throws Exception {
