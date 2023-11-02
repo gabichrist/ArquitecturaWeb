@@ -101,7 +101,7 @@ public class AdministradorController {
 	}
 	
 	@PutMapping("/paradas/{id}")
-	public ResponseEntity<?> agregarParada(@PathVariable Long id, @RequestBody MonopatinDto monopatin){
+	public ResponseEntity<?> actualizarParada(@PathVariable Long id, @RequestBody MonopatinDto monopatin){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(adminService.actualizarMonopatin(id, monopatin));
 		}catch(Exception e) {
