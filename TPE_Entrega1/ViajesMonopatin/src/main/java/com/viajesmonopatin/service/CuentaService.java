@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.viajesmonopatin.dto.CuentaDto;
+import com.viajesmonopatin.dto.ModificarSaldoDto;
 
 import reactor.core.publisher.Flux;
 
@@ -22,11 +23,16 @@ public class CuentaService implements BaseService<CuentaDto> {
     
 	@Override
 	public CuentaDto findById(Long id) throws Exception {
-	      return webClient.get()
-	                .uri("http://localhost:8080/cuentas/" + id)
-	                .retrieve()
-	                .bodyToMono(CuentaDto.class)
-	                .block();
+		try {
+			return webClient.get()
+					.uri("http://localhost:8080/cuentas/" + id)
+					.retrieve()
+					.bodyToMono(CuentaDto.class)
+					.block();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new Exception(e);
+		}
 	}
 	
 	@Override
@@ -41,11 +47,18 @@ public class CuentaService implements BaseService<CuentaDto> {
 
 	@Override
 	public CuentaDto save(CuentaDto entity) throws Exception {		
-		CuentaDto cuenta = webClient.post().uri("/cuentas").body(BodyInserters.fromValue(entity))
+		CuentaDto cuenta = webClient.post().uri("http://localhost:8080/cuentas/").body(BodyInserters.fromValue(entity))
 				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(CuentaDto.class).blockFirst();
 		return cuenta;	
 	}
 
+	public CuentaDto descontarSaldo(Long id, Float importe) throws Exception {
+		ModificarSaldoDto dto = new ModificarSaldoDto();
+		dto.setImporte(importe);
+		CuentaDto cuenta = webClient.post().uri("http://localhost:8080/cuentas/" + id + "/descontar-saldo").body(BodyInserters.fromValue(dto))
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToFlux(CuentaDto.class).blockFirst();
+		return cuenta;	
+	}
 
 	@Override
 	public CuentaDto update(Long id, CuentaDto entity) throws Exception {

@@ -66,6 +66,7 @@ public class ViajeController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(expectableException.getMessage());	
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"error\":\"Error. No se pudo iniciar el viaje" + ".\"}");
 		}	

@@ -79,10 +79,15 @@ public class ViajeService implements BaseService<Viaje>{
 					throw new ExpectableException("No se encontró el monopatin indicado");
 				Monopatin monopatin = monopatinBuscado.get();
 				v.setMonopatin(monopatin);   		
-	
+				
+				if (monopatin.getParada() == null) {
+					throw new ExpectableException("El monopatín debe tener una parada asiganda");
+				}
+				
 				try {
-					Parada paradaInicio = paradaRepository.getByLatitudLongitud(monopatin.getLatitud(), monopatin.getLongitud());	
-					v.setParadaInicio(paradaInicio);
+//					Parada paradaInicio = paradaRepository.getByLatitudLongitud(monopatin.getLatitud(), monopatin.getLongitud());
+					
+					v.setParadaInicio(monopatin.getParada());
 				} catch (Exception e) {			
 					throw new ExpectableException("No se encontró la parada de inicio indicada");
 				}
@@ -91,21 +96,26 @@ public class ViajeService implements BaseService<Viaje>{
 				
 				if (paradaDestinoBuscada.isEmpty())
 					throw new ExpectableException("No se encontró la parada destino indicada");
-				Parada paradaDestino = paradaDestinoBuscada.get();	
+				Parada paradaDestino = paradaDestinoBuscada.get();
 				
-				CuentaDto cuenta = this.cuentaService.findById(viajeMonopatinUsuarioDTO.getIdCuenta());
-					
-				if (cuenta != null) {
-					List<Long> idUsuariosCuenta = cuenta.getIdUsuarios();
-					if (!idUsuariosCuenta.contains(viajeMonopatinUsuarioDTO.getIdUsuario()))
-						throw new ExpectableException("El usuario no pertenece a la cuenta indicada");	
-					if (!cuenta.getHabilitada()) 						
-						throw new ExpectableException("La cuenta no esta habilitada");		
-					if (cuenta.getSaldo() <= 0) 						
-						throw new ExpectableException("La cuenta no tiene sado disponible");				
-				}else {
-					throw new ExpectableException("No se encontro la cuenta indicada");
+				try {
+					CuentaDto cuenta = this.cuentaService.findById(viajeMonopatinUsuarioDTO.getIdCuenta());					
+					if (cuenta != null) {
+						List<Long> idUsuariosCuenta = cuenta.getIdUsuarios();
+						if (!idUsuariosCuenta.contains(viajeMonopatinUsuarioDTO.getIdUsuario()))
+							throw new ExpectableException("El usuario no pertenece a la cuenta indicada");	
+						if (!cuenta.getHabilitada()) 						
+							throw new ExpectableException("La cuenta no esta habilitada");		
+						if (cuenta.getSaldo() <= 0) 						
+							throw new ExpectableException("La cuenta no tiene saldo disponible");				
+					}else {
+						throw new ExpectableException("No se encontro la cuenta indicada");
+					}
+				} catch(Exception e) {
+					throw new ExpectableException("No se encontró la cuenta");
 				}
+						
+					
 								
 				v.setIdUsuario(viajeMonopatinUsuarioDTO.getIdUsuario());
 				v.setIdCuenta(viajeMonopatinUsuarioDTO.getIdCuenta());
@@ -244,18 +254,22 @@ public class ViajeService implements BaseService<Viaje>{
 					}
 					
 					viaje.setCostoViaje(costoViaje);
-					CuentaDto cuenta = this.cuentaService.findById(viaje.getIdCuenta());
 					
-					if (cuenta != null) {				
-						Float saldo = cuenta.getSaldo();
-						cuenta.setSaldo(saldo - costoViaje);
+					CuentaDto cuenta;
+					try {						
+						cuenta = this.cuentaService.findById(viaje.getIdCuenta());
+					} catch(Exception e) {
+						throw new ExpectableException("No se encontro la cuenta indicada en el viaje");
+					}
+				
+					if (cuenta != null) {
 						try {
-							cuentaService.save(cuenta);		
+							cuentaService.descontarSaldo(viaje.getIdCuenta(), viaje.getCostoViaje());							
 						} catch (Exception e) {
-							e.getStackTrace();
-							throw new ExpectableException("Error al intentar modificar la cuenta del usuario indicada");
+							System.out.println(e.getMessage());
+							throw new ExpectableException("No se pudo descontar el saldo");
 						}
-						
+
 					} else {							
 						throw new ExpectableException("No se encontro la cuenta indicada en el viaje");
 					}		
