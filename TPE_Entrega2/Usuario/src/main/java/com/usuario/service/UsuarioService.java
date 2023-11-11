@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.usuario.dtos.MonopatinDto;
@@ -17,27 +18,22 @@ import com.usuario.utils.PasswordUtils;
 
 @Service("usuarioServicio")
 public class UsuarioService implements BaseService<Usuario> {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@Autowired
 	private ViajesMonopatinService viajesMonopatinService;
-	
+
 	@Override
 	public List<Usuario> findAll() throws Exception {
 		return usuarioRepository.findAll();
 	}
-	
-	public Usuario findByEmail(String email) {
-		try {
-			
-			return usuarioRepository.findByEmail(email);
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("LCSTM " + e);
-			throw e;
-		}
+
+	public Optional<Usuario> findByEmail(String email) {
+		return usuarioRepository.findUserByEmailIgnoreCase(email);
 	}
 
 	@Override
@@ -53,7 +49,7 @@ public class UsuarioService implements BaseService<Usuario> {
 	@Override
 	public Usuario save(Usuario entity) throws Exception {
 		try {
-			String encryptedPassword = PasswordUtils.hashPassword(entity.getPassword());
+			String encryptedPassword = passwordEncoder.encode(entity.getPassword());
 			entity.setPassword(encryptedPassword);
 			return usuarioRepository.save(entity);
 		} catch (Exception e) {
@@ -124,11 +120,11 @@ public class UsuarioService implements BaseService<Usuario> {
 		throw new ExpectableException("{\"error\":\"Error. No existe el usuario.\"}");
 
 	}
-	
-	public List<MonopatinDto> getMonopatinesEnLaZona(Float latitud, Float longitud){
+
+	public List<MonopatinDto> getMonopatinesEnLaZona(Float latitud, Float longitud) {
 		try {
 			return this.viajesMonopatinService.getMonopatinesEnLaZona(latitud, longitud);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
