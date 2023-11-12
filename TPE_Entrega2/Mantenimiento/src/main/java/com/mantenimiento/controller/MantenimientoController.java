@@ -1,5 +1,6 @@
 package com.mantenimiento.controller;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +32,14 @@ public class MantenimientoController {
 		} catch (ExpectableException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"error\":\"Error. Por favor intente más tarde.\"}");
 		}
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getOne(@PathVariable Long id) {
+	public ResponseEntity<?> getOne(@PathVariable ObjectId id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(mantenimientoService.findById(id));
 		} catch (Exception e) {
@@ -47,7 +49,7 @@ public class MantenimientoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable ObjectId id) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.mantenimientoService.delete(id));
 		} catch (ExpectableException e) {
@@ -69,7 +71,7 @@ public class MantenimientoController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Mantenimiento mantenimiento) {
+	public ResponseEntity<?> update(@PathVariable ObjectId id, @RequestBody Mantenimiento mantenimiento) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.mantenimientoService.update(id, mantenimiento));
 		} catch (Exception e) {

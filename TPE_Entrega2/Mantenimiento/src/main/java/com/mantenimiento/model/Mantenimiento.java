@@ -1,86 +1,38 @@
 package com.mantenimiento.model;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
-//import com.viajesmonopatin.model.Monopatin;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
-@Entity
+@Document
+@Data
 public class Mantenimiento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private ObjectId id;
 	
-	@Column(name = "id_monopatin")
 	private Long idMonopatin;
 	
-	@Column(nullable = false)
-	private	Timestamp inicio;
-	
-	@Column 
-	private Timestamp fin;
-	
-	@Column
+	private	Instant inicio;
+
+	private Instant fin;
+
 	private String descripcion;
 
 	public Mantenimiento() {
 		super();
 	}
 
-	public Mantenimiento(Long id, Long idMonopatin, Timestamp inicio, Timestamp fin, String descripcion) {
+	public Mantenimiento(ObjectId id, Long idMonopatin, Instant inicio, Instant fin, String descripcion) {
 		super();
 		this.id = id;
 		this.idMonopatin = idMonopatin;
 		this.inicio = inicio;
 		this.fin = fin;
-		this.descripcion = descripcion;
-	}
-
-	public Long getIdMonopatin() {
-		return idMonopatin;
-	}
-
-	public void setIdMonopatin(Long idMonopatin) {
-		this.idMonopatin = idMonopatin;
-	}
-
-	public Timestamp getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(Timestamp inicio) {
-		this.inicio = inicio;
-	}
-
-	public Timestamp getFin() {
-		return fin;
-	}
-
-	public void setFin(Timestamp fin) {
-		this.fin = fin;
-	}
-
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-		
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 

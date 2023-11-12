@@ -1,10 +1,11 @@
 package com.mantenimiento.service;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import com.mantenimiento.model.Mantenimiento;
 import com.mantenimiento.repository.MantenimientoRepository;
 
 @Service("MantenimientoService")
-public class MantenimientoService implements BaseService<Mantenimiento>{
+public class MantenimientoService {
 	
 		@Autowired
 		private MonopatinUsoService monopatinUsoService;
@@ -23,13 +24,11 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 		@Autowired
 		private MantenimientoRepository mantenimientoRepository;
 
-		@Override
 		public List<Mantenimiento> findAll() throws Exception {
 			return mantenimientoRepository.findAll();
 		}
 
-		@Override
-		public Mantenimiento findById(Long id) throws Exception {
+		public Mantenimiento findById(ObjectId id) throws Exception {
 			try {
 				Optional<Mantenimiento> mantenimientoBuscado = mantenimientoRepository.findById(id);
 				return mantenimientoBuscado.get();
@@ -38,7 +37,6 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 			}
 		}
 
-		@Override
 		public Mantenimiento save(Mantenimiento entity) throws Exception {
 			try {
 				return mantenimientoRepository.save(entity);
@@ -47,8 +45,7 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 			}
 		}
 
-		@Override
-		public Mantenimiento update(Long id, Mantenimiento entity) throws Exception {
+		public Mantenimiento update(ObjectId id, Mantenimiento entity) throws Exception {
 			if (mantenimientoRepository.existsById(id)) {
 				try {
 					Mantenimiento mantenimiento = mantenimientoRepository.findById(id).get();
@@ -75,8 +72,8 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 			}
 		}
 
-		@Override
-		public boolean delete(Long id) throws Exception {
+
+		public boolean delete(ObjectId id) throws Exception {
 			if (mantenimientoRepository.existsById(id)) {
 				try {
 					mantenimientoRepository.deleteById(id);
@@ -97,8 +94,7 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 			try {
 				Mantenimiento m = new Mantenimiento();
 				m.setIdMonopatin(id);
-				Date now = new Date();
-				m.setInicio(new Timestamp(now.getTime()));
+				m.setInicio(Instant.now());
 				m.setDescripcion(descripcion.getDescripcion());
 				mantenimientoRepository.save(m);
 				return monopatinUsoService.registrarMonopatinEnMantenimiento(id);
@@ -114,7 +110,7 @@ public class MantenimientoService implements BaseService<Mantenimiento>{
 			try {
 				Mantenimiento m = mantenimientoRepository.getMantenimientoEnCurso(id); 
 				Date now = new Date();
-				m.setFin(new Timestamp(now.getTime()));
+				m.setFin(Instant.now());
 				if (descripcion.getDescripcion() != null)
 					m.setDescripcion(descripcion.getDescripcion());
 				mantenimientoRepository.save(m);
