@@ -1,0 +1,35 @@
+version: '3.1'
+
+name: arquitectura-tpe-grupo10
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - "./data/mongo:/data/db"
+  db1:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:        
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "3396:3306"
+    volumes:
+      - "./data/mysql1:/var/lib/mysql"
+  db2:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:        
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - "3397:3306"
+    volumes:
+      - "./data/mysql2:/var/lib/mysql"
