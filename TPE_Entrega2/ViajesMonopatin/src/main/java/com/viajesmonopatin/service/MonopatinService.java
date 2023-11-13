@@ -133,7 +133,7 @@ public class MonopatinService implements BaseService<Monopatin> {
 		if (monopatinRepository.existsById(id)) {
 			try {
 				Monopatin m = monopatinRepository.getById(id);
-				if (m.getEstado() != EstadoMonopatinEnum.DISPONIBLE) {
+				if (m.getEstado() != EstadoMonopatinEnum.DISPONIBLE) {				
 					m.setEstado(EstadoMonopatinEnum.DISPONIBLE);
 					return monopatinRepository.save(m);
 				}

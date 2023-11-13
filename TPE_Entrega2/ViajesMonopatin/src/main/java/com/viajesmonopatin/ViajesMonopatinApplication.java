@@ -25,5 +25,4 @@ public class ViajesMonopatinApplication {
 		cargaDeDatos.cargarMonopatinesDesdeCSV();
 		cargaDeDatos.cargarViajesDesdeCSV();
 	}
-
 }
