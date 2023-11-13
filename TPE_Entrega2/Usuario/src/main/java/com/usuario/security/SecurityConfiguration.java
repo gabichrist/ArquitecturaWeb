@@ -40,6 +40,7 @@ public class SecurityConfiguration {
 		http.apply(securityConfigurerAdapter());
 		http.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> auth.requestMatchers("auth/**").permitAll()
+						.requestMatchers("swagger-ui/**").permitAll().requestMatchers("v3/**").permitAll()
 						.requestMatchers("POST", "/cuentas/*/anular-cuenta").hasAuthority(Roles.ADMIN.name()))
 				.anonymous(AbstractHttpConfigurer::disable)
 				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
