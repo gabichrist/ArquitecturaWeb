@@ -14,7 +14,6 @@ import com.usuario.exception.ExpectableException;
 import com.usuario.model.Cuenta;
 import com.usuario.model.Usuario;
 import com.usuario.repository.UsuarioRepository;
-import com.usuario.utils.PasswordUtils;
 
 @Service("usuarioServicio")
 public class UsuarioService implements BaseService<Usuario> {

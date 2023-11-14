@@ -5,7 +5,6 @@ import com.usuario.dtos.LoginDTO;
 import com.usuario.model.Usuario;
 import com.usuario.security.TokenProvider;
 import com.usuario.service.UsuarioService;
-import com.usuario.utils.PasswordUtils;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

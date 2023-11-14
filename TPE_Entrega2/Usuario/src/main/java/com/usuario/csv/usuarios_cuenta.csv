@@ -1,5 +1,5 @@
 id,nombre,apellido,nro_celular,email,password,rol,id_mercado_pago,saldo,fecha_alta
-1,Waverley,Shyram,927-915-3610,wshyram0@patch.com,cA2|oMIkWP,ADMIN,1,3861.46,2022-11-21 02:50:45
+1,Waverley,Shyram,927-915-3610,wshyram0@patch.com,123456,ADMIN,1,3861.46,2022-11-21 02:50:45
 2,Koressa,Crichmere,942-986-0342,kcrichmere1@dyndns.org,bI0(cqry,USER,2,4976.27,2023-06-21 19:31:20
 3,Jeanne,Beddingham,607-721-6101,jbeddingham2@technorati.com,cJ8*X2@*w,MAINTAINER,3,4267.16,2023-10-22 21:32:54
 4,Reine,Dashkovich,523-299-4671,rdashkovich3@ftc.gov,gW0_|ve\5v@z,ADMIN,4,2466.58,2023-09-11 06:16:15

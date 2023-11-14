@@ -37,14 +37,14 @@ public class Usuario {
 	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Roles rol;
 
-	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Cuenta> cuentas;
 
 	public Usuario() {
