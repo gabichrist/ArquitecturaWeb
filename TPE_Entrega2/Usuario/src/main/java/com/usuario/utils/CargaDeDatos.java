@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -20,9 +22,11 @@ import enums.Roles;
 
 @Component
 public class CargaDeDatos {
-	
+	@Autowired
 	private final UsuarioRepository usuarioRepository;
-		
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public CargaDeDatos(UsuarioRepository usuarioRepository, CuentaRepository cuentaRepository) {
 		this.usuarioRepository = usuarioRepository;	
 	}
@@ -35,11 +39,11 @@ public class CargaDeDatos {
 	        	
 	            for (CSVRecord csvRecord : csvParser) {
 	                Usuario u = new Usuario();
+	                u.setId(Long.parseLong(csvRecord.get("id")));
 	                u.setNombre(csvRecord.get("nombre"));
 	                u.setApellido(csvRecord.get("apellido"));
 	                u.setNro_celular(csvRecord.get("nro_celular"));
-	                String encryptedPassword = PasswordUtils.hashPassword(csvRecord.get("password"));
-	                u.setPassword(encryptedPassword);
+	                u.setPassword(passwordEncoder.encode("password"));
 	                u.setEmail(csvRecord.get("email"));
 	                switch (csvRecord.get("rol")) {
 					case "USER":
