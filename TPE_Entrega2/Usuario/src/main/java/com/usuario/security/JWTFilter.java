@@ -26,53 +26,57 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class JWTFilter extends GenericFilterBean {
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    private final TokenProvider tokenProvider;
+	public static final String AUTHORIZATION_HEADER = "Authorization";
+	private final TokenProvider tokenProvider;
 
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        String jwt = this.getToken( httpServletRequest );
-   
-        try {
-            if ( StringUtils.hasText( jwt ) && this.tokenProvider.validateToken( jwt ) ) {
-                Authentication authentication = this.tokenProvider.getAuthentication( jwt );
-                SecurityContextHolder.getContext().setAuthentication( authentication );
-            }
-        } catch ( ExpiredTokenException e ) { // Manejo el token expirado
-            final var response = ((HttpServletResponse) servletResponse );
-            response.setStatus( 498 );
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.getWriter().write( new JwtErrorDTO().toJson() );
-            return;
-        }
-        filterChain.doFilter(servletRequest, servletResponse);
-    }
+	@Override
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+			throws IOException, ServletException {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+		String jwt = this.getToken(httpServletRequest);
 
-    private String getToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader( AUTHORIZATION_HEADER );
-        if ( StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ") ) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
+		try {
+			if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
+				Authentication authentication = this.tokenProvider.getAuthentication(jwt);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			}
+		} catch (ExpiredTokenException e) { // Manejo el token expirado
+			final var response = ((HttpServletResponse) servletResponse);
+			response.setStatus(498);
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+			response.getWriter().write(new JwtErrorDTO().toJson());
+			return;
+		}
+		filterChain.doFilter(servletRequest, servletResponse);
+	}
 
-    @Getter
-    private static class JwtErrorDTO {
-        private final JwtEnum code = JwtEnum.invalid_token;
-        private final String message = "Token expired";
-        private final String date = LocalDateTime.now().toString();
+	private String getToken(HttpServletRequest request) {
+		String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+			return bearerToken.substring(7);
+		}
+		return null;
+	}
 
-        public JwtErrorDTO(){}
+	@Getter
+	private static class JwtErrorDTO {
+		private final JwtEnum code = JwtEnum.invalid_token;
+		private final String message = "Token expired";
+		private final String date = LocalDateTime.now().toString();
 
-        public String toJson() {
-            try {
-                return new ObjectMapper().writeValueAsString(this);
-            } catch (RuntimeException | JsonProcessingException ex ) {
-                return String.format("{ message: %s }", this.message );
-            }
-        }
-    }
+		public JwtErrorDTO() {
+		}
 
-    private enum JwtEnum { invalid_token }
+		public String toJson() {
+			try {
+				return new ObjectMapper().writeValueAsString(this);
+			} catch (RuntimeException | JsonProcessingException ex) {
+				return String.format("{ message: %s }", this.message);
+			}
+		}
+	}
+
+	private enum JwtEnum {
+		invalid_token
+	}
 }

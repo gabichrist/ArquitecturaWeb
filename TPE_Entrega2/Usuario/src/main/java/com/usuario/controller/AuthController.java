@@ -42,12 +42,12 @@ public class AuthController {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 				request.getEmail(), request.getPassword());
 
-		System.out.println("TOKEN " + authenticationToken);
 		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		final var jwt = tokenProvider.createToken(authentication);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+
 	}
 
 	@PostMapping({ "", "/register" })
