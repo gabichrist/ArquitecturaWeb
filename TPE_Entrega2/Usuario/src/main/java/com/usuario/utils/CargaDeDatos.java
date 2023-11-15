@@ -9,26 +9,22 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import com.usuario.model.Cuenta;
 import com.usuario.model.Usuario;
-import com.usuario.repository.CuentaRepository;
-import com.usuario.repository.UsuarioRepository;
+import com.usuario.service.UsuarioService;
 
 import enums.Roles;
 
 @Component
 public class CargaDeDatos {
 	@Autowired
-	private final UsuarioRepository usuarioRepository;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final UsuarioService usuarioService;
 	
-	public CargaDeDatos(UsuarioRepository usuarioRepository, CuentaRepository cuentaRepository) {
-		this.usuarioRepository = usuarioRepository;	
+	public CargaDeDatos(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;	
 	}
 	
 	 public void cargarUsuariosDesdeCSV() throws IOException {
@@ -43,7 +39,7 @@ public class CargaDeDatos {
 	                u.setNombre(csvRecord.get("nombre"));
 	                u.setApellido(csvRecord.get("apellido"));
 	                u.setNro_celular(csvRecord.get("nro_celular"));
-	                u.setPassword(passwordEncoder.encode("password"));
+	                u.setPassword(csvRecord.get("password"));
 	                u.setEmail(csvRecord.get("email"));
 	                switch (csvRecord.get("rol")) {
 					case "USER":
@@ -66,7 +62,11 @@ public class CargaDeDatos {
 	                c.setHabilitada(true);
 	                c.addUsuario(u);
 	                u.addCuenta(c);
-	                usuarioRepository.save(u);
+	                try {
+	                	usuarioService.save(u);	                	
+	                } catch (Exception e) {
+	                	System.out.println("No se pudo generar el usuario inicial " + u);
+					}
 	            }
 	        }
 	    }
