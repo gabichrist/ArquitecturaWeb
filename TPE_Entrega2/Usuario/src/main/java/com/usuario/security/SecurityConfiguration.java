@@ -37,11 +37,8 @@ public class SecurityConfiguration {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.apply(securityConfigurerAdapter());
 		http.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests(auth -> auth.requestMatchers("auth/**").permitAll()
-						.requestMatchers("swagger-ui/**").permitAll().requestMatchers("v3/**").permitAll()
-						.requestMatchers("POST", "/cuentas/*/anular-cuenta").hasAuthority(Roles.ADMIN.name()))
+				.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
 				.anonymous(AbstractHttpConfigurer::disable)
 				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		http.httpBasic(Customizer.withDefaults());
@@ -49,11 +46,5 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 
-	/**
-	 * Nuestra configuracion de JWT.
-	 */
-	private JWTConfigurer securityConfigurerAdapter() {
-		return new JWTConfigurer(tokenProvider);
-	}
 
 }

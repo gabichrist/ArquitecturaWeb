@@ -15,6 +15,7 @@ import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -48,13 +49,15 @@ public class TokenProvider {
 	 * @param authentication
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public String createToken(Authentication authentication) {
 		String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
 				.collect(Collectors.joining(","));
 		long now = (new Date()).getTime();
 		Date validity = new Date(now + this.tokenValidityInMilliseconds);
 		return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authorities)
-				.setExpiration(validity).compact();
+				.setExpiration(validity).signWith(SignatureAlgorithm.HS512, secret) 
+                .compact();
 	}
 
 	public Authentication getAuthentication(String token) {
@@ -67,6 +70,24 @@ public class TokenProvider {
 		User principal = new User(claims.getSubject(), "", authorities);
 
 		return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+	}
+
+	public String getUsernameFromToken(String token) {
+		return getClaims(token, Claims::getSubject);
+	}
+
+	public <T> T getClaims(String token, Function<Claims, T> type) {
+		final Claims claims = getAllClaimsFromToken(token);
+		return type.apply(claims);
+	}
+
+	private Claims getAllClaimsFromToken(String token) {
+		return Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(token).getBody();
+	}
+
+	private Key getKey() {
+		byte[] decodedKey = Decoders.BASE64.decode(secret);
+		return Keys.hmacShaKeyFor(decodedKey);
 	}
 
 	/**
