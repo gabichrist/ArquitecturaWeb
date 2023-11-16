@@ -7,6 +7,1076 @@
 	},
 	"item": [
 		{
+			"name": "Microservicio Administracion",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "paradas",
+							"item": [
+								{
+									"name": "Agregar una parada",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"direccion\": \"test direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/paradas",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"paradas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Actualiza una parada",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"direccion\": \"tsest direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/paradas/:id",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"paradas",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Quitar una parada",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/paradas/:id",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"paradas",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "monopatines",
+							"item": [
+								{
+									"name": "Agregar un monopatin",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/monopatines",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"monopatines"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Actualizar un monopatin",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/monopatines/:id",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"monopatines",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Quitar un monopatin",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlAdministracion}}/admin/monopatines/:id",
+											"host": [
+												"{{baseUrlAdministracion}}"
+											],
+											"path": [
+												"admin",
+												"monopatines",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "(3.b) Anular una cuenta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/anular-cuenta/:id",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"anular-cuenta",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.c) consultar monopatines con más de X viajes en cierto año",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/viajes/cantidad-viajes-anual?anio=2023&cantidad=1",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"viajes",
+										"cantidad-viajes-anual"
+									],
+									"query": [
+										{
+											"key": "anio",
+											"value": "2023"
+										},
+										{
+											"key": "cantidad",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.c) consultar monopatines con más de X viajes en cierto año Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"facturacion",
+										"anio",
+										":anio"
+									],
+									"query": [
+										{
+											"key": "mes-desde",
+											"value": "1"
+										},
+										{
+											"key": "mes-hasta",
+											"value": "12"
+										}
+									],
+									"variable": [
+										{
+											"key": "anio",
+											"value": "2023"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.e) Reporte monopatines disponibles vs en mantenimiento",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/monopatines/disponibilidad",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"monopatines",
+										"disponibilidad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.f) Definir precio actual o a futuro. Si no se completa validoDesde toma el momento actual",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tarifa\": 50.0,\r\n    \"tarifaExtra\": 80.0,\r\n    \"validoDesde\": \"2023-10-31T21:31:37.511-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlAdministracion}}/admin/viajes/ajustar-tarifas",
+									"host": [
+										"{{baseUrlAdministracion}}"
+									],
+									"path": [
+										"admin",
+										"viajes",
+										"ajustar-tarifas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Microservicio Mantenimiento",
+			"item": [
+				{
+					"name": "mantenimientos",
+					"item": [
+						{
+							"name": "reportes",
+							"item": [
+								{
+									"name": "(3.a) Reporte uso por kilometros",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/kilometros?con-tiempo-de-pausa=true",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"kilometros"
+											],
+											"query": [
+												{
+													"key": "con-tiempo-de-pausa",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte uso por tiempo con pausas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/tiempo-con-pausas",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"tiempo-con-pausas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte uso por tiempo sin pausas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/tiempo-sin-pausas",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"tiempo-sin-pausas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte de uso  general",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/",
+											"host": [
+												"{{baseUrlMantenimiento}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Iniciar mantenimiento de manopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/monopatines/:id/registrar-en-mantenimiento",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										"monopatines",
+										":id",
+										"registrar-en-mantenimiento"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finalizar mantenimiento de manopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/monopatines/:id/fin-mantenimiento",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										"monopatines",
+										":id",
+										"fin-mantenimiento"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve listado de mantenimientos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve mantenimiento con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "65514aab0b5b817d2169cc6f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nuevo mantenimiento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"idMonopatin\": 10000,\r\n    \"inicio\": \"2023-10-23T12:13:37.595+00:00\",\r\n    \"fin\": \"2023-10-24T15:25:37.125+00:00\",\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica un mantenimiento existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 10000,\r\n    \"inicio\": \"2023-10-23T12:13:37.595+00:00\",\r\n    \"fin\": \"2023-10-24T15:25:37.125+00:00\",\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina un mantenimiento existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
+									"host": [
+										"{{baseUrlMantenimiento}}"
+									],
+									"path": [
+										"mantenimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Microservicio Usuarios",
+			"item": [
+				{
+					"name": "usuarios",
+					"item": [
+						{
+							"name": "Devuelve listado de usuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlUsuario}}/usuarios",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve usuario con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlUsuario}}/usuarios/:id",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"usuarios",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nuevo usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"nombre\": \"Alfonso\",\r\n\t\"apellido\": \"Perez\",\r\n\t\"nro_celular\": \"+54 9 249 432 3232\",\r\n\t\"email\": \"testuser@domain.com\",\r\n\t\"rol\": \"USER\",\r\n    \"password\":\"lalalalala\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/usuarios",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica un usuario existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"nombre\": \"Alfonso\",\r\n\t\"apellido\": \"Perez\",\r\n\t\"nro_celular\": \"+54 9 249 432 3232\",\r\n\t\"email\": \"testuser@domain.com\",\r\n\t\"roles\": \"ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina un usuario existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/usuarios/:id",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"usuarios",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cuentas",
+					"item": [
+						{
+							"name": "Devuelve listado de cuentas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve cuenta con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas/:id",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nueva cuenta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_alta\": \"2023-12-21T19:11:36.000-03:00\",\r\n    \"id_mercado_pago\": 11,\r\n    \"saldo\": 2997.0,\r\n    \"habilitada\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Carga saldo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"importe\": 2997.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas/:id/cargar-saldo",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas",
+										":id",
+										"cargar-saldo"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Descontar saldo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"importe\": 2997.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas/:id/descontar-saldo",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas",
+										":id",
+										"descontar-saldo"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica una cuenta existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_alta\": \"2022-12-21T19:11:36.000+00:00\",\r\n    \"id_mercado_pago\": 1,\r\n    \"saldo\": 5997.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas/:id",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina una cuenta existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/cuentas/:id",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"cuentas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"wshyram0@patch.com\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/auth/login",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin-test@gmail.com\",\r\n    \"password\":\"sdfffaas\",\r\n    \"nombre\":\"Joaquin\",\r\n    \"apellido\":\"Iglesias\",\r\n    \"nro_celular\":\"249 424 0572\",\r\n    \"rol\":\"ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrlUsuario}}/auth/register",
+									"host": [
+										"{{baseUrlUsuario}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "(3.g) Monopatines en la zona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlUsuario}}/usuarios/monopatines/en-la-zona?latitud=-94.1996&longitud=-50.0984",
+							"host": [
+								"{{baseUrlUsuario}}"
+							],
+							"path": [
+								"usuarios",
+								"monopatines",
+								"en-la-zona"
+							],
+							"query": [
+								{
+									"key": "latitud",
+									"value": "-94.1996"
+								},
+								{
+									"key": "longitud",
+									"value": "-50.0984"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Microservicio ViajeMonopatin",
 			"item": [
 				{
@@ -413,7 +1483,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"direccion\": \"test direccion\",\r\n    \"latitud\": -1.21455,\r\n    \"longitud\": -6.21454\r\n}",
+									"raw": "{\r\n    \"tarifa\": 100.0,\r\n    \"tarifaExtra\": 250.0,\r\n    \"validoDesde\": \"2025-10-01T16:14:58.000+00:00\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -454,12 +1524,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlViajeMonopatin}}/tarifa/:id",
+									"raw": "{{baseUrlViajeMonopatin}}/tarifas/:id",
 									"host": [
 										"{{baseUrlViajeMonopatin}}"
 									],
 									"path": [
-										"tarifa",
+										"tarifas",
 										":id"
 									],
 									"variable": [
@@ -746,110 +1816,19 @@
 			]
 		},
 		{
-			"name": "Microservicio Mantenimiento",
+			"name": "Gateway",
 			"item": [
 				{
-					"name": "mantenimientos",
+					"name": "auth",
 					"item": [
 						{
-							"name": "reportes",
-							"item": [
-								{
-									"name": "(3.a) Reporte uso por kilometros",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/kilometros?con-tiempo-de-pausa=true",
-											"host": [
-												"{{baseUrlMantenimiento}}"
-											],
-											"path": [
-												"mantenimientos",
-												"reportes",
-												"monopatines",
-												"kilometros"
-											],
-											"query": [
-												{
-													"key": "con-tiempo-de-pausa",
-													"value": "true"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Reporte uso por tiempo con pausas",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/tiempo-con-pausas",
-											"host": [
-												"{{baseUrlMantenimiento}}"
-											],
-											"path": [
-												"mantenimientos",
-												"reportes",
-												"monopatines",
-												"tiempo-con-pausas"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Reporte uso por tiempo sin pausas",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/tiempo-sin-pausas",
-											"host": [
-												"{{baseUrlMantenimiento}}"
-											],
-											"path": [
-												"mantenimientos",
-												"reportes",
-												"monopatines",
-												"tiempo-sin-pausas"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Reporte de uso  general",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrlMantenimiento}}/mantenimientos/reportes/monopatines/",
-											"host": [
-												"{{baseUrlMantenimiento}}"
-											],
-											"path": [
-												"mantenimientos",
-												"reportes",
-												"monopatines",
-												""
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "Iniciar mantenimiento de manopatin",
+							"name": "Login",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"raw": "{\r\n    \"email\":\"wshyram0@patch.com\",\r\n    \"password\":\"123456\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -857,34 +1836,26 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos/monopatines/:id/registrar-en-mantenimiento",
+									"raw": "{{baseUrl}}/auth/login",
 									"host": [
-										"{{baseUrlMantenimiento}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mantenimientos",
-										"monopatines",
-										":id",
-										"registrar-en-mantenimiento"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1"
-										}
+										"auth",
+										"login"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Finalizar mantenimiento de manopatin",
+							"name": "Register",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"raw": "{\r\n    \"email\":\"admin-test@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"nombre\":\"admin\",\r\n    \"apellido\":\"test\",\r\n    \"nro_celular\":\"249 424 0572\",\r\n    \"rol\":\"ADMIN\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -892,61 +1863,58 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos/monopatines/:id/fin-mantenimiento",
+									"raw": "{{baseUrl}}/auth/register",
 									"host": [
-										"{{baseUrlMantenimiento}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mantenimientos",
-										"monopatines",
-										":id",
-										"fin-mantenimiento"
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cuentas",
+					"item": [
+						{
+							"name": "Devuelve listado de cuentas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cuentas",
+									"host": [
+										"{{baseUrl}}"
 									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1"
-										}
+									"path": [
+										"cuentas"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Devuelve listado de mantenimientos",
+							"name": "Devuelve cuenta con el {{id}} solicitado",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos",
+									"raw": "{{baseUrl}}/cuentas/:id",
 									"host": [
-										"{{baseUrlMantenimiento}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mantenimientos"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Devuelve mantenimiento con el {{id}} solicitado",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
-									"host": [
-										"{{baseUrlMantenimiento}}"
-									],
-									"path": [
-										"mantenimientos",
+										"cuentas",
 										":id"
 									],
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "11"
 										}
 									]
 								}
@@ -954,13 +1922,13 @@
 							"response": []
 						},
 						{
-							"name": "Agrega nuevo mantenimiento",
+							"name": "Agrega nueva cuenta",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 1,\r\n    \"idMonopatin\": 10000,\r\n    \"inicio\": \"2023-10-23T12:13:37.595+00:00\",\r\n    \"fin\": \"2023-10-24T15:25:37.125+00:00\",\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"raw": "{\r\n    \"fecha_alta\": \"2023-12-21T19:11:36.000-03:00\",\r\n    \"id_mercado_pago\": 11,\r\n    \"saldo\": 39297.0,\r\n    \"habilitada\": true\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -968,25 +1936,93 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos",
+									"raw": "{{baseUrl}}/cuentas",
 									"host": [
-										"{{baseUrlMantenimiento}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mantenimientos"
+										"cuentas"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Modifica un mantenimiento existente. Todos los campos son opcionales",
+							"name": "Carga saldo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"importe\": 2997.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cuentas/:id/cargar-saldo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cuentas",
+										":id",
+										"cargar-saldo"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Descontar saldo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"importe\": 2997.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cuentas/:id/descontar-saldo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cuentas",
+										":id",
+										"descontar-saldo"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica una cuenta existente. Todos los campos son opcionales",
 							"request": {
 								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"idMonopatin\": 10000,\r\n    \"inicio\": \"2023-10-23T12:13:37.595+00:00\",\r\n    \"fin\": \"2023-10-24T15:25:37.125+00:00\",\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"raw": "{\r\n    \"fecha_alta\": \"2022-12-21T19:11:36.000+00:00\",\r\n    \"id_mercado_pago\": 1,\r\n    \"saldo\": 5997.0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -994,12 +2030,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
+									"raw": "{{baseUrl}}/cuentas/:id",
 									"host": [
-										"{{baseUrlMantenimiento}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mantenimientos",
+										"cuentas",
 										":id"
 									],
 									"variable": [
@@ -1013,7 +2049,7 @@
 							"response": []
 						},
 						{
-							"name": "Elimina un mantenimiento existente",
+							"name": "Elimina una cuenta existente",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -1027,12 +2063,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlMantenimiento}}/mantenimientos/:id",
+									"raw": "{{baseUrl}}/cuentas/:id",
 									"host": [
-										"{{baseUrlMantenimiento}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mantenimientos",
+										"cuentas",
 										":id"
 									],
 									"variable": [
@@ -1044,198 +2080,6 @@
 								}
 							},
 							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Microservicio Administracion",
-			"item": [
-				{
-					"name": "admin",
-					"item": [
-						{
-							"name": "paradas",
-							"item": [
-								{
-									"name": "Agregar una parada",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"direccion\": \"test direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{baseUrlAdministracion}}/admin/paradas",
-											"host": [
-												"{{baseUrlAdministracion}}"
-											],
-											"path": [
-												"admin",
-												"paradas"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Actualiza una parada",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"direccion\": \"tsest direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{baseUrlAdministracion}}/admin/paradas/:id",
-											"host": [
-												"{{baseUrlAdministracion}}"
-											],
-											"path": [
-												"admin",
-												"paradas",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "1"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Quitar una parada",
-									"request": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrlAdministracion}}/admin/paradas/:id",
-											"host": [
-												"{{baseUrlAdministracion}}"
-											],
-											"path": [
-												"admin",
-												"paradas",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "1"
-												}
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "monopatines",
-							"item": [
-								{
-									"name": "Agregar un monopatin",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{baseUrlAdministracion}}/admin/monopatines",
-											"host": [
-												"{{baseUrlAdministracion}}"
-											],
-											"path": [
-												"admin",
-												"monopatines"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Actualizar un monopatin",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{baseUrlAdministracion}}/admin/monopatines/:id",
-											"host": [
-												"{{baseUrlAdministracion}}"
-											],
-											"path": [
-												"admin",
-												"monopatines",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "3"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Quitar un monopatin",
-									"request": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrlAdministracion}}/admin/monopatines/:id",
-											"host": [
-												"{{baseUrlAdministracion}}"
-											],
-											"path": [
-												"admin",
-												"monopatines",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "10"
-												}
-											]
-										}
-									},
-									"response": []
-								}
-							]
 						},
 						{
 							"name": "(3.b) Anular una cuenta",
@@ -1243,9 +2087,9 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/anular-cuenta/:id",
+									"raw": "{{baseUrl}}/admin/anular-cuenta/:id",
 									"host": [
-										"{{baseUrlAdministracion}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
@@ -1261,126 +2105,9 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "(3.c) consultar monopatines con más de X viajes en cierto año",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/viajes/cantidad-viajes-anual?anio=2023&cantidad=1",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"viajes",
-										"cantidad-viajes-anual"
-									],
-									"query": [
-										{
-											"key": "anio",
-											"value": "2023"
-										},
-										{
-											"key": "cantidad",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "(3.c) consultar monopatines con más de X viajes en cierto año Copy",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"facturacion",
-										"anio",
-										":anio"
-									],
-									"query": [
-										{
-											"key": "mes-desde",
-											"value": "1"
-										},
-										{
-											"key": "mes-hasta",
-											"value": "12"
-										}
-									],
-									"variable": [
-										{
-											"key": "anio",
-											"value": "2023"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "(3.e) Reporte monopatines disponibles vs en mantenimiento",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/monopatines/disponibilidad",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"monopatines",
-										"disponibilidad"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "(3.f) Definir precio actual o a futuro. Si no se completa validoDesde toma el momento actual",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"tarifa\": 50.0,\r\n    \"tarifaExtra\": 80.0,\r\n    \"validoDesde\": \"2023-10-31T21:31:37.511-03:00\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrlAdministracion}}/admin/viajes/ajustar-tarifas",
-									"host": [
-										"{{baseUrlAdministracion}}"
-									],
-									"path": [
-										"admin",
-										"viajes",
-										"ajustar-tarifas"
-									]
-								}
-							},
-							"response": []
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "Microservicio Usuarios",
-			"item": [
+				},
 				{
 					"name": "usuarios",
 					"item": [
@@ -1390,9 +2117,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrlUsuario}}/usuarios",
+									"raw": "{{baseUrl}}/usuarios",
 									"host": [
-										"{{baseUrlUsuario}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"usuarios"
@@ -1407,9 +2134,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrlUsuario}}/usuarios/:id",
+									"raw": "{{baseUrl}}/usuarios/:id",
 									"host": [
-										"{{baseUrlUsuario}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"usuarios",
@@ -1432,7 +2159,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"nombre\": \"Alfonso\",\r\n\t\"apellido\": \"Perez\",\r\n\t\"nro_celular\": \"+54 9 249 432 3232\",\r\n\t\"email\": \"testuser@domain.com\",\r\n\t\"rol\": \"USER\"\r\n}",
+									"raw": "{\r\n\t\"nombre\": \"Alfonso\",\r\n\t\"apellido\": \"Perez\",\r\n\t\"nro_celular\": \"+54 9 249 432 3232\",\r\n\t\"email\": \"tester@domain.com\",\r\n\t\"rol\": \"USER\",\r\n    \"password\":\"lalalalala\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1440,9 +2167,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlUsuario}}/usuarios",
+									"raw": "{{baseUrl}}/usuarios",
 									"host": [
-										"{{baseUrlUsuario}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"usuarios"
@@ -1466,9 +2193,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlUsuario}}/usuarios/:id",
+									"raw": "{{baseUrl}}/usuarios/:id",
 									"host": [
-										"{{baseUrlUsuario}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"usuarios",
@@ -1520,164 +2247,203 @@
 					]
 				},
 				{
-					"name": "cuentas",
+					"name": "admin",
 					"item": [
 						{
-							"name": "Devuelve listado de cuentas",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlUsuario}}/cuentas",
-									"host": [
-										"{{baseUrlUsuario}}"
-									],
-									"path": [
-										"cuentas"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Devuelve usuario con el {{id}} solicitado",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrlUsuario}}/cuentas/:id",
-									"host": [
-										"{{baseUrlUsuario}}"
-									],
-									"path": [
-										"cuentas",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "101"
+							"name": "paradas",
+							"item": [
+								{
+									"name": "Agregar una parada",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"direccion\": \"test direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/admin/paradas",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"admin",
+												"paradas"
+											]
 										}
-									]
+									},
+									"response": []
+								},
+								{
+									"name": "Actualiza una parada",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"direccion\": \"tsest direction\",\r\n    \"latitud\": -6.214547,\r\n    \"longitud\": -1.21454\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/admin/paradas/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"admin",
+												"paradas",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Quitar una parada",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/admin/paradas/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"admin",
+												"paradas",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "Agrega nueva cuenta",
+							"name": "monopatines",
+							"item": [
+								{
+									"name": "Agregar un monopatin",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/admin/monopatines",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"admin",
+												"monopatines"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Actualizar un monopatin",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/admin/monopatines/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"admin",
+												"monopatines",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Quitar un monopatin",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/admin/monopatines/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"admin",
+												"monopatines",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "(3.b) Anular una cuenta",
 							"request": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"fecha_alta\": \"2023-12-21T19:11:36.000-03:00\",\r\n    \"id_mercado_pago\": 11,\r\n    \"saldo\": 2997.0,\r\n    \"habilitada\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{baseUrlUsuario}}/cuentas",
+									"raw": "{{baseUrl}}/admin/anular-cuenta/:id",
 									"host": [
-										"{{baseUrlUsuario}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"cuentas"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Carga saldo",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"importe\": 2997.0\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrlUsuario}}/cuentas/:id/cargar-saldo",
-									"host": [
-										"{{baseUrlUsuario}}"
-									],
-									"path": [
-										"cuentas",
-										":id",
-										"cargar-saldo"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "101"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Descontar saldo",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"importe\": 2997.0\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrlUsuario}}/cuentas/:id/descontar-saldo",
-									"host": [
-										"{{baseUrlUsuario}}"
-									],
-									"path": [
-										"cuentas",
-										":id",
-										"descontar-saldo"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "101"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Modifica una cuenta existente. Todos los campos son opcionales",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"fecha_alta\": \"2022-12-21T19:11:36.000+00:00\",\r\n    \"id_mercado_pago\": 1,\r\n    \"saldo\": 5997.0\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrlUsuario}}/cuentas/:id",
-									"host": [
-										"{{baseUrlUsuario}}"
-									],
-									"path": [
-										"cuentas",
+										"admin",
+										"anular-cuenta",
 										":id"
 									],
 									"variable": [
@@ -1691,7 +2457,385 @@
 							"response": []
 						},
 						{
-							"name": "Elimina una cuenta existente",
+							"name": "(3.c) consultar monopatines con más de X viajes en cierto año",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/viajes/cantidad-viajes-anual?anio=2023&cantidad=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"viajes",
+										"cantidad-viajes-anual"
+									],
+									"query": [
+										{
+											"key": "anio",
+											"value": "2023"
+										},
+										{
+											"key": "cantidad",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.c) consultar monopatines con más de X viajes en cierto año Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"facturacion",
+										"anio",
+										":anio"
+									],
+									"query": [
+										{
+											"key": "mes-desde",
+											"value": "1"
+										},
+										{
+											"key": "mes-hasta",
+											"value": "12"
+										}
+									],
+									"variable": [
+										{
+											"key": "anio",
+											"value": "2023"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.e) Reporte monopatines disponibles vs en mantenimiento",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/admin/monopatines/disponibilidad",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"monopatines",
+										"disponibilidad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(3.f) Definir precio actual o a futuro. Si no se completa validoDesde toma el momento actual",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tarifa\": 50.0,\r\n    \"tarifaExtra\": 80.0,\r\n    \"validoDesde\": \"2023-10-31T21:31:37.511-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/viajes/ajustar-tarifas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"viajes",
+										"ajustar-tarifas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "mantenimientos",
+					"item": [
+						{
+							"name": "reportes",
+							"item": [
+								{
+									"name": "(3.a) Reporte uso por kilometros",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/mantenimientos/reportes/monopatines/kilometros?con-tiempo-de-pausa=true",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"kilometros"
+											],
+											"query": [
+												{
+													"key": "con-tiempo-de-pausa",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte uso por tiempo con pausas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/mantenimientos/reportes/monopatines/tiempo-con-pausas",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"tiempo-con-pausas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte uso por tiempo sin pausas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/mantenimientos/reportes/monopatines/tiempo-sin-pausas",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												"tiempo-sin-pausas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reporte de uso  general",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/mantenimientos/reportes/monopatines/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"mantenimientos",
+												"reportes",
+												"monopatines",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Iniciar mantenimiento de manopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mantenimientos/monopatines/:id/registrar-en-mantenimiento",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mantenimientos",
+										"monopatines",
+										":id",
+										"registrar-en-mantenimiento"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finalizar mantenimiento de manopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mantenimientos/monopatines/:id/fin-mantenimiento",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mantenimientos",
+										"monopatines",
+										":id",
+										"fin-mantenimiento"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve listado de mantenimientos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/mantenimientos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mantenimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve mantenimiento con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/mantenimientos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mantenimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "65514aab0b5b817d2169cc6f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nuevo mantenimiento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"idMonopatin\": 10000,\r\n    \"inicio\": \"2023-10-23T12:13:37.595+00:00\",\r\n    \"fin\": \"2023-10-24T15:25:37.125+00:00\",\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mantenimientos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mantenimientos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica un mantenimiento existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 10000,\r\n    \"inicio\": \"2023-10-23T12:13:37.595+00:00\",\r\n    \"fin\": \"2023-10-24T15:25:37.125+00:00\",\r\n    \"descripcion\": \"Se ajustaron frenos \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/mantenimientos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mantenimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina un mantenimiento existente",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -1705,12 +2849,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrlUsuario}}/usuarios/:id",
+									"raw": "{{baseUrl}}/mantenimientos/:id",
 									"host": [
-										"{{baseUrlUsuario}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"usuarios",
+										"mantenimientos",
 										":id"
 									],
 									"variable": [
@@ -1726,37 +2870,752 @@
 					]
 				},
 				{
-					"name": "(3.g) Monopatines en la zona",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrlUsuario}}/usuarios/monopatines/en-la-zona?latitud=-94.1996&longitud=-50.0984",
-							"host": [
-								"{{baseUrlUsuario}}"
-							],
-							"path": [
-								"usuarios",
-								"monopatines",
-								"en-la-zona"
-							],
-							"query": [
-								{
-									"key": "latitud",
-									"value": "-94.1996"
-								},
-								{
-									"key": "longitud",
-									"value": "-50.0984"
+					"name": "paradas",
+					"item": [
+						{
+							"name": "Devuelve listado de paradas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/paradas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"paradas"
+									]
 								}
-							]
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve parada con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/paradas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"paradas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "12"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nueva parada",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"direccion\": \"test direccion\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/paradas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"paradas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica una parada existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"direccion\": \"test direccion\",\r\n    \"latitud\": -1.21455,\r\n    \"longitud\": -6.21454\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/paradas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"paradas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "37"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina una parada existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/paradas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"paradas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "39"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "monopatines",
+					"item": [
+						{
+							"name": "Monopatines en la zona",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/monopatines/disponibles/latitud/:latitud/longitud/:longitud",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"monopatines",
+										"disponibles",
+										"latitud",
+										":latitud",
+										"longitud",
+										":longitud"
+									],
+									"variable": [
+										{
+											"key": "latitud",
+											"value": "-93.1996"
+										},
+										{
+											"key": "longitud",
+											"value": "-50.0984"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve listado de monopatines",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/monopatines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"monopatines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve monopatín con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/monopatines/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"monopatines",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nuevo monopatin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"latitud\": -1.214547,\r\n    \"longitud\": -6.21454,\r\n    \"idParada\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/monopatines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"monopatines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica un monopatín existente. Todos los campos son opcionales. Valores estado: [\"DISPONIBLE\", \"EN_USO\", \"EN_MANTENIMIENTO\"]]",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"direccion\": \"test direccion\",\r\n    \"latitud\": -1.21455,\r\n    \"longitud\": -6.21454,\r\n    \"estado\": \"DISPONIBLE\",\r\n    \"idParada\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/monopatines/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"monopatines",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina un monopatín existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/monopatines/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"monopatines",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tarifas",
+					"item": [
+						{
+							"name": "Devuelve listado de tarifas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tarifas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tarifas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve tarifa con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tarifas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tarifas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve tarifa actual",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tarifas/fecha/actual",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tarifas",
+										"fecha",
+										"actual"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agrega nueva tarifa",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tarifa\": 100.0,\r\n    \"tarifaExtra\": 2250.0,\r\n    \"validoDesde\": \"2025-10-01T16:14:58.000+00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tarifas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tarifas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica una tarifa existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tarifa\": 100.0,\r\n    \"tarifaExtra\": 250.0,\r\n    \"validoDesde\": \"2025-10-01T16:14:58.000+00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tarifas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tarifas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina una tarifa existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tarifas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tarifas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "viajes Copy",
+					"item": [
+						{
+							"name": "Agrega nuevo viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 1,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/viajes/iniciar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										"iniciar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inicia pausa de viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/viajes/:id/pausar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										":id",
+										"pausar"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finaliza pausa de viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/viajes/:id/reanudar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										":id",
+										"reanudar"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finaliza viaje",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 6,\r\n    \"idUsuario\": 1,\r\n    \"idCuenta\": 101,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/viajes/:id/finalizar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										":id",
+										"finalizar"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve listado de viajes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/viajes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve viaje con el {{id}} solicitado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/viajes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica un viaje existente. Todos los campos son opcionales",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idMonopatin\": 1,\r\n    \"idUsuario\": 1,\r\n    \"idParadaInicio\": 1,\r\n    \"idParadaDestino\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/viajes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina un viaje existente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/viajes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Devuelve facturacion de viajes entre fechas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/viajes/facturacion?desde=2022-10-31T23:14:40.781-03:00&hasta=2022-12-31T23:14:40.781-03:00",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"viajes",
+										"facturacion"
+									],
+									"query": [
+										{
+											"key": "desde",
+											"value": "2022-10-31T23:14:40.781-03:00"
+										},
+										{
+											"key": "hasta",
+											"value": "2022-12-31T23:14:40.781-03:00"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -1795,6 +3654,16 @@
 		{
 			"key": "baseUrlAdministracion",
 			"value": "localhost:8083",
+			"type": "string"
+		},
+		{
+			"key": "bearerToken",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FraW5pY0BnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTcwMDA0Mzg2MX0.49M6ofmwmS-hqljXVPKprNyj5LnnXPXtPAIRi1bcS0-jBsR8UJBgLoPZVxHqAYILoBfxeZq9JDpkBvAXu9ZUrQ",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "localhost:8085",
 			"type": "string"
 		}
 	]
