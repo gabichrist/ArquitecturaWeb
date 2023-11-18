@@ -249,7 +249,7 @@
 							"response": []
 						},
 						{
-							"name": "(3.c) consultar monopatines con más de X viajes en cierto año Copy",
+							"name": "(3.d) Devuelve facturacion de viajes entre fechas",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -1789,22 +1789,30 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrlViajeMonopatin}}/viajes/facturacion?desde=2022-10-31T23:14:40.781-03:00&hasta=2022-12-31T23:14:40.781-03:00",
+									"raw": "{{baseUrlViajeMonopatin}}/viajes/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
 									"host": [
 										"{{baseUrlViajeMonopatin}}"
 									],
 									"path": [
 										"viajes",
-										"facturacion"
+										"facturacion",
+										"anio",
+										":anio"
 									],
 									"query": [
 										{
-											"key": "desde",
-											"value": "2022-10-31T23:14:40.781-03:00"
+											"key": "mes-desde",
+											"value": "1"
 										},
 										{
-											"key": "hasta",
-											"value": "2022-12-31T23:14:40.781-03:00"
+											"key": "mes-hasta",
+											"value": "12"
+										}
+									],
+									"variable": [
+										{
+											"key": "anio",
+											"value": "2023"
 										}
 									]
 								}
@@ -2486,17 +2494,17 @@
 							"response": []
 						},
 						{
-							"name": "(3.c) consultar monopatines con más de X viajes en cierto año Copy",
+							"name": "(3.d) Devuelve facturacion de viajes entre fechas",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/admin/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
+									"raw": "{{baseUrl}}/viajes/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"admin",
+										"viajes",
 										"facturacion",
 										"anio",
 										":anio"
@@ -3335,7 +3343,7 @@
 					]
 				},
 				{
-					"name": "viajes Copy",
+					"name": "viajes",
 					"item": [
 						{
 							"name": "Agrega nuevo viaje",
@@ -3500,7 +3508,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "7"
+											"value": "1"
 										}
 									]
 								}
@@ -3566,7 +3574,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "6"
+											"value": "1"
 										}
 									]
 								}
@@ -3579,22 +3587,30 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/viajes/facturacion?desde=2022-10-31T23:14:40.781-03:00&hasta=2022-12-31T23:14:40.781-03:00",
+									"raw": "{{baseUrl}}/admin/facturacion/anio/:anio?mes-desde=1&mes-hasta=12",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"viajes",
-										"facturacion"
+										"admin",
+										"facturacion",
+										"anio",
+										":anio"
 									],
 									"query": [
 										{
-											"key": "desde",
-											"value": "2022-10-31T23:14:40.781-03:00"
+											"key": "mes-desde",
+											"value": "1"
 										},
 										{
-											"key": "hasta",
-											"value": "2022-12-31T23:14:40.781-03:00"
+											"key": "mes-hasta",
+											"value": "12"
+										}
+									],
+									"variable": [
+										{
+											"key": "anio",
+											"value": "2023"
 										}
 									]
 								}
@@ -3657,13 +3673,13 @@
 			"type": "string"
 		},
 		{
-			"key": "bearerToken",
-			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FraW5pY0BnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTcwMDA0Mzg2MX0.49M6ofmwmS-hqljXVPKprNyj5LnnXPXtPAIRi1bcS0-jBsR8UJBgLoPZVxHqAYILoBfxeZq9JDpkBvAXu9ZUrQ",
+			"key": "baseUrl",
+			"value": "localhost:8085",
 			"type": "string"
 		},
 		{
-			"key": "baseUrl",
-			"value": "localhost:8085",
+			"key": "bearerToken",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FraW5pY0BnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTiIsImV4cCI6MTcwMDA0Mzg2MX0.49M6ofmwmS-hqljXVPKprNyj5LnnXPXtPAIRi1bcS0-jBsR8UJBgLoPZVxHqAYILoBfxeZq9JDpkBvAXu9ZUrQ",
 			"type": "string"
 		}
 	]
