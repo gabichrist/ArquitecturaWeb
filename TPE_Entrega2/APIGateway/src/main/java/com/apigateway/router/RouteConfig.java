@@ -23,12 +23,16 @@ public class RouteConfig {
 								.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config())))
 								.uri("http://localhost:8080"))
 				.route("micro-usuarios-1",
-						r -> r.path("/usuarios**").filters(f -> f.filter(admFilter.apply(new AdminFilter.Config())))
+						r -> r.path("/usuarios/**").filters(f -> f.filter(admFilter.apply(new AdminFilter.Config())))
 								.uri("http://localhost:8080"))
 				.route("auth-anular-cuenta", r -> r.path("/cuentas/*/anular")
 						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8080"))
 				.route("auth-cargar-saldo",
 						r -> r.path("/cuentas/*/cargar-saldo")
+								.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config())))
+								.uri("http://localhost:8080"))
+				.route("auth-cargar-saldo",
+						r -> r.path("/cuentas/*/descontar-saldo")
 								.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config())))
 								.uri("http://localhost:8080"))
 				.route("auth-nueva-cuenta",
@@ -43,7 +47,8 @@ public class RouteConfig {
 				.route("micro-mantainer",
 						r -> r.path("/mantenimientos/**")
 								.filters(f -> f.filter(mantFilter.apply(new MantainerFilter.Config())))
-								.uri("http://localhost:8084"))
+										
+								.uri("http://localhost:8082"))
 
 				.route("micro-monopatin",
 						r -> r.path("GET", "/paradas/**")
@@ -55,22 +60,27 @@ public class RouteConfig {
 						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8081"))
 				.route("micro-monopatin", r -> r.path("PUT", "/paradas**")
 						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8081"))
-				.route("micro-monopatin", r -> r.path("/tarifas**")
-						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8081"))
-				.route("micro-monopatin", r -> r.path("/monopatines/disponibles/latitud/**")
-						.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config()))).uri("http://localhost:8081"))
-				.route("micro-monopatin", r -> r.path("/monopatines/disponibles**")
-						.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config()))).uri("http://localhost:8081"))
+				.route("micro-monopatin",
+						r -> r.path("/tarifas/**").filters(f -> f.filter(admFilter.apply(new AdminFilter.Config())))
+								.uri("http://localhost:8081"))
+				.route("micro-monopatin",
+						r -> r.path("/monopatines/disponibles/latitud/**")
+								.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config())))
+								.uri("http://localhost:8081"))
+				.route("micro-monopatin",
+						r -> r.path("/monopatines/disponibles**")
+								.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config())))
+								.uri("http://localhost:8081"))
 				.route("micro-monopatin", r -> r.path("POST", "/monopatines**")
 						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8081"))
 				.route("micro-monopatin", r -> r.path("PUT", "/monopatines**")
 						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8081"))
 				.route("micro-monopatin", r -> r.path("DELETE", "/monopatines**")
 						.filters(f -> f.filter(admFilter.apply(new AdminFilter.Config()))).uri("http://localhost:8081"))
-				.route("micro-monopatin", r -> r.path("/viajes**")
-						.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config()))).uri("http://localhost:8081"))
-				.route("micro-monopatin", r -> r.path("/viajes**")
-						.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config()))).uri("http://localhost:8081"))
+				.route("micro-monopatin",
+						r -> r.path("/viajes/**")
+								.filters(f -> f.filter(authFilter.apply(new AuthenticationFilter.Config())))
+								.uri("http://localhost:8081"))
 				.build();
 	}
 

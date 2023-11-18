@@ -71,6 +71,11 @@ public class CargaDeDatos {
 	        		String estado = String.valueOf(csvRecord.get("estado"));
 	        		if(estado.equalsIgnoreCase("DISPONIBLE")) {
 	        			m.setEstado(EstadoMonopatinEnum.DISPONIBLE);
+		        		Long idParada = Long.parseLong(csvRecord.get("parada"));
+		        		Parada p = paradaRepository.findById(idParada).get();
+		        		m.setParada(p);
+		        		m.setLatitud(p.getLatitud());
+		        		m.setLongitud(p.getLongitud());
 	        		} else if(estado.equalsIgnoreCase("EN_USO")) {
 	        			m.setEstado(EstadoMonopatinEnum.EN_USO);
 	        		} else if(estado.equalsIgnoreCase("EN_MANTENIMIENTO")) {
@@ -79,6 +84,7 @@ public class CargaDeDatos {
 	        		m.setKilometrosRecorridos(Float.parseFloat(csvRecord.get("kilometros_recorridos")));
 	        		m.setTiempoUsoConPausas(Float.parseFloat(csvRecord.get("tiempo_uso_con_pausas")));
 	        		m.setTiempoUsoSinPausas(Float.parseFloat(csvRecord.get("tiempo_uso_sin_pausas")));
+
 	        		monopatinRepository.save(m);
 	            }
 	        }

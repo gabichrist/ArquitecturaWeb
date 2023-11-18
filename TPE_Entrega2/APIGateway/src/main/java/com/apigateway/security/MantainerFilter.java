@@ -40,7 +40,7 @@ public class MantainerFilter extends AbstractGatewayFilterFactory<MantainerFilte
 				return webClientBuilder.build().post().uri("http://localhost:8080/auth/validate").bodyValue(tokenValue)
 						.header(_AuthHeader, bearerToken).retrieve().bodyToMono(ValidateTokenDTO.class)
 						.map(response -> {
-							if (!response.isAuthenticated() || response.getRol() != Roles.ROLE_MANTAINER)
+							if (!response.isAuthenticated() || (response.getRol() != Roles.ROLE_MANTAINER & response.getRol() != Roles.ROLE_ADMIN))
 								throw new BadCredentialsException("JWT invalido");
 							return exchange;
 						}).flatMap(chain::filter);
