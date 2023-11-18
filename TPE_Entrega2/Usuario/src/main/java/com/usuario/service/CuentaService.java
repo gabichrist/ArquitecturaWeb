@@ -108,7 +108,7 @@ public class CuentaService implements BaseService<Cuenta> {
 	}
 
 	public Cuenta descontarSaldo(Long id, Float importe) throws Exception {
-		if (importe == null || importe <= 0) {
+		if (importe == null || importe < 0) {
 			throw new ExpectableException("{\"error\":\"Error. Importe debe ser un valor mayor a 0.\"}");
 		}
 		Optional<Cuenta> optCuenta = cuentaRepository.findById(id);

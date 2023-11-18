@@ -103,7 +103,7 @@ public class ViajeService implements BaseService<Viaje>{
 					if (cuenta != null) {
 						List<Long> idUsuariosCuenta = cuenta.getIdUsuarios();
 						if (!idUsuariosCuenta.contains(viajeMonopatinUsuarioDTO.getIdUsuario()))
-							throw new ExpectableException("El usuario no pertenece a la cuenta indicada");	
+							throw new ExpectableException("El usuario no está asociado con la cuenta indicada");	
 						if (!cuenta.getHabilitada()) 						
 							throw new ExpectableException("La cuenta no esta habilitada");		
 						if (cuenta.getSaldo() <= 0) 						
@@ -111,8 +111,10 @@ public class ViajeService implements BaseService<Viaje>{
 					}else {
 						throw new ExpectableException("No se encontro la cuenta indicada");
 					}
+				} catch(ExpectableException e) {
+					throw e;
 				} catch(Exception e) {
-					throw new ExpectableException("No se encontró la cuenta");
+					throw new ExpectableException("Error al intentar obtener la cuenta");
 				}
 						
 					
@@ -228,13 +230,17 @@ public class ViajeService implements BaseService<Viaje>{
 					Float costoViaje = Float.valueOf("0");
 					Long tiempoUsoTotal = tiempoFin.getTime() - tiempoInicio.getTime();
 					Float tiempoTotal = tiempoUsoTotal.floatValue() / 3600000;
-					monopatin.setTiempoUsoConPausas(tiempoTotal);
+					System.out.println("tiempoTotal" + tiempoTotal + "segundos");
+
+					monopatin.setTiempoUsoConPausas(monopatin.getTiempoUsoConPausas() + tiempoTotal);
 					
 					if(tiempoPausaInicio != null && tiempoPausaFin != null) {
 						Long tiempoPausa = tiempoPausaFin.getTime() - tiempoPausaInicio.getTime();			
-						Float tiempoSinPausas = (tiempoTotal - tiempoPausa);						
+						Float tiempoSinPausas = (tiempoTotal - tiempoPausa);
 						float tiempoUsoSinPausas= tiempoSinPausas / 3600000;
-						monopatin.setTiempoUsoConPausas(tiempoUsoSinPausas);
+						monopatin.setTiempoUsoSinPausas(monopatin.getTiempoUsoSinPausas() + tiempoUsoSinPausas);
+						System.out.println("tiempoUsoSinPausas" + tiempoUsoSinPausas + "segundos");
+
 												
 						Long diferenciaMiliSegundos = viaje.getTiempoPausaFin().getTime() - viaje.getTiempoPausaInicio().getTime();
 						int tiempoPermitido = 15 * 60 * 1000;
@@ -276,7 +282,8 @@ public class ViajeService implements BaseService<Viaje>{
 				    Random random = new Random();
 				    double kilometrosRandom = random.nextDouble() * 5.0;
 				    kilometrosRecorridos = kilometrosRecorridos + kilometrosRandom;
-					viaje.setKilometrosRecorridos((float)kilometrosRecorridos);					
+					viaje.setKilometrosRecorridos((float) kilometrosRecorridos);					
+					monopatin.setKilometrosRecorridos(monopatin.getKilometrosRecorridos() + (float) kilometrosRecorridos);
 					
 					try {
 						monopatinRepository.save(monopatin);
