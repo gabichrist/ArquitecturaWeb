@@ -33,7 +33,7 @@ public class TarifaServiceTest {
 	@Test
 	public void testCurrentPrice() throws Exception {
 	    Float tarifaEsperada = (float) 100;
-	    Optional<Tarifa> tarifaActual = tarifaService.findCurrentPrice();
-	    assertEquals(tarifaEsperada, tarifaActual);
+	    Tarifa tarifaActual = tarifaService.findCurrentPrice().get();
+	    assertEquals(tarifaEsperada, tarifaActual.getTarifa());
 	}
 }
