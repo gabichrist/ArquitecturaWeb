@@ -2,11 +2,11 @@ package com.usuario.model;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
-//import java.util.List;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-//import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,10 +47,10 @@ public class Cuenta {
 	)
 	private Set<Usuario> usuarios;
 
-//	@JsonProperty("idUsuarios")
-//	public List<Long> idUsuarios() {
-//		return this.usuarios.stream().map(usuario -> usuario.getId()).toList();
-//	}
+	@JsonProperty("idUsuarios")
+	public List<Long> idUsuarios() {
+		return this.usuarios.stream().map(usuario -> usuario.getId()).toList();
+	}
 	
 	@Override
 	public String toString() {
