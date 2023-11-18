@@ -40,7 +40,6 @@ public class MonopatinServiceTest {
 		 monopatinService.findById(id);
 	}
 	
-	
 	@Test(expected = Exception.class)
 	@DisplayName("Intenta modificar un monopatin que no existe")
 	public void testUpdateMonopatinInexistente() throws Exception {		
